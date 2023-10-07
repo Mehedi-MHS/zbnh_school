@@ -64,6 +64,11 @@ export default function NavBar(props) {
           >
             MUI
           </Typography>
+          <Box
+            component="img"
+            src="/images/logo.png"
+            sx={{ width: { xs: "60px", sm: "80px" }, height: "auto" }}
+          />
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
               <Button key={item} sx={{ color: "#fff" }}>
