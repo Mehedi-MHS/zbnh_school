@@ -12,6 +12,10 @@ export default function Navigation() {
         <Link to="/dashboard">
           <button>Dashboard</button>
         </Link>
+        <Link to="/posts/:id">
+          <button>Dynamic Post</button>
+          <p>Use props.match.params.id for /posts/:id</p>
+        </Link>
       </div>
     </>
   );
