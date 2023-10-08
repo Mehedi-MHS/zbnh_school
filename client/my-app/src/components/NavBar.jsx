@@ -12,8 +12,40 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+//import ListItemIcon from "@mui/material";
+import { Link } from "react-router-dom";
+//import { Home as HomeIcon } from "@mui/icons-material/Home";
 const drawerWidth = 240;
-const navItems = ["Home", "About", "Contact"];
+const navItems = [
+  {
+    name: "Home",
+    url: "/",
+  },
+  {
+    name: "Notice",
+    url: "notice",
+  },
+  {
+    name: "Teachers",
+    url: "teachers",
+  },
+  {
+    name: "Students",
+    url: "students",
+  },
+  {
+    name: "Gallery",
+    url: "gallery",
+  },
+  {
+    name: "About",
+    url: "about",
+  },
+  {
+    name: "Dashboard",
+    url: "dashboard",
+  },
+];
 
 export default function NavBar(props) {
   const { window } = props;
@@ -25,17 +57,24 @@ export default function NavBar(props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
+      {/*<Typography variant="h6" sx={{ my: 2 }}>
         MUI
       </Typography>
       <Divider />
+      */}
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
+        {navItems.map((item, index) => (
+          <Link key={index} to={item.url} sx={{ textDecoration: "none" }}>
+            <ListItem disablePadding>
+              <ListItemButton sx={{ textAlign: "center" }}>
+                {/*} <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                */}
+                <ListItemText primary={item.name} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
     </Box>
@@ -70,10 +109,14 @@ export default function NavBar(props) {
             sx={{ width: { xs: "60px", sm: "80px" }, height: "auto" }}
           />
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
-              </Button>
+            {navItems.map((item, index) => (
+              <Link
+                key={index}
+                to={item.url}
+                sx={{ color: "#fff", textDecoration: "none" }}
+              >
+                <Button sx={{ color: "#fff" }}> {item.name}</Button>
+              </Link>
             ))}
           </Box>
         </Toolbar>
