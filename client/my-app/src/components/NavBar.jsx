@@ -9,7 +9,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import HomeIcon from "@mui/icons-material/Home";
@@ -21,6 +20,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import Link from "./custom/CustomLink"; //created custom link to work mui with react-router-dom
 import Divider from "@mui/material/Divider";
+import { Stack } from "@mui/material";
 const drawerWidth = 240;
 const navItems = [
   {
@@ -128,17 +128,27 @@ export default function NavBar(props) {
             MUI
           </Typography>
           */}
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+              display: { xs: "none", sm: "block" },
+              ml: 9,
+            }}
+          >
             {navItems.map((item, index) => (
               <Link
                 key={index}
                 to={item.url}
                 sx={{ color: "#fff", textDecoration: "none" }}
               >
-                <Button sx={{ color: "#fff" }}> {item.name}</Button>
+                <Button sx={{ color: "#fff" }} startIcon={item.icon}>
+                  {" "}
+                  {item.name}
+                </Button>
               </Link>
             ))}
-          </Box>
+          </Stack>
         </Toolbar>
       </AppBar>
       <nav>

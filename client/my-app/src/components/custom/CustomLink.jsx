@@ -7,7 +7,7 @@ export default function Link(props) {
       {...props}
       component={ReactRouterLink}
       to={props.to || "#"}
-      sx={{ textDecoration: "none" }}
+      sx={{ textDecoration: "none", color: "inherit" }}
     />
   );
 }
