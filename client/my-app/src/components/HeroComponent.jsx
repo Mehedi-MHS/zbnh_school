@@ -17,7 +17,7 @@ export default function HeroSection() {
 
   return (
     <Card style={{ borderRadius: 0 }}>
-      <Box style={{ position: "relative", backgroundColor: "rgba(0,0,0,0.5)" }}>
+      <Box style={{ position: "relative" }}>
         <CardMedia
           component="img"
           height="400"
