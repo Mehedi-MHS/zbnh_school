@@ -133,7 +133,7 @@ export default function NavBar(props) {
             spacing={{ xs: 1, sm: 3 }}
             sx={{
               display: { xs: "none", sm: "block" },
-              ml: { xs: 9, sm: 11 },
+              ml: { xs: 9, sm: 15 },
             }}
           >
             {navItems.map((item, index) => (

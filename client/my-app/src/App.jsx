@@ -1,5 +1,5 @@
 import NavBar from "./components/NavBar";
-import Home from "./components/Home";
+import Home from "./components/HomePage/Home";
 import Students from "./components/Students";
 import DashboardHome from "./components/dashboard/DashboardHome";
 import DynamicPost from "./components/DynamicPosts";

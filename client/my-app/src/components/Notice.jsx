@@ -3,12 +3,13 @@ import SettingsIcon from "@mui/icons-material/Settings";
 export default function Notice() {
   const boxStyle = {
     margin: "2rem 1rem",
-    background: "linear-gradient(to top, cyan,transparent)",
+    backgroundImage:
+      "linear-gradient(102.4deg,  rgba(253,189,85,1) 7.8%, rgba(249,131,255,1) 100.3% )",
     display: "inline-block",
     padding: "0.5rem",
     borderRadius: "3px",
-    boxShadow: "0px 1px 2px black",
   };
+
   return (
     <>
       <Box sx={boxStyle}>
