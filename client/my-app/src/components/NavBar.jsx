@@ -1,7 +1,6 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
@@ -12,39 +11,52 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-//import ListItemIcon from "@mui/material";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import HomeIcon from "@mui/icons-material/Home";
+import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
+import CoPresentIcon from "@mui/icons-material/CoPresent";
+import GroupsIcon from "@mui/icons-material/Groups";
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
+import InfoIcon from "@mui/icons-material/Info";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import Link from "./custom/CustomLink"; //created custom link to work mui with react-router-dom
-
-//import { Home as HomeIcon } from "@mui/icons-material/Home";
+import Divider from "@mui/material/Divider";
 const drawerWidth = 240;
 const navItems = [
   {
     name: "Home",
     url: "/",
+    icon: <HomeIcon />,
   },
   {
     name: "Notice",
     url: "notice",
+    icon: <CircleNotificationsIcon />,
   },
   {
     name: "Teachers",
     url: "teachers",
+    icon: <CoPresentIcon />,
   },
   {
     name: "Students",
     url: "students",
+    icon: <GroupsIcon />,
   },
   {
     name: "Gallery",
     url: "gallery",
+    icon: <InsertPhotoIcon />,
   },
   {
     name: "About",
     url: "about",
+    icon: <InfoIcon />,
   },
   {
     name: "Dashboard",
     url: "dashboard",
+    icon: <DashboardIcon />,
   },
 ];
 
@@ -57,7 +69,7 @@ export default function NavBar(props) {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+    <Box onClick={handleDrawerToggle}>
       {/*<Typography variant="h6" sx={{ my: 2 }}>
         MUI
       </Typography>
@@ -65,16 +77,16 @@ export default function NavBar(props) {
       */}
       <List>
         {navItems.map((item, index) => (
-          <Link key={index} to={item.url} sx={{ textDecoration: "none" }}>
+          <Link key={index} to={item.url}>
             <ListItem disablePadding>
-              <ListItemButton sx={{ textAlign: "center" }}>
-                {/*} <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                */}
+              <ListItemButton>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+
                 <ListItemText primary={item.name} />
               </ListItemButton>
             </ListItem>
+
+            <Divider />
           </Link>
         ))}
       </List>
@@ -97,18 +109,25 @@ export default function NavBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
+
+          <Box
+            component="img"
+            src="/images/logo.png"
+            sx={{
+              width: { xs: "60px", sm: "80px" },
+              height: "auto",
+              ml: { xs: "30%", sm: 0 },
+            }}
+          />
+
+          {/* <Typography
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, display: { xs: "block", sm: "block" } }}
           >
             MUI
           </Typography>
-          <Box
-            component="img"
-            src="/images/logo.png"
-            sx={{ width: { xs: "60px", sm: "80px" }, height: "auto" }}
-          />
+          */}
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item, index) => (
               <Link
