@@ -3,7 +3,7 @@ import Home from "./components/HomePage/Home";
 import Students from "./components/students/Students";
 import DashboardHome from "./components/dashboard/DashboardHome";
 import DynamicPost from "./components/DynamicPosts";
-import Teachers from "./components/Teachers";
+import Teachers from "./components/teachers/Teachers";
 import Notice from "./components/Notice";
 import About from "./components/About";
 import Gallery from "./components/Gallery";
