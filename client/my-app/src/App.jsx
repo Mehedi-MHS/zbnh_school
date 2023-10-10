@@ -7,7 +7,9 @@ import Teachers from "./components/Teachers";
 import Notice from "./components/Notice";
 import About from "./components/About";
 import Gallery from "./components/Gallery";
+import EditStudents from "./components/dashboard/EditStudents";
 import { Routes, Route } from "react-router-dom";
+
 export default function App() {
   return (
     <>
@@ -19,9 +21,11 @@ export default function App() {
         <Route path="/teachers" element={<Teachers />} />
         <Route path="/students" element={<Students />} />
         <Route path="/dashboard" element={<DashboardHome />} />
+        <Route path="dashboard/editStudents" element={<EditStudents />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/about" element={<About />} />
         <Route path="/posts/:id" element={<DynamicPost />} />
+        <Route path="/*" element={<DynamicPost />} />
       </Routes>
     </>
   );
