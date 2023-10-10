@@ -1,6 +1,6 @@
 import NavBar from "./components/NavBar";
 import Home from "./components/HomePage/Home";
-import Students from "./components/Students";
+import Students from "./components/students/Students";
 import DashboardHome from "./components/dashboard/DashboardHome";
 import DynamicPost from "./components/DynamicPosts";
 import Teachers from "./components/Teachers";
@@ -9,36 +9,6 @@ import About from "./components/About";
 import Gallery from "./components/Gallery";
 import { Routes, Route } from "react-router-dom";
 export default function App() {
-  const navItems = [
-    {
-      name: "Home",
-      url: "/",
-    },
-    {
-      name: "Notice",
-      url: "notice",
-    },
-    {
-      name: "Teachers",
-      url: "teachers",
-    },
-    {
-      name: "Students",
-      url: "students",
-    },
-    {
-      name: "Gallery",
-      url: "gallery",
-    },
-    {
-      name: "About",
-      url: "about",
-    },
-    {
-      name: "Dashboard",
-      url: "dashboard",
-    },
-  ];
   return (
     <>
       <NavBar />

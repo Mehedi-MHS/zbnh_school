@@ -130,10 +130,10 @@ export default function NavBar(props) {
           */}
           <Stack
             direction="row"
-            spacing={{ xs: 1, sm: 3 }}
+            spacing={{ sm: 3 }}
             sx={{
               display: { xs: "none", sm: "block" },
-              ml: { xs: 9, sm: 15 },
+              ml: { sm: 7 },
             }}
           >
             {navItems.map((item, index) => (
