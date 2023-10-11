@@ -46,7 +46,7 @@ export default function TeachersBox() {
   return (
     <>
       <Typography
-        variant="h3"
+        variant="h4"
         component="h1"
         sx={{
           fontFamily: "roboto,sans-serif",
@@ -57,7 +57,7 @@ export default function TeachersBox() {
           marginTop: "2rem",
         }}
       >
-        Our Honourable Teachers
+        Honourable Teachers
       </Typography>
 
       <Container>
@@ -70,23 +70,34 @@ export default function TeachersBox() {
           {teacherList.map((teacher) => (
             <Card
               sx={{
-                width: { xs: "100%", sm: "30%" },
-                margin: { xs: "0 0 1rem 0", sm: "0 1rem 1rem 0" },
+                width: { xs: "100%", sm: "300px" },
+                background: "rgba(15,13,55,0.05)",
               }}
               key={teacher.id}
+              variant="outlined"
             >
               <CardContent>
-                <Stack direction={{ sm: "row" }} gap="2rem">
+                <Stack
+                  direction={{ sm: "row" }}
+                  gap="2rem"
+                  alignItems={{ xs: "center", sm: "inherit" }}
+                >
                   <Avatar
                     alt={teacher.name}
                     src={teacher.pic ? teacher.pic : "/images/avatar0.webp"}
+                    sx={{ width: { xs: 85 }, height: { xs: 85 } }}
                   />
                   <Box>
-                    <Typography variant="h5" component="p">
+                    <Typography
+                      variant="h5"
+                      sx={{ textAlign: { xs: "center" } }}
+                      component="p"
+                    >
                       {teacher.name}
                     </Typography>
                     <Typography
                       variant="p"
+                      sx={{ textAlign: { xs: "center" } }}
                       component="p"
                       color="text.secondary"
                     >
@@ -95,7 +106,7 @@ export default function TeachersBox() {
                   </Box>
                 </Stack>
               </CardContent>
-              <CardActions>
+              <CardActions disableSpacing>
                 <Button variant="outlined">View Profile</Button>
               </CardActions>
             </Card>
