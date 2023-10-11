@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Link from "../custom/CustomLink";
 export default function TeachersBox() {
   const teacherList = [
     {
@@ -107,7 +108,9 @@ export default function TeachersBox() {
                 </Stack>
               </CardContent>
               <CardActions disableSpacing>
-                <Button variant="outlined">View Profile</Button>
+                <Link to={`/teachers/profile/${teacher.id}`}>
+                  <Button variant="outlined">View Profile</Button>
+                </Link>
               </CardActions>
             </Card>
           ))}

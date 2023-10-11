@@ -4,6 +4,7 @@ import Students from "./components/students/StudentsHome";
 import DashboardHome from "./components/dashboard/DashboardHome";
 import DynamicPost from "./components/DynamicPosts";
 import Teachers from "./components/teachers/TeachersHome";
+import TeachersProfileHome from "./components/teachers/profile/TeachersProfileHome";
 import Notice from "./components/Notice";
 import About from "./components/About";
 import Gallery from "./components/Gallery";
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/notice" element={<Notice />} />
         <Route path="/teachers" element={<Teachers />} />
+        <Route path="/teachers/profile/:id" element={<TeachersProfileHome />} />
         <Route path="/students" element={<Students />} />
         <Route path="/dashboard" element={<DashboardHome />} />
         <Route path="dashboard/editStudents" element={<EditStudents />} />
