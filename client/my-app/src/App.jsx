@@ -8,6 +8,7 @@ import Notice from "./components/Notice";
 import About from "./components/About";
 import Gallery from "./components/Gallery";
 import EditStudents from "./components/dashboard/EditStudents";
+import NotFound from "./components/404";
 import { Routes, Route } from "react-router-dom";
 
 export default function App() {
@@ -25,7 +26,7 @@ export default function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/about" element={<About />} />
         <Route path="/posts/:id" element={<DynamicPost />} />
-        <Route path="/*" element={<DynamicPost />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
