@@ -36,13 +36,16 @@ export default function StudentCountBox() {
           fontFamily: "roboto,sans-serif",
           textAlign: "center",
           padding: "0.5rem",
-          background: "black",
+          background: "rgba(55,63,72,0.3)",
           color: "white",
-          marginTop: "2rem",
+          "&:hover": {
+            color: "black",
+            background: "linear-gradient(to top right,cyan,magenta)",
+          },
         }}
       >
         <SchoolIcon
-          sx={{ color: "white", fontSize: "inherit", marginRight: "5px" }}
+          sx={{ color: "inherit", fontSize: "inherit", marginRight: "5px" }}
         />
         Our Students
       </Typography>
@@ -52,7 +55,6 @@ export default function StudentCountBox() {
         gap={3}
         sx={{
           margin: "10px auto",
-          background: "lightGreen",
           padding: "2rem 0",
           justifyContent: "center",
           alignItems: "center",
@@ -88,7 +90,11 @@ export default function StudentCountBox() {
             >
               <Typography
                 variant="p"
-                sx={{ textAlign: "center", color: "white", fontWeight: "bold" }}
+                sx={{
+                  textAlign: "center",
+                  color: "white",
+                  fontWeight: "bold",
+                }}
               >
                 Class : {student.cls}
               </Typography>
