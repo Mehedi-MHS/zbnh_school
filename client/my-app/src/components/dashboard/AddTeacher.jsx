@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -8,7 +9,11 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Avatar from "@mui/material/Avatar";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
-import Autocomplete from "@mui/material/Autocomplete";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+
 export default function AddTeacher() {
   const [teacherInfo, setTeacherInfo] = useState({
     picData: "",
@@ -52,13 +57,19 @@ export default function AddTeacher() {
           Add a Teacher
         </Typography>
 
-        <Container sx={{ background: "#fff", padding: "2rem" }}>
-          <Stack direction={{ xs: "column", sm: "row" }} gap={3}>
+        <Container sx={{ background: "#fff" }} disableGutters>
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            gap={2}
+            sx={{ padding: 3 }}
+          >
             <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
                 flexDirection: "column",
+                background: "black",
+                padding: "1rem",
               }}
             >
               <Avatar
@@ -67,71 +78,147 @@ export default function AddTeacher() {
               />
               <Button
                 component="label"
-                variant="outlined"
+                variant="contained"
                 startIcon={<CloudUploadIcon />}
               >
                 Upload Profile Picture
                 <VisuallyHiddenInput type="file" />
               </Button>
             </Box>
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              flexWrap="wrap"
-              spacing={1}
+            <Grid
+              container
+              rowSpacing={{ xs: 1, sm: 0 }}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             >
-              <TextField
-                label="Full Name"
-                variant="filled"
-                type="text"
-                required
-                fullWidth
-              />
-              <TextField
-                label="Designation"
-                variant="filled"
-                type="text"
-                required
-                fullWidth
-              />
-              <TextField
-                label="Father's Name"
-                variant="filled"
-                type="text"
-                required
-                fullWidth
-              />
-              <TextField
-                label="Mother's Name"
-                variant="filled"
-                type="text"
-                required
-                fullWidth
-              />
-              <Autocomplete
-                sx={{ width: { sm: "30vw" } }}
-                disablePortal
-                onChange={(e, newValue) =>
-                  setTeacherInfo((prev) => ({
-                    ...prev,
-                    gender: newValue,
-                  }))
-                }
-                options={[
-                  { label: "Male", value: "Male" },
-                  { label: "Female", value: "Female" },
-                ]}
-                getOptionLabel={(option) => option.label}
-                renderInput={(params) => (
-                  <TextField {...params} label="Select Gender" />
-                )}
-              />
-            </Stack>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  id="full-name"
+                  label="Full Name"
+                  variant="outlined"
+                  type="text"
+                  required
+                  fullWidth
+                  margin="none"
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="Designation"
+                  variant="outlined"
+                  type="text"
+                  required
+                  fullWidth
+                  margin="none"
+                />
+              </Grid>
+
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="Father's Name"
+                  variant="outlined"
+                  type="text"
+                  required
+                  fullWidth
+                  margin="none"
+                />
+              </Grid>
+
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="Mother's Name"
+                  variant="outlined"
+                  type="text"
+                  required
+                  fullWidth
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <FormControl fullWidth required>
+                  <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={teacherInfo.gender}
+                    label="Gender"
+                    onChange={(event) => {
+                      setTeacherInfo((prev) => ({
+                        ...prev,
+                        gender: event.target.value,
+                      }));
+                    }}
+                  >
+                    <MenuItem value="Male">Male</MenuItem>
+                    <MenuItem value="Female">Female</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="Education"
+                  variant="outlined"
+                  type="text"
+                  required
+                  fullWidth
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="Religion"
+                  variant="outlined"
+                  type="text"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="Date of Birth"
+                  variant="outlined"
+                  type="date"
+                  required
+                  fullWidth
+                  InputLabelProps={{ shrink: true }}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="Contact Number"
+                  variant="outlined"
+                  type="number"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="E-mail"
+                  variant="outlined"
+                  type="email"
+                  fullWidth
+                  margin="none"
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="Blood Group"
+                  variant="outlined"
+                  type="text"
+                  fullWidth
+                  margin="none"
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="Joined"
+                  variant="outlined"
+                  type="date"
+                  required
+                  fullWidth
+                  InputLabelProps={{ shrink: true }}
+                />
+              </Grid>
+            </Grid>
           </Stack>
         </Container>
       </Box>
-      <Typography sx={{ color: "red" }}>
-        {teacherInfo.gender ? teacherInfo.gender.label : "no gender"}
-      </Typography>
     </>
   );
 }
