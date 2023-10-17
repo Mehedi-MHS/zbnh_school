@@ -50,14 +50,29 @@ export default function AddTeacher() {
           width: "100vw",
           minHeight: "100vh",
           paddingTop: "2rem",
-          background: "silver",
+          background: "skyblue",
         }}
       >
-        <Typography variant="h4" component="h1" align="center">
+        <Typography
+          variant="h4"
+          component="h1"
+          align="center"
+          sx={{
+            margin: "2rem auto",
+            color: "white",
+            textShadow: "0px 1px 2px black",
+          }}
+        >
           Add a Teacher
         </Typography>
 
-        <Container sx={{ background: "#fff" }} disableGutters>
+        <Container
+          sx={{
+            background: "#fff",
+            paddingBottom: "1rem",
+            borderRadius: "0.5rem",
+          }}
+        >
           <Stack
             direction={{ xs: "column", sm: "row" }}
             gap={2}
@@ -68,7 +83,7 @@ export default function AddTeacher() {
                 display: "flex",
                 alignItems: "center",
                 flexDirection: "column",
-                background: "black",
+
                 padding: "1rem",
               }}
             >
@@ -78,7 +93,7 @@ export default function AddTeacher() {
               />
               <Button
                 component="label"
-                variant="contained"
+                variant="outlined"
                 startIcon={<CloudUploadIcon />}
               >
                 Upload Profile Picture
@@ -217,6 +232,9 @@ export default function AddTeacher() {
               </Grid>
             </Grid>
           </Stack>
+          <Box textAlign="center">
+            <Button variant="contained">Save Changes</Button>
+          </Box>
         </Container>
       </Box>
     </>
