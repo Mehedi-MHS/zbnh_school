@@ -8,26 +8,6 @@ import IconButton from "@mui/material/IconButton";
 import { FormControlLabel } from "@mui/material";
 
 export default function Notice() {
-  const MatEdit = ({ index }) => {
-    const handleEditClick = () => {
-      // some action
-    };
-
-    return (
-      <FormControlLabel
-        control={
-          <IconButton
-            color="secondary"
-            aria-label="add an alarm"
-            onClick={handleEditClick}
-          >
-            <PictureAsPdfIcon style={{ color: "blue" }} />
-          </IconButton>
-        }
-      />
-    );
-  };
-
   const columns = [
     { field: "serialNumber", headerName: "No", flex: 1 },
     { field: "title", headerName: "Title", flex: 2, minWidth: 150 },
@@ -40,6 +20,7 @@ export default function Notice() {
       sortable: false,
       disableClickEventBubbling: true,
       renderCell: (params) => {
+        console.log(params);
         return (
           <div
             sx={{
@@ -49,7 +30,15 @@ export default function Notice() {
               alignItems: "center",
             }}
           >
-            <MatEdit index={params.row.id} />
+            <FormControlLabel
+              control={
+                <Link to={params.row.file}>
+                  <IconButton color="secondary" aria-label="add an alarm">
+                    <PictureAsPdfIcon style={{ color: "red" }} />
+                  </IconButton>
+                </Link>
+              }
+            />
           </div>
         );
       },
@@ -60,12 +49,17 @@ export default function Notice() {
       id: 1,
       title: "Post No 1 Lorem Ipusm Dolor Sit amet codfhd jjfljodfd ",
       date: "21 Sep 2023",
-      file: "pdf.pdf",
+      file: "/file1",
     },
-    { id: 2, title: "Post No 2", date: "22 Sep 2023", file: "pdf.pdf" },
-    { id: 4, title: "Post No 3", date: "23 Sep 2023", file: "pdf.pdf" },
-    { id: 7, title: "Post No 4", date: "24 Sep 2023", file: "pdf.pdf" },
-    { id: 8, title: "Post No 5", date: "25 Sep 2023", file: "pdf.pdf" },
+    {
+      id: 2,
+      title: "Post No 2",
+      date: "22 Sep 2023",
+      file: "http://localhost:5173/images/school.jpg",
+    },
+    { id: 4, title: "Post No 3", date: "23 Sep 2023", file: "/file3" },
+    { id: 7, title: "Post No 4", date: "24 Sep 2023", file: "/file4" },
+    { id: 8, title: "Post No 5", date: "25 Sep 2023", file: "/file5" },
   ];
   /*
 My Custom logic to show data serial number automatically. 
