@@ -11,6 +11,8 @@ import About from "./components/About";
 import Gallery from "./components/Gallery";
 import EditStudents from "./components/dashboard/EditStudents";
 import NotFound from "./components/404";
+import Login from "./components/Login";
+import PrivateRoute from "./components/PrivateRoute";
 import { Routes, Route } from "react-router-dom";
 
 export default function App() {
@@ -24,9 +26,33 @@ export default function App() {
         <Route path="/teachers" element={<Teachers />} />
         <Route path="/teachers/profile/:id" element={<TeachersProfileHome />} />
         <Route path="/students" element={<Students />} />
-        <Route path="/dashboard" element={<DashboardHome />} />
-        <Route path="dashboard/editStudents" element={<EditStudents />} />
-        <Route path="dashboard/addTeacher" element={<AddTeacher />} />
+        <Route path="/login" element={<Login />} />
+
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <DashboardHome />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="dashboard/editStudents"
+          element={
+            <PrivateRoute>
+              <EditStudents />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="dashboard/addTeacher"
+          element={
+            <PrivateRoute>
+              <AddTeacher />
+            </PrivateRoute>
+          }
+        />
+
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/about" element={<About />} />
         <Route path="/posts/:id" element={<DynamicPost />} />
