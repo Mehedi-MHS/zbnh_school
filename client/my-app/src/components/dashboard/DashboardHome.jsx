@@ -11,6 +11,9 @@ export default function DashboardHome() {
       <Link to="/dashboard/addTeacher">
         <Button>Add a Teacher</Button>
       </Link>
+      <Link to="/dashboard/addSchoolInfo">
+        <Button>Add School Info</Button>
+      </Link>
     </>
   );
 }

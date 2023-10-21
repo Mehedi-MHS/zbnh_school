@@ -12,6 +12,7 @@ import Gallery from "./components/Gallery";
 import EditStudents from "./components/dashboard/EditStudents";
 import NotFound from "./components/404";
 import Login from "./components/Login";
+import AddSchoolInfo from "./components/dashboard/AddSchoolInfo";
 import PrivateRoute from "./components/PrivateRoute";
 import { Routes, Route } from "react-router-dom";
 
@@ -49,6 +50,14 @@ export default function App() {
           element={
             <PrivateRoute>
               <AddTeacher />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboard/addSchoolInfo"
+          element={
+            <PrivateRoute>
+              <AddSchoolInfo />
             </PrivateRoute>
           }
         />
