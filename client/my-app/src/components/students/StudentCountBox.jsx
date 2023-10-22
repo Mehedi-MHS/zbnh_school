@@ -1,32 +1,23 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import SchoolIcon from "@mui/icons-material/School";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 export default function StudentCountBox() {
-  const [students, setStudents] = useState([
-    {
-      cls: "Six",
-      count: 0,
-    },
-    {
-      cls: "Seven",
-      count: 0,
-    },
-    {
-      cls: "Eight",
-      count: 0,
-    },
-    {
-      cls: "Nine",
-      count: 0,
-    },
-    {
-      cls: "Ten",
-      count: 0,
-    },
-  ]);
+  const [students, setStudents] = useState([]);
 
+  useEffect(() => {
+    getStudents();
+  }, []);
+  const getStudents = async () => {
+    const req = await fetch("http://localhost:3000/dashboard/getStudents", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+    });
+    const res = await req.json();
+    console.log(res);
+    setStudents(res);
+  };
   return (
     <>
       <Typography
@@ -66,12 +57,14 @@ export default function StudentCountBox() {
             sx={{
               padding: "2.5rem 1rem",
               border: "1px solid gray",
-              background: "white",
+              background: "linear-gradient(to top right,magenta,Blue)",
               width: { xs: "250px", sm: "300px" },
               position: "relative",
               borderRadius: "0.5rem",
               "&:hover": {
-                boxShadow: "0px 2px 5px magenta",
+                boxShadow: "0px 2px 5px cyan",
+                background: "linear-gradient(to top right,Blue,magenta)",
+                transition: "5s ease",
                 cursor: "pointer",
               },
             }}
@@ -80,9 +73,10 @@ export default function StudentCountBox() {
               sx={{
                 position: "absolute",
                 marginBottom: "10px",
-                background: "dodgerBlue",
+                background: "black",
                 top: 0,
                 left: 0,
+                width: "100%",
                 textAlign: "center",
                 padding: "4px 0.5rem",
                 borderTopLeftRadius: "0.5rem",
@@ -96,11 +90,19 @@ export default function StudentCountBox() {
                   fontWeight: "bold",
                 }}
               >
-                Class : {student.cls}
+                Class : {student.title}
               </Typography>
             </Box>
-            <Typography variant="h4">
-              Total Students: {student.count}
+            <Typography variant="h4" textAlign="center" color="silver">
+              Total Students:
+            </Typography>
+            <Typography
+              variant="h2"
+              textAlign="center"
+              component="p"
+              sx={{ color: "#fff" }}
+            >
+              {student.total}
             </Typography>
           </Box>
         ))}

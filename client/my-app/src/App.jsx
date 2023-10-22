@@ -15,7 +15,7 @@ import Login from "./components/Login";
 import AddSchoolInfo from "./components/dashboard/AddSchoolInfo";
 import PrivateRoute from "./components/PrivateRoute";
 import { Routes, Route } from "react-router-dom";
-
+import Footer from "./components/Footer";
 export default function App() {
   return (
     <>
@@ -67,6 +67,7 @@ export default function App() {
         <Route path="/posts/:id" element={<DynamicPost />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </>
   );
 }

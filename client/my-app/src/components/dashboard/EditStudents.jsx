@@ -68,8 +68,8 @@ export default function EditStudents() {
             <Stack spacing={3}>
               <Autocomplete
                 disablePortal
-                onChange={(e) =>
-                  setStudent((prev) => ({ ...prev, class: e.target.value }))
+                onChange={(e, newValue) =>
+                  setStudent((prev) => ({ ...prev, class: newValue?.value }))
                 }
                 id="edit-studensts-box"
                 options={classOptions}
@@ -93,6 +93,9 @@ export default function EditStudents() {
             <Button variant="contained">Save Changes</Button>
           </CardActions>
         </Card>
+        <Typography variant="h3">{`Class:${
+          student.class || "null"
+        } - Students: ${student.total}`}</Typography>
       </Container>
     </>
   );

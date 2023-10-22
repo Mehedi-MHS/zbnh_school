@@ -7,7 +7,7 @@ export default function Students() {
         sx={{
           width: "100vw",
           minHeight: "100vh",
-          background: "rgba(155,63,52,0.3)",
+          background: "rgba(0,0,0,0.1)",
           marginTop: 0,
           paddingTop: "2rem",
         }}
