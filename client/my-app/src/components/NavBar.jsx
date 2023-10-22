@@ -49,7 +49,7 @@ const navItems = [
     icon: <InsertPhotoIcon />,
   },
   {
-    name: "About",
+    name: "About School",
     url: "about",
     icon: <InfoIcon />,
   },
