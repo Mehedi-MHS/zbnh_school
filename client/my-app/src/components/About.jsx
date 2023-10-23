@@ -1,8 +1,9 @@
+import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
+
 import Stack from "@mui/material/Stack";
 
 export default function About() {
@@ -24,12 +25,11 @@ export default function About() {
   ];
   return (
     <>
-      <Box
+      <Container
         sx={{
           width: "100vw",
-          minHeight: "100vh",
-          padding: "2.5rem 0.5rem",
-          background: "silver",
+
+          padding: { xs: "2rem 0.5rem", sm: "5rem 0.5rem" },
         }}
       >
         <Stack direction={{ xs: "column", sm: "row" }} gap={3}>
@@ -59,7 +59,7 @@ export default function About() {
             </Card>
           ))}
         </Stack>
-      </Box>
+      </Container>
     </>
   );
 }

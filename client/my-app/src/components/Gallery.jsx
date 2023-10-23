@@ -1,8 +1,8 @@
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { Card, CardMedia, CardContent } from "@mui/material";
 import Link from "./custom/CustomLink";
+import Container from "@mui/material/Container";
 export default function Gallery() {
   const demoData = [
     {
@@ -20,11 +20,10 @@ export default function Gallery() {
   ];
   return (
     <>
-      <Box
+      <Container
         sx={{
-          width: "100vw",
-          minHeight: "100vh",
-          margin: { xs: "2rem auto", sm: "2rem 0.5rem" },
+          margin: { xs: "2rem auto", sm: "2rem auto" },
+          overflow: "hidden",
         }}
       >
         <Typography
@@ -67,7 +66,7 @@ export default function Gallery() {
             </Card>
           ))}
         </Stack>
-      </Box>
+      </Container>
     </>
   );
 }
