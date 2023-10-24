@@ -46,33 +46,36 @@ export default function Gallery() {
           Gallery
         </Typography>
         <Stack direction={{ xs: "column", sm: "row" }} gap={3}>
-          {galleryData.map((data, index) => (
-            <Card
-              key={index}
-              sx={{
-                background: "none",
-                boxShadow: "none",
-                borderRadius: 0,
-                maxWidth: { xs: "100%", sm: "30%" },
-              }}
-            >
-              <Link to={data.image}>
-                <CardMedia
-                  component="img"
-                  image={data.image}
-                  alt="Demo"
-                  sx={{ height: "200px" }}
-                />
-              </Link>
-              <CardContent sx={{ textAlign: "center" }}>
-                <Typography variant="body2" color="text.secondary">
-                  {data.description}
-                </Typography>
-              </CardContent>
-            </Card>
-          ))}
+          {galleryData.length > 0 ? (
+            galleryData.map((data, index) => (
+              <Card
+                key={index}
+                sx={{
+                  background: "none",
+                  boxShadow: "none",
+                  borderRadius: 0,
+                  maxWidth: { xs: "100%", sm: "30%" },
+                }}
+              >
+                <Link to={data.image}>
+                  <CardMedia
+                    component="img"
+                    image={data.image}
+                    alt="Demo"
+                    sx={{ height: "200px" }}
+                  />
+                </Link>
+                <CardContent sx={{ textAlign: "center" }}>
+                  <Typography variant="body2" color="text.secondary">
+                    {data.description}
+                  </Typography>
+                </CardContent>
+              </Card>
+            ))
+          ) : (
+            <GallerySkeleton />
+          )}
         </Stack>
-        <GallerySkeleton />
       </Container>
     </>
   );
@@ -85,7 +88,11 @@ function GallerySkeleton() {
         {[1, 2, 3].map((num, index) => (
           <Box
             key={index}
-            sx={{ width: { xs: "100%", sm: "30%" }, height: "300px" }}
+            sx={{
+              width: { xs: "100%", sm: "30vw" },
+              maxWidth: { sm: "30vw" },
+              height: "300px",
+            }}
           >
             <Skeleton
               variant="rectangular"
