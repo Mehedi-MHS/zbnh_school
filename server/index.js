@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const DashboardRoute = require("./routes/DashboardRoute");
+const HomeRoute = require("./routes/HomeRoute");
 //const dbConfig = require("./lib/dbConfig");
 
 const app = express();
@@ -14,10 +15,9 @@ app.use(
   })
 );
 
+app.use("/", HomeRoute);
 app.use("/dashboard", DashboardRoute);
-app.get("/", (req, res, next) => {
-  res.json({ message: "Welcome to home" });
-});
+
 /*
 app.get("/getUsers", async (req, res, next) => {
   const [rows, fields] = await dbConfig.query("SELECT * FROM `users`");

@@ -6,44 +6,24 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Link from "../custom/CustomLink";
+import { useState, useEffect } from "react";
+
 export default function TeachersBox() {
-  const teacherList = [
-    {
-      id: 1,
-      name: "MD Ismail Chowdhury",
-      designation: "Headmaster",
-      pic: "",
-      profile_url: "",
-    },
-    {
-      id: 2,
-      name: "Rahmat Ullah Sujon",
-      designation: "State Headmaster",
-      pic: "",
-      profile_url: "",
-    },
-    {
-      id: 3,
-      name: "Omor Faruk",
-      designation: "Senior IT teacher",
-      pic: "",
-      profile_url: "",
-    },
-    {
-      id: 4,
-      name: "Teacher4",
-      designation: "Assistant English Teacher ",
-      pic: "",
-      profile_url: "",
-    },
-    {
-      id: 5,
-      name: "Teacher5",
-      designation: "Guest Teacher",
-      pic: "",
-      profile_url: "",
-    },
-  ];
+  const [teacherList, setTeacherList] = useState([]);
+
+  useEffect(() => {
+    getTeachers();
+  }, []);
+
+  const getTeachers = async () => {
+    const req = await fetch("http://localhost:3000/teachers", {
+      method: "GET",
+      headers: { "Content-type": "application/json" },
+    });
+    const res = await req.json();
+    setTeacherList(res);
+  };
+
   return (
     <>
       <Typography

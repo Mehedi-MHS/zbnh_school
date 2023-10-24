@@ -6,8 +6,22 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import Link from "./custom/CustomLink";
 import IconButton from "@mui/material/IconButton";
 import { FormControlLabel } from "@mui/material";
-
+import { useState, useEffect } from "react";
 export default function Notice() {
+  const [notice, setNotice] = useState([]);
+  useEffect(() => {
+    getNotices();
+  }, []);
+
+  const getNotices = async () => {
+    const req = await fetch("http://localhost:3000/notice", {
+      method: "GET",
+      headers: { "Content-type": "application/json" },
+    });
+    const res = await req.json();
+    setNotice(res);
+  };
+
   const columns = [
     { field: "serialNumber", headerName: "No", flex: 1 },
     { field: "title", headerName: "Title", flex: 2, minWidth: 150 },
@@ -22,7 +36,7 @@ export default function Notice() {
       renderCell: (params) => {
         console.log(params);
         return (
-          <div
+          <Box
             sx={{
               cursor: "pointer",
               display: "flex",
@@ -39,27 +53,10 @@ export default function Notice() {
                 </Link>
               }
             />
-          </div>
+          </Box>
         );
       },
     },
-  ];
-  const rows = [
-    {
-      id: 1,
-      title: "Post No 1 Lorem Ipusm Dolor Sit amet codfhd jjfljodfd ",
-      date: "21 Sep 2023",
-      file: "/file1",
-    },
-    {
-      id: 2,
-      title: "Post No 2",
-      date: "22 Sep 2023",
-      file: "http://localhost:5173/images/school.jpg",
-    },
-    { id: 4, title: "Post No 3", date: "23 Sep 2023", file: "/file3" },
-    { id: 7, title: "Post No 4", date: "24 Sep 2023", file: "/file4" },
-    { id: 8, title: "Post No 5", date: "25 Sep 2023", file: "/file5" },
   ];
   /*
 My Custom logic to show data serial number automatically. 
@@ -110,7 +107,7 @@ continuous number , use this custom logic in frontend.
         >
           <div style={{ height: "100%", width: "100%" }}>
             <DataGrid
-              rows={rowsWithSerialNumber(rows)}
+              rows={rowsWithSerialNumber(notice)}
               columns={columns}
               initialState={{
                 pagination: {
