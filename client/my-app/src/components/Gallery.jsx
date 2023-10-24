@@ -3,21 +3,27 @@ import Stack from "@mui/material/Stack";
 import { Card, CardMedia, CardContent } from "@mui/material";
 import Link from "./custom/CustomLink";
 import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
+import { useState, useEffect } from "react";
 export default function Gallery() {
-  const demoData = [
-    {
-      id: 1,
-      image: "/images/school.jpg",
-      description:
-        "Lorem Ipsum Dolor Sit amet condsid oi dlfjdlhf olj odifdj jfji odoiieur et nhodufodfidofuou od fiduf idf o",
-    },
-    {
-      id: 2,
-      image: "/images/school.jpg",
-      description:
-        "Lorem Ipsum Dolor Sit amet condsid oi dlfjdlhf olj odifdj jfji odoiieur et nhodufodfidofuou od fiduf idf o",
-    },
-  ];
+  const [galleryData, setGalleryData] = useState([]);
+
+  useEffect(() => {
+    getGalleryData();
+  }, []);
+
+  const getGalleryData = async () => {
+    const req = await fetch("http://localhost:3000/gallery", {
+      method: "GET",
+      headers: { "Content-type": "application/json" },
+    });
+    const res = await req.json();
+    if (res.length > 0) {
+      setGalleryData(res);
+    }
+  };
+
   return (
     <>
       <Container
@@ -40,7 +46,7 @@ export default function Gallery() {
           Gallery
         </Typography>
         <Stack direction={{ xs: "column", sm: "row" }} gap={3}>
-          {demoData.map((data, index) => (
+          {galleryData.map((data, index) => (
             <Card
               key={index}
               sx={{
@@ -66,7 +72,35 @@ export default function Gallery() {
             </Card>
           ))}
         </Stack>
+        <GallerySkeleton />
       </Container>
+    </>
+  );
+}
+
+function GallerySkeleton() {
+  return (
+    <>
+      <Stack direction={{ sm: "row" }} gap={3}>
+        {[1, 2, 3].map((num, index) => (
+          <Box
+            key={index}
+            sx={{ width: { xs: "100%", sm: "30%" }, height: "300px" }}
+          >
+            <Skeleton
+              variant="rectangular"
+              sx={{ width: "100%", height: "200px" }}
+              animation="wave"
+            />
+
+            <Skeleton
+              variant="text"
+              animation="wave"
+              sx={{ width: "100%", marginTop: "1rem" }}
+            />
+          </Box>
+        ))}
+      </Stack>
     </>
   );
 }

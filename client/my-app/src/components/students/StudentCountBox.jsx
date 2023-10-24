@@ -12,8 +12,8 @@ export default function StudentCountBox() {
     getStudents();
   }, []);
   const getStudents = async () => {
-    const req = await fetch("http://localhost:3000/dashboard/getStudents", {
-      method: "POST",
+    const req = await fetch("http://localhost:3000/getStudents", {
+      method: "GET",
       headers: { "Content-type": "application/json" },
     });
     const res = await req.json();

@@ -41,7 +41,7 @@ export default function TeachersBox() {
         Honourable Teachers
       </Typography>
 
-      <Container>
+      <Container sx={{ paddingBottom: "2rem" }}>
         <Stack
           direction={{ xs: "column", sm: "row" }}
           flexWrap="wrap"

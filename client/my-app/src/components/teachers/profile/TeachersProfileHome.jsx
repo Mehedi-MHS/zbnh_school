@@ -8,29 +8,47 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-
 import { useParams } from "react-router-dom";
-
+import { useState, useEffect } from "react";
 export default function TeachersProfileHome() {
-  const { id } = useParams();
-  //In production mode keep the 'info' varible for storing user info as it is used to make dynamic array for generating dynamic table
-  //info will be fetched from db
-  const info = {
-    id: 1,
+  const [info, setInfo] = useState({
+    id: "",
     picUrl: "",
-    fullName: "MD Ismail Chowdhury",
-    designation: "HeadMaster",
+    fullName: "",
+    designation: "",
     fathersName: "",
     mothersName: "",
-    gender: "Male",
-    education: "M.Sc",
-    religion: "Islam",
+    gender: "",
+    education: "",
+    religion: "",
     dateOfBirth: "",
-    contact: "+880123569870",
-    email: "zbnhs@gmail.com",
-    bloodGroup: "D(+ve)",
-    joined: "1 Jan 2001",
+    contact: "",
+    email: "",
+    bloodGroup: "",
+    joined: "",
+  });
+  const { id } = useParams();
+  console.log(id);
+  useEffect(() => {
+    getTeacherProfileInfo();
+  }, []);
+  const getTeacherProfileInfo = async () => {
+    try {
+      const req = await fetch(`http://localhost:3000/teachers/profile/${id}`, {
+        method: "GET",
+        headers: { "Content-type": "application/json" },
+      });
+      const res = await req.json();
+      if (res.length > 0) {
+        setInfo(res[0]);
+      }
+    } catch (error) {
+      console.error("error in teachersProfile:", error);
+    }
   };
+
+  //In production mode keep the 'info' varible for storing user info as it is used to make dynamic array for generating dynamic table
+  //info will be fetched from db
 
   //Donot modify tableCellOptions
   const tableCellOptions = [
@@ -50,54 +68,60 @@ export default function TeachersProfileHome() {
 
   return (
     <>
-      <Box
-        sx={{
-          background: "linear-gradient(to top right,magenta,cyan)",
-          width: "100vw",
-          minHeight: "100vh",
-          padding: { xs: " 8vw 2vw", sm: " 10vw 5vw" },
-        }}
-      >
-        <Typography
-          variant="h3"
-          component="h1"
-          sx={{ color: "#fff", textAlign: "center" }}
-          gutterBottom
-        >
-          {info.fullName}
+      {Object.keys(info).length === 0 ? (
+        <Typography sx={{ marginTop: "5rem" }} variant="h6">
+          Loading....
         </Typography>
-        <Card>
-          <CardContent>
-            <Stack direction={{ xs: "column", sm: "row" }} gap={5}>
-              <Box sx={{ display: "flex", justifyContent: { xs: "center" } }}>
-                <Avatar
-                  alt={info.fullName}
-                  src={
-                    info.picUrl ||
-                    (info.gender.toLowerCase() == "male"
-                      ? "/images/avatar0.webp"
-                      : "/images/Female.png")
-                  }
-                  sx={{ width: "150px", height: "150px" }}
-                />
-              </Box>
-              <TableContainer>
-                <Table>
-                  <TableBody>
-                    {tableCellOptions.map((cell, index) =>
-                      generateTableCell({
-                        title: cell.title,
-                        value: cell.value,
-                        key: index,
-                      })
-                    )}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Stack>
-          </CardContent>
-        </Card>
-      </Box>
+      ) : (
+        <Box
+          sx={{
+            background: "linear-gradient(to top right,magenta,cyan)",
+            width: "100%",
+            minHeight: "100vh",
+            padding: { xs: " 8vw 2vw", sm: " 10vw 5vw" },
+          }}
+        >
+          <Typography
+            variant="h3"
+            component="h1"
+            sx={{ color: "#fff", textAlign: "center" }}
+            gutterBottom
+          >
+            {info.fullName}
+          </Typography>
+          <Card>
+            <CardContent>
+              <Stack direction={{ xs: "column", sm: "row" }} gap={5}>
+                <Box sx={{ display: "flex", justifyContent: { xs: "center" } }}>
+                  <Avatar
+                    alt={info.fullName}
+                    src={
+                      info.picUrl ||
+                      (info.gender?.toLowerCase() == "male"
+                        ? "/images/avatar0.webp"
+                        : "/images/Female.png")
+                    }
+                    sx={{ width: "150px", height: "150px" }}
+                  />
+                </Box>
+                <TableContainer>
+                  <Table>
+                    <TableBody>
+                      {tableCellOptions.map((cell, index) =>
+                        generateTableCell({
+                          title: cell.title,
+                          value: cell.value,
+                          key: index,
+                        })
+                      )}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Stack>
+            </CardContent>
+          </Card>
+        </Box>
+      )}
     </>
   );
 }

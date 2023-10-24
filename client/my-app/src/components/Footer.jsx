@@ -14,6 +14,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Link from "./custom/CustomLink";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function Footer() {
   const mainMenuOptions = [
@@ -46,7 +47,7 @@ export default function Footer() {
     {
       icon: <LocationOnIcon sx={{ color: "orange" }} />,
       title: "ZamiderHat, Begumgonj, Noakhali -3200",
-      url: "",
+      url: "#",
     },
   ];
   return (
@@ -133,7 +134,23 @@ export default function Footer() {
       </Box>
       <Typography variant="h6" component="div" sx={{ textAlign: "center" }}>
         &copy;Copyright {new Date().getFullYear()}. All rights reserved -
-        Developer
+        <Tooltip
+          title="Mehedi Hasan Shuvo (Batch: 2019) 
+           Email: mehedishuvo685638@gmail.com"
+          arrow
+        >
+          <Typography
+            variant="inherit"
+            sx={{
+              cursor: "pointer",
+              textDecoration: "underline",
+              display: "inline-block",
+              color: "green",
+            }}
+          >
+            &nbsp;Developer
+          </Typography>
+        </Tooltip>
       </Typography>
     </>
   );

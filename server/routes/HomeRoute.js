@@ -47,45 +47,53 @@ HomeRouter.get("/notice", (req, res) => {
   res.json(demoNotice);
 });
 
-HomeRouter.get("/teachers", (req, res) => {
-  const DemoTeacherList = [
+HomeRouter.get("/getStudents", (req, res) => {
+  const demoStudents = [
+    {
+      title: "Six",
+      class: 6,
+      total: 250,
+    },
+    {
+      title: "Seven",
+      class: 7,
+      total: 180,
+    },
+    {
+      title: "Eight",
+      class: 8,
+      total: 150,
+    },
+    {
+      title: "Nine",
+      class: 9,
+      total: 180,
+    },
+    {
+      title: "Ten",
+      class: 10,
+      total: 130,
+    },
+  ];
+  res.json(demoStudents);
+});
+
+HomeRouter.get("/gallery", (req, res) => {
+  const demoData = [
     {
       id: 1,
-      name: "MD Ismail Chowdhury",
-      designation: "Headmaster",
-      pic: "",
-      profile_url: "",
+      image: "/images/school.jpg",
+      description:
+        "Lorem Ipsum Dolor Sit amet condsid oi dlfjdlhf olj odifdj jfji odoiieur et nhodufodfidofuou od fiduf idf o",
     },
     {
       id: 2,
-      name: "Rahmat Ullah Sujon",
-      designation: "State Headmaster",
-      pic: "",
-      profile_url: "",
-    },
-    {
-      id: 3,
-      name: "Omor Faruk",
-      designation: "Senior IT teacher",
-      pic: "",
-      profile_url: "",
-    },
-    {
-      id: 4,
-      name: "Teacher4",
-      designation: "Assistant English Teacher ",
-      pic: "",
-      profile_url: "",
-    },
-    {
-      id: 5,
-      name: "Teacher5",
-      designation: "Guest Teacher",
-      pic: "",
-      profile_url: "",
+      image: "/images/school.jpg",
+      description:
+        "Lorem Ipsum Dolor Sit amet condsid oi dlfjdlhf olj odifdj jfji odoiieur et nhodufodfidofuou od fiduf idf o",
     },
   ];
-  res.json(DemoTeacherList);
+  res.json(demoData);
 });
 
 module.exports = HomeRouter;
