@@ -96,4 +96,23 @@ HomeRouter.get("/gallery", (req, res) => {
   res.json(demoData);
 });
 
+HomeRouter.get("/about", (req, res) => {
+  const demoPost = [
+    {
+      id: 1,
+      title: "Our School At a Glance",
+      image: "/images/school.jpg",
+      description:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpnemo animi maxime aliquid, itaque nobis eveniet quisquam istecupiditate eligendi corporis aspernatur, eos harum minima intemporibus facere hic omnis",
+    },
+    {
+      id: 2,
+      title: "Our Mission and Vision",
+      image: "/images/school.jpg",
+      description:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpnemo animi maxime aliquid, itaque nobis eveniet quisquam istecupiditate eligendi corporis aspernatur, eos harum minima intemporibus facere hic omnis",
+    },
+  ];
+  res.json(demoPost);
+});
 module.exports = HomeRouter;
