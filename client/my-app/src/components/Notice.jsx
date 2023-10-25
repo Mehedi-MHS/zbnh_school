@@ -5,6 +5,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import Link from "./custom/CustomLink";
 import IconButton from "@mui/material/IconButton";
+import SEO from "./custom/SEO";
 import { FormControlLabel } from "@mui/material";
 import { useState, useEffect } from "react";
 export default function Notice() {
@@ -77,6 +78,12 @@ continuous number , use this custom logic in frontend.
 
   return (
     <>
+      <SEO
+        title="Notice Board"
+        description="See all the Recent Notice of ZamiderHat Begum Nurunnahar High School"
+        name="ZamiderHat Begum Nurunnahar High School"
+        type="Article"
+      />
       <Box
         sx={{
           width: "100vw",

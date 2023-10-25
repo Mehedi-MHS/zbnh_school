@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
+import SEO from "./custom/SEO";
 import { useState, useEffect } from "react";
 export default function About() {
   const [post, setPost] = useState([]);
@@ -27,6 +28,12 @@ export default function About() {
 
   return (
     <>
+      <SEO
+        title="About School"
+        description="Learn About Our History, mission and vision - ZamiderHat Begum Nurunnahar High School"
+        name="ZamiderHat Begum Nurunnahar High School"
+        type="Article"
+      />
       <Container
         sx={{
           width: "100vw",

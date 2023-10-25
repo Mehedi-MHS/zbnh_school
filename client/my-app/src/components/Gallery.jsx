@@ -5,6 +5,7 @@ import Link from "./custom/CustomLink";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
+import SEO from "./custom/SEO";
 import { useState, useEffect } from "react";
 export default function Gallery() {
   const [galleryData, setGalleryData] = useState([]);
@@ -26,6 +27,12 @@ export default function Gallery() {
 
   return (
     <>
+      <SEO
+        title="Gallery"
+        description="See all the latest events of ZamiderHat Begum Nurunnahar High School"
+        name="ZamiderHat Begum Nurunnahar High School"
+        type="Article"
+      />
       <Container
         sx={{
           margin: { xs: "2rem auto", sm: "2rem auto" },
