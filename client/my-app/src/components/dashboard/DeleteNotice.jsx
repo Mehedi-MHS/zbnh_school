@@ -7,20 +7,20 @@ import IconButton from "@mui/material/IconButton";
 
 import { FormControlLabel } from "@mui/material";
 import { useState, useEffect } from "react";
-export default function DeleteSchoolInfo() {
-  const [schoolPosts, setSchoolPosts] = useState([]);
-  const [postId, setPostId] = useState(null);
+export default function DeleteNotice() {
+  const [notices, setNotices] = useState([]);
+  const [noticeId, setNoticeId] = useState(null);
   useEffect(() => {
-    getSchoolPosts();
+    getAllNotice();
   }, []);
 
-  const getSchoolPosts = async () => {
-    const req = await fetch("http://localhost:3000/about", {
+  const getAllNotice = async () => {
+    const req = await fetch("http://localhost:3000/notice", {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });
     const res = await req.json();
-    setSchoolPosts(res);
+    setNotices(res);
   };
 
   const columns = [
@@ -97,7 +97,7 @@ continuous number , use this custom logic in frontend.
             color: "Red",
           }}
         >
-          Delete School Information related posts
+          Delete Notice
         </Typography>
 
         <Container
@@ -109,7 +109,7 @@ continuous number , use this custom logic in frontend.
         >
           <div style={{ height: "100%", width: "100%" }}>
             <DataGrid
-              rows={rowsWithSerialNumber(schoolPosts)}
+              rows={rowsWithSerialNumber(notices)}
               columns={columns}
               initialState={{
                 pagination: {

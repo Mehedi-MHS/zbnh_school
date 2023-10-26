@@ -50,13 +50,13 @@ export default function TeachersBox() {
           sx={{ marginTop: "3rem" }}
         >
           {teacherList.length > 0 ? (
-            teacherList.map((teacher) => (
+            teacherList.map((teacher, index) => (
               <Card
                 sx={{
                   width: { xs: "100%", sm: "300px" },
                   background: "rgba(15,13,55,0.05)",
                 }}
-                key={teacher.id}
+                key={index}
                 variant="outlined"
               >
                 <CardContent>

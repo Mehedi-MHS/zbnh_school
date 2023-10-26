@@ -11,7 +11,7 @@ TeachersRouter.get("/", (req, res) => {
       profile_url: "",
     },
     {
-      id: 2,
+      id: 6,
       name: "Rahmat Ullah Sujon",
       designation: "State Headmaster",
       pic: "",

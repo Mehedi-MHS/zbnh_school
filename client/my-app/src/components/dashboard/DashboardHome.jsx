@@ -39,17 +39,17 @@ export default function DashboardHome() {
       title: "Notice Board",
       subheader: "Create new notice or delete existing one",
       buttons: [
-        { title: "Create Notice", link: "#" },
-        { title: "Delete Notice", link: "#" },
+        { title: "Create Notice", link: "/dashboard/addNotice" },
+        { title: "Delete Notice", link: "/dashboard/deleteNotice" },
       ],
     },
     {
       id: 5,
       title: "Gallery",
-      subheader: "Create post of and event",
+      subheader: "Create post of an event",
       buttons: [
-        { title: "Add Post", link: "#" },
-        { title: "Delete Post", link: "#" },
+        { title: "Add Post", link: "/dashboard/addGalleryPost" },
+        { title: "Delete Post", link: "/dashboard/deleteGalleryPost" },
       ],
     },
   ];

@@ -3,11 +3,11 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { Card, CardContent, CardActions } from "@mui/material";
 import Container from "@mui/material/Container";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-export default function AddSchoolInfo() {
+export default function AddNotice() {
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",
@@ -37,10 +37,14 @@ export default function AddSchoolInfo() {
           }}
         >
           <Typography variant="h4" component="h1" textAlign="center">
-            Add School Information
+            Add New Notice
           </Typography>
           <Card
-            sx={{ maxWidth: { xs: "100%", sm: "40%" }, margin: " 2rem auto" }}
+            sx={{
+              maxWidth: { xs: "100%", sm: "40%" },
+              margin: " 2rem auto",
+            }}
+            variant="outlined"
           >
             <CardContent>
               <TextField
@@ -50,24 +54,16 @@ export default function AddSchoolInfo() {
                 sx={{ marginBottom: 2 }}
                 fullWidth
               />
-              <TextField
-                type="text"
-                label="Description..."
-                fullWidth
-                multiline
-                sx={{ marginBottom: 2 }}
-                rows={2}
-              />
               <IconButton component="label" color="success">
-                <AddPhotoAlternateIcon />
+                <PictureAsPdfIcon />
                 <Typography
                   variant="body2"
                   color="text.secondary"
                   sx={{ marginLeft: "2px" }}
                 >
-                  Add Picture
+                  Add PDF Notice
                 </Typography>
-                <VisuallyHiddenInput type="file" accept="image/*" />
+                <VisuallyHiddenInput type="file" accept=".pdf" />
               </IconButton>
             </CardContent>
             <CardActions>

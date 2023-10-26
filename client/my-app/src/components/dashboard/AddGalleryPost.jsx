@@ -7,7 +7,7 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-export default function AddSchoolInfo() {
+export default function AddGalleryPost() {
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",
@@ -37,7 +37,7 @@ export default function AddSchoolInfo() {
           }}
         >
           <Typography variant="h4" component="h1" textAlign="center">
-            Add School Information
+            Add post to Gallery
           </Typography>
           <Card
             sx={{ maxWidth: { xs: "100%", sm: "40%" }, margin: " 2rem auto" }}
@@ -45,14 +45,7 @@ export default function AddSchoolInfo() {
             <CardContent>
               <TextField
                 type="text"
-                label="Title"
-                variant="standard"
-                sx={{ marginBottom: 2 }}
-                fullWidth
-              />
-              <TextField
-                type="text"
-                label="Description..."
+                label="Add information..."
                 fullWidth
                 multiline
                 sx={{ marginBottom: 2 }}

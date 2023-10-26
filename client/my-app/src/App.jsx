@@ -13,7 +13,11 @@ import EditStudents from "./components/dashboard/EditStudents";
 import NotFound from "./components/404";
 import Login from "./components/Login";
 import AddSchoolInfo from "./components/dashboard/AddSchoolInfo";
+import AddNotice from "./components/dashboard/AddNotice";
+import AddGalleryPost from "./components/dashboard/AddGalleryPost";
 import DeleteSchoolInfo from "./components/dashboard/DeleteSchoolInfo";
+import DeleteTeacher from "./components/dashboard/DeleteTeacher";
+import DeleteNotice from "./components/dashboard/DeleteNotice";
 import PrivateRoute from "./components/PrivateRoute";
 import { Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
@@ -68,10 +72,42 @@ export default function App() {
             }
           />
           <Route
+            path="/dashboard/addNotice"
+            element={
+              <PrivateRoute>
+                <AddNotice />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard/addGalleryPost"
+            element={
+              <PrivateRoute>
+                <AddGalleryPost />
+              </PrivateRoute>
+            }
+          />
+          <Route
             path="/dashboard/deleteSchoolInfo"
             element={
               <PrivateRoute>
                 <DeleteSchoolInfo />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard/deleteTeacher"
+            element={
+              <PrivateRoute>
+                <DeleteTeacher />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard/deleteNotice"
+            element={
+              <PrivateRoute>
+                <DeleteNotice />
               </PrivateRoute>
             }
           />

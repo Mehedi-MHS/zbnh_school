@@ -97,7 +97,7 @@ export default function AddTeacher() {
                 startIcon={<CloudUploadIcon />}
               >
                 Upload Profile Picture
-                <VisuallyHiddenInput type="file" />
+                <VisuallyHiddenInput type="file" accept="image/*" />
               </Button>
             </Box>
             <Grid

@@ -86,10 +86,9 @@ continuous number , use this custom logic in frontend.
       />
       <Box
         sx={{
-          width: "100vw",
-          minHeight: "100vh",
+          width: "100%",
+          minHeight: "70vh",
           paddingTop: "2rem",
-          background: "gray",
         }}
       >
         <Typography
@@ -98,11 +97,9 @@ continuous number , use this custom logic in frontend.
           align="center"
           sx={{
             margin: "2rem auto",
-            color: "white",
-            textShadow: "0px 1px 2px black",
           }}
         >
-          Notice Board
+          Recent News/Notice
         </Typography>
 
         <Container

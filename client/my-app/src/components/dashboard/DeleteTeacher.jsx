@@ -7,25 +7,25 @@ import IconButton from "@mui/material/IconButton";
 
 import { FormControlLabel } from "@mui/material";
 import { useState, useEffect } from "react";
-export default function DeleteSchoolInfo() {
-  const [schoolPosts, setSchoolPosts] = useState([]);
-  const [postId, setPostId] = useState(null);
+export default function DeleteTeacher() {
+  const [teachers, setTeachers] = useState([]);
+  const [teacherId, setTeacherId] = useState(null);
   useEffect(() => {
-    getSchoolPosts();
+    getTeachers();
   }, []);
 
-  const getSchoolPosts = async () => {
-    const req = await fetch("http://localhost:3000/about", {
+  const getTeachers = async () => {
+    const req = await fetch("http://localhost:3000/teachers", {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });
     const res = await req.json();
-    setSchoolPosts(res);
+    setTeachers(res);
   };
 
   const columns = [
     { field: "serialNumber", headerName: "No", flex: 1 },
-    { field: "title", headerName: "Title", flex: 2, minWidth: 150 },
+    { field: "name", headerName: "Name", flex: 2, minWidth: 150 },
     {
       field: "action",
       headerName: "Delete",
@@ -84,8 +84,9 @@ continuous number , use this custom logic in frontend.
       <Box
         sx={{
           width: "100%",
-          minHeight: "70vh",
+          minHeight: "100vh",
           paddingTop: "2rem",
+          background: "gray",
         }}
       >
         <Typography
@@ -94,10 +95,11 @@ continuous number , use this custom logic in frontend.
           align="center"
           sx={{
             margin: "2rem auto",
-            color: "Red",
+            color: "white",
+            textShadow: "0px 1px 2px black",
           }}
         >
-          Delete School Information related posts
+          Delete Teacher Information
         </Typography>
 
         <Container
@@ -109,7 +111,7 @@ continuous number , use this custom logic in frontend.
         >
           <div style={{ height: "100%", width: "100%" }}>
             <DataGrid
-              rows={rowsWithSerialNumber(schoolPosts)}
+              rows={rowsWithSerialNumber(teachers)}
               columns={columns}
               initialState={{
                 pagination: {
