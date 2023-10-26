@@ -13,6 +13,7 @@ import EditStudents from "./components/dashboard/EditStudents";
 import NotFound from "./components/404";
 import Login from "./components/Login";
 import AddSchoolInfo from "./components/dashboard/AddSchoolInfo";
+import DeleteSchoolInfo from "./components/dashboard/DeleteSchoolInfo";
 import PrivateRoute from "./components/PrivateRoute";
 import { Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
@@ -63,6 +64,14 @@ export default function App() {
             element={
               <PrivateRoute>
                 <AddSchoolInfo />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard/deleteSchoolInfo"
+            element={
+              <PrivateRoute>
+                <DeleteSchoolInfo />
               </PrivateRoute>
             }
           />

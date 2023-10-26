@@ -106,7 +106,7 @@ HomeRouter.get("/about", (req, res) => {
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpnemo animi maxime aliquid, itaque nobis eveniet quisquam istecupiditate eligendi corporis aspernatur, eos harum minima intemporibus facere hic omnis",
     },
     {
-      id: 2,
+      id: 3,
       title: "Our Mission and Vision",
       image: "/images/school.jpg",
       description:

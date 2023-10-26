@@ -34,6 +34,24 @@ export default function DashboardHome() {
         { title: "Delete School Info", link: "/dashboard/deleteSchoolInfo" },
       ],
     },
+    {
+      id: 4,
+      title: "Notice Board",
+      subheader: "Create new notice or delete existing one",
+      buttons: [
+        { title: "Create Notice", link: "#" },
+        { title: "Delete Notice", link: "#" },
+      ],
+    },
+    {
+      id: 5,
+      title: "Gallery",
+      subheader: "Create post of and event",
+      buttons: [
+        { title: "Add Post", link: "#" },
+        { title: "Delete Post", link: "#" },
+      ],
+    },
   ];
   return (
     <>
