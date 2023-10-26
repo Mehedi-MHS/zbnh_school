@@ -7,7 +7,6 @@ import Container from "@mui/material/Container";
 import Skeleton from "@mui/material/Skeleton";
 export default function StudentCountBox() {
   const [students, setStudents] = useState([]);
-  const [loading, setLoading] = useState(true);
   useEffect(() => {
     getStudents();
   }, []);
@@ -19,8 +18,6 @@ export default function StudentCountBox() {
     const res = await req.json();
     console.log(res);
     setStudents(res);
-
-    setLoading(false);
   };
   return (
     <>
@@ -58,10 +55,8 @@ export default function StudentCountBox() {
             overflow: "hidden",
           }}
         >
-          {students.map((student, index) =>
-            loading ? (
-              <Skeleton key={index} width={250} height={250} />
-            ) : (
+          {students.length > 0 ? (
+            students.map((student, index) => (
               <Box
                 key={index}
                 sx={{
@@ -115,10 +110,42 @@ export default function StudentCountBox() {
                   {student.total}
                 </Typography>
               </Box>
-            )
+            ))
+          ) : (
+            <StudentsSkeleton />
           )}
         </Stack>
       </Container>
+    </>
+  );
+}
+
+function StudentsSkeleton() {
+  return (
+    <>
+      <Stack direction={{ sm: "row" }} gap={3}>
+        {[1, 2, 3].map((num, index) => (
+          <Box
+            key={index}
+            sx={{
+              width: { xs: "100%", sm: "30vw" },
+              maxWidth: { sm: "30vw" },
+              height: "300px",
+            }}
+          >
+            <Skeleton
+              variant="text"
+              animation="wave"
+              sx={{ width: "100%", marginTop: "1rem" }}
+            />
+            <Skeleton
+              variant="rectangular"
+              sx={{ width: "100%", height: "200px" }}
+              animation="wave"
+            />
+          </Box>
+        ))}
+      </Stack>
     </>
   );
 }

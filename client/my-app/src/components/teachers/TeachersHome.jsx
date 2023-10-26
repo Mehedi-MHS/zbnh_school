@@ -1,5 +1,6 @@
 import TeachersBox from "./TeachersBox";
 import SEO from "../custom/SEO";
+
 export default function Teachers() {
   return (
     <>

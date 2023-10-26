@@ -8,6 +8,7 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
+import { Skeleton } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 export default function TeachersProfileHome() {
@@ -69,9 +70,7 @@ export default function TeachersProfileHome() {
   return (
     <>
       {Object.keys(info).length === 0 ? (
-        <Typography sx={{ marginTop: "5rem" }} variant="h6">
-          Loading....
-        </Typography>
+        <TeacherSkeleton />
       ) : (
         <Box
           sx={{
@@ -144,3 +143,37 @@ const generateTableCell = ({ title, value, key }) => {
     </TableRow>
   );
 };
+
+function TeacherSkeleton() {
+  return (
+    <>
+      <Stack direction={{ sm: "row" }} gap={3} flexWrap="wrap">
+        <Card
+          sx={{
+            width: { xs: "100%", sm: "300px" },
+            background: "rgba(15,13,55,0.05)",
+          }}
+          variant="outlined"
+        >
+          <CardContent>
+            <Stack
+              direction={{ sm: "row" }}
+              gap="2rem"
+              alignItems={{ xs: "center", sm: "inherit" }}
+            >
+              <Skeleton
+                variant="circular"
+                sx={{ width: { xs: 85 }, height: { xs: 85 } }}
+              />
+              <Box sx={{ width: { xs: "100%", sm: "55%" } }}>
+                <Skeleton variant="text" />
+
+                <Skeleton variant="text" />
+              </Box>
+            </Stack>
+          </CardContent>{" "}
+        </Card>
+      </Stack>
+    </>
+  );
+}
