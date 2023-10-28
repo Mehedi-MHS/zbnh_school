@@ -1,4 +1,5 @@
 import HeroSection from "./HeroComponent";
+import MarqueeNews from "./MarqueeNews";
 import SEO from "../custom/SEO";
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
         type="Article"
       />
       <HeroSection />
+      <MarqueeNews />
     </>
   );
 }

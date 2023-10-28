@@ -18,6 +18,7 @@ import AddGalleryPost from "./components/dashboard/AddGalleryPost";
 import DeleteSchoolInfo from "./components/dashboard/DeleteSchoolInfo";
 import DeleteTeacher from "./components/dashboard/DeleteTeacher";
 import DeleteNotice from "./components/dashboard/DeleteNotice";
+import DeleteGalleryPost from "./components/dashboard/DeleteGalleryPost";
 import PrivateRoute from "./components/PrivateRoute";
 import { Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
@@ -111,7 +112,14 @@ export default function App() {
               </PrivateRoute>
             }
           />
-
+          <Route
+            path="/dashboard/deleteGalleryPost"
+            element={
+              <PrivateRoute>
+                <DeleteGalleryPost />
+              </PrivateRoute>
+            }
+          />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/about" element={<About />} />
           <Route path="/posts/:id" element={<DynamicPost />} />

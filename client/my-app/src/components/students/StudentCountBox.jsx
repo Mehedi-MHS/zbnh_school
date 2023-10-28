@@ -29,11 +29,11 @@ export default function StudentCountBox() {
             fontFamily: "roboto,sans-serif",
             textAlign: "center",
             padding: "0.5rem",
-            background: "rgba(55,63,72,0.3)",
-            color: "white",
+            color: "#000",
             "&:hover": {
-              color: "black",
-              background: "linear-gradient(to top right,cyan,magenta)",
+              color: "green",
+              textTransform: "uppercase",
+              transition: "0.5s",
             },
           }}
         >
@@ -51,7 +51,7 @@ export default function StudentCountBox() {
             padding: "2rem 0",
             justifyContent: "center",
             alignItems: "center",
-            maxWidth: "100vw",
+            maxWidth: "100%",
             overflow: "hidden",
           }}
         >
@@ -128,8 +128,8 @@ function StudentsSkeleton() {
           <Box
             key={index}
             sx={{
-              width: { xs: "100%", sm: "30vw" },
-              maxWidth: { sm: "30vw" },
+              width: { xs: "90vw", sm: "30vw" },
+              maxWidth: { sm: "30vw", xs: "100%" },
               height: "300px",
             }}
           >

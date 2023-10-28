@@ -14,15 +14,25 @@ export default function DashboardHome() {
       id: 1,
       title: "Students",
       subheader: "Manage students here",
-      buttons: [{ title: "Edit Students", link: "/dashboard/editStudents" }],
+      buttons: [
+        {
+          title: "Edit Students",
+          color: "info",
+          link: "/dashboard/editStudents",
+        },
+      ],
     },
     {
       id: 2,
       title: "Teachers",
       subheader: "Manage teachers here",
       buttons: [
-        { title: "Add Teacher", link: "/dashboard/addTeacher" },
-        { title: "Delete Teacher", link: "/dashboard/deleteTeacher" },
+        { title: "Add Teacher", color: "info", link: "/dashboard/addTeacher" },
+        {
+          title: "Delete Teacher",
+          color: "error",
+          link: "/dashboard/deleteTeacher",
+        },
       ],
     },
     {
@@ -30,8 +40,12 @@ export default function DashboardHome() {
       title: "School Info",
       subheader: "Edit or Delete School related information",
       buttons: [
-        { title: "Add School Info", link: "/dashboard/addSchoolInfo" },
-        { title: "Delete School Info", link: "/dashboard/deleteSchoolInfo" },
+        { title: "Add Info", link: "/dashboard/addSchoolInfo" },
+        {
+          title: "Delete Info",
+          color: "error",
+          link: "/dashboard/deleteSchoolInfo",
+        },
       ],
     },
     {
@@ -40,7 +54,11 @@ export default function DashboardHome() {
       subheader: "Create new notice or delete existing one",
       buttons: [
         { title: "Create Notice", link: "/dashboard/addNotice" },
-        { title: "Delete Notice", link: "/dashboard/deleteNotice" },
+        {
+          title: "Delete Notice",
+          color: "error",
+          link: "/dashboard/deleteNotice",
+        },
       ],
     },
     {
@@ -49,7 +67,11 @@ export default function DashboardHome() {
       subheader: "Create post of an event",
       buttons: [
         { title: "Add Post", link: "/dashboard/addGalleryPost" },
-        { title: "Delete Post", link: "/dashboard/deleteGalleryPost" },
+        {
+          title: "Delete Post",
+          color: "error",
+          link: "/dashboard/deleteGalleryPost",
+        },
       ],
     },
   ];
@@ -88,7 +110,10 @@ export default function DashboardHome() {
               <CardActions>
                 {option.buttons.map((button, index) => (
                   <Link to={button.link} key={index}>
-                    <Button variant="contained" color="info">
+                    <Button
+                      variant="contained"
+                      color={button.color || "primary"}
+                    >
                       {button.title}
                     </Button>
                   </Link>
@@ -98,10 +123,6 @@ export default function DashboardHome() {
           ))}
         </Stack>
       </Box>
-
-      <Link to="/dashboard/addSchoolInfo">
-        <Button>Add School Info</Button>
-      </Link>
     </>
   );
 }
