@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { keyframes } from "@emotion/react";
 import Stack from "@mui/material/Stack";
-import { Link } from "../custom/CustomLink";
+import Link from "../custom/CustomLink";
 import { useState, useEffect } from "react";
 // Define a keyframe animation
 const slide = keyframes`
@@ -15,7 +15,7 @@ const slide = keyframes`
 `;
 
 export default function MarqueeNews() {
-  const [notices, setNotices] = useState([]);
+  const [notices, setNotices] = useState(["No notice found.."]);
   useEffect(() => {
     getNotices();
   }, []);
@@ -63,7 +63,7 @@ export default function MarqueeNews() {
 
       <Box
         sx={{
-          animation: `${slide} 15s linear infinite`,
+          animation: `${slide} 20s linear infinite`,
           whiteSpace: "nowrap",
           display: "flex",
           paddingLeft: "50%", // Initial padding to ensure news starts off-screen
