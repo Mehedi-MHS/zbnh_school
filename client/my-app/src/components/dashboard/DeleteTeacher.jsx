@@ -86,7 +86,7 @@ continuous number , use this custom logic in frontend.
           width: "100%",
           minHeight: "100vh",
           paddingTop: "2rem",
-          background: "gray",
+          background: "rgba(0,0,0,0.1)",
         }}
       >
         <Typography
