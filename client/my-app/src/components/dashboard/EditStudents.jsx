@@ -44,6 +44,7 @@ export default function EditStudents() {
           width: "100vw",
           height: "100vh",
           padding: "7% 2%",
+          background: "rgba(0,0,0,0.1)",
         }}
       >
         <Card

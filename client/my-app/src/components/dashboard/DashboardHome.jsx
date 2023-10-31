@@ -82,10 +82,10 @@ export default function DashboardHome() {
           width: "100%",
           minHeight: "100vh",
           padding: { xs: "2rem 1rem", sm: "3rem 1rem" },
-          background: "silver",
+          background: "rgba(0,0,0,0.1)",
         }}
       >
-        <Typography variant="h2" component="h1">
+        <Typography variant="h3" component="h1" textAlign="center" mb="2rem">
           Admin Panel
         </Typography>
         <Stack direction={{ sm: "row" }} flexWrap="wrap" gap={2}>

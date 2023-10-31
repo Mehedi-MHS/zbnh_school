@@ -26,7 +26,7 @@ export default function AddSchoolInfo() {
         sx={{
           width: "100%",
           minHeight: "70vh",
-          background: "silver",
+          background: "rgba(0,0,0,0.1)",
           top: 0,
           paddingTop: "3rem",
         }}

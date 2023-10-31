@@ -2,6 +2,7 @@ const express = require("express");
 const HomeRouter = express.Router();
 
 HomeRouter.get("/notice", (req, res) => {
+  //get news from db order by date descending so that new notice appear on top
   const demoNotice = [
     {
       id: 1,
@@ -115,4 +116,5 @@ HomeRouter.get("/about", (req, res) => {
   ];
   res.json(demoPost);
 });
+
 module.exports = HomeRouter;
