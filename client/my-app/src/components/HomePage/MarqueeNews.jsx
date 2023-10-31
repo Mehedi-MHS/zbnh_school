@@ -90,7 +90,7 @@ export default function MarqueeNews() {
           animation: `${slide} 15s linear infinite`,
           whiteSpace: "nowrap",
           display: "flex",
-          paddingLeft: "50%", // Initial padding to ensure news starts off-screen
+          paddingLeft: "100%", // Initial padding to ensure news starts off-screen
         }}
       >
         <Typography variant="h6">News 1. Lorem ipsum </Typography>
