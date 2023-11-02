@@ -1,6 +1,7 @@
 import HeroSection from "./HeroComponent";
 import MarqueeNews from "./MarqueeNews";
 import SEO from "../custom/SEO";
+import Carousel from "./Carousel";
 export default function Home() {
   return (
     <>
@@ -12,6 +13,8 @@ export default function Home() {
       />
       <HeroSection />
       <MarqueeNews />
+
+      <Carousel />
     </>
   );
 }
