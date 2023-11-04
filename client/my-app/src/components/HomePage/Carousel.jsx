@@ -21,15 +21,33 @@ export default function Carousel() {
       setPosts(res);
     }
   };
-
-  const settings = {
+  var settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    autoPlay: true,
     nextArrow: <Arrow />,
     prevArrow: <Arrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   return (
@@ -52,8 +70,21 @@ export default function Carousel() {
         </Typography>
         <Slider {...settings}>
           {posts.map((data, index) => (
-            <Box key={index} sx={{ textAlign: "center" }}>
-              <img src={data.image} />
+            <Box
+              key={index}
+              sx={{
+                textAlign: "center",
+                display: "grid",
+                placeItems: "center",
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <img
+                src={data.image}
+                style={{ height: "200px" }}
+                alt={data.description}
+              />
               <Typography variant="p">{data.description}</Typography>
             </Box>
           ))}
