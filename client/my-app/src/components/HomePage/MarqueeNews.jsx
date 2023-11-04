@@ -7,10 +7,10 @@ import { useState, useEffect } from "react";
 // Define a keyframe animation
 const slide = keyframes`
   from {
-    transform: translateX(100vw);
+    transform: translateX(100%);
   }
   to {
-    transform: translateX(-100vw);
+    transform: translateX(-100%);
   }
 `;
 
@@ -36,6 +36,7 @@ export default function MarqueeNews() {
       sx={{
         position: "relative",
         width: "100%",
+        maxWidth: "100%",
         overflow: "hidden",
         padding: "3px 0",
         background: "silver",
@@ -63,7 +64,7 @@ export default function MarqueeNews() {
 
       <Box
         sx={{
-          animation: `${slide} 20s linear infinite`,
+          animation: `${slide} 18s linear infinite`,
           whiteSpace: "nowrap",
           display: "flex",
           paddingLeft: "50%", // Initial padding to ensure news starts off-screen

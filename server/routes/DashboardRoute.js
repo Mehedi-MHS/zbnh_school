@@ -7,4 +7,13 @@ dashboardRouter.all("/*", (req, res, next) => {
   next();
 });
 
+dashboardRouter.post("/editStudents", (req, res) => {
+  const { cls, total } = req.body;
+  if (cls && total) {
+    return res.json({ success: true });
+  } else {
+    return res.json({ success: false });
+  }
+});
+
 module.exports = dashboardRouter;

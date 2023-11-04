@@ -1,4 +1,3 @@
-import React from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
@@ -16,8 +15,8 @@ export default function HeroSection() {
   };
 
   return (
-    <Card style={{ borderRadius: 0 }}>
-      <Box style={{ position: "relative" }}>
+    <Card sx={{ borderRadius: 0, background: "red" }}>
+      <Box style={{ position: "relative", maxWidth: "100%" }}>
         <CardMedia
           component="img"
           height="400"

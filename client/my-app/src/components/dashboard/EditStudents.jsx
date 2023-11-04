@@ -9,11 +9,14 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
+import { CircularProgress } from "@mui/material";
 export default function EditStudents() {
   const [student, setStudent] = useState({
     class: null,
     total: null,
   });
+
+  const [loading, setLoading] = useState(false);
   const classOptions = [
     {
       label: "Six",
@@ -36,6 +39,20 @@ export default function EditStudents() {
       value: 10,
     },
   ];
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    const data = { cls: student.class, total: student.total };
+    const req = await fetch("http://localhost:3000/dashboard/editStudents", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    const res = await req.json();
+    if (res.success) {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -86,17 +103,33 @@ export default function EditStudents() {
                 }
                 type="number"
                 required
-                helperText={student ? student.class : "No Class Selected"}
               />
             </Stack>
           </CardContent>
           <CardActions>
-            <Button variant="contained">Save Changes</Button>
+            <Button
+              variant="contained"
+              disabled={student.class && student.total ? false : true}
+              onClick={handleSubmit}
+            >
+              {loading ? (
+                <CircularProgress
+                  sx={{ color: "white", fontSize: "7px" }}
+                  disableShrink
+                />
+              ) : (
+                "Save changes"
+              )}
+            </Button>
           </CardActions>
         </Card>
         <Typography variant="h3">{`Class:${
           student.class || "null"
         } - Students: ${student.total}`}</Typography>
+        <Button variant="contained">
+          {" "}
+          <CircularProgress sx={{ color: "white" }} />
+        </Button>
       </Container>
     </>
   );
