@@ -1,7 +1,7 @@
 import HeroSection from "./HeroComponent";
 import MarqueeNews from "./MarqueeNews";
 import SEO from "../custom/SEO";
-import Carousel from "./Carousel";
+import CarouselComponent from "./Carousel";
 import NavigationBox from "./NavigationBox";
 import Box from "@mui/material/Box";
 import { Divider } from "@mui/material";
@@ -19,7 +19,7 @@ export default function Home() {
         <MarqueeNews />
         <NavigationBox />
         <Divider />
-        <Carousel />
+        <CarouselComponent />
       </Box>
     </>
   );

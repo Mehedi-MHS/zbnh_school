@@ -113,10 +113,7 @@ export default function EditStudents() {
               onClick={handleSubmit}
             >
               {loading ? (
-                <CircularProgress
-                  sx={{ color: "white", fontSize: "7px" }}
-                  disableShrink
-                />
+                <CircularProgress sx={{ color: "white" }} size="1rem" />
               ) : (
                 "Save changes"
               )}
@@ -128,7 +125,7 @@ export default function EditStudents() {
         } - Students: ${student.total}`}</Typography>
         <Button variant="contained">
           {" "}
-          <CircularProgress sx={{ color: "white" }} />
+          <CircularProgress sx={{ color: "white" }} size="1.5rem" />
         </Button>
       </Container>
     </>
