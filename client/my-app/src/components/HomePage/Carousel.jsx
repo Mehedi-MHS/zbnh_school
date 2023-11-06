@@ -35,7 +35,11 @@ export default function CarouselComponent() {
         >
           Recent Posts
         </Typography>
-        <Carousel animation="slide">
+        <Carousel
+          animation="slide"
+          stopAutoPlayOnHover="false"
+          cycleNavigation="true"
+        >
           {posts.map((post, index) => (
             <Item key={index} item={post} />
           ))}
@@ -49,14 +53,24 @@ function Item(props) {
   return (
     <Box
       sx={{
-        textAlign: "center",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: "center",
+        rowGap: "1rem",
+        width: { sm: "40%", height: "auto" },
+        margin: "0px auto",
+        padding: { sm: "1rem" },
+        textAlign: "center",
       }}
     >
-      <img src={props.item.image} alt={props.item.description} />
+      <img
+        src={props.item.image}
+        alt={props.item.description}
+        style={{
+          border: "5px solid white",
+          boxShadow: "0px 1px 3px black",
+        }}
+      />
       <Typography variant="p">{props.item.description}</Typography>
     </Box>
   );
