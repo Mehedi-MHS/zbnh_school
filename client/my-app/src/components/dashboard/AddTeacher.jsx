@@ -60,20 +60,25 @@ export default function AddTeacher() {
   };
   const handleSubmit = async () => {
     setLoading(true);
-    const formData = new FormData();
-    formData.append("picData", selectedImage);
-    formData.append("info", teacherInfo);
-    const req = await fetch("http:localhost:3000/dashboard/editTeacher", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: formData,
-    });
-    const res = await req.json();
-    if (res) {
+    try {
+      const formData = new FormData();
+      // formData.append("picData", selectedImage);
+      formData.append("info", "hi");
+      console.log(formData);
+      const req = await fetch("http://localhost:3000/dashboard/editTeacher", {
+        method: "POST",
+        body: formData,
+      });
+      const res = await req.json();
+      if (res) {
+        setSnackbarMessage(res.message);
+        setSnackbarOpen(true);
+        setSeverity(res.severity);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
       setLoading(false);
-      setSnackbarMessage(res.message);
-      setSnackbarOpen(true);
-      setSeverity(res.severity);
     }
   };
 
@@ -122,11 +127,7 @@ export default function AddTeacher() {
               }}
             >
               <Avatar
-                src={
-                  selectedImage ||
-                  teacherInfo.picData ||
-                  "/images/black_profile.webp"
-                }
+                src={selectedImage || "/images/blank_profile.webp"}
                 sx={{ width: "30vmin", height: "30vmin", marginBottom: "2rem" }}
               />
               <Button
