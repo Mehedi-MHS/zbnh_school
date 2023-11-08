@@ -13,10 +13,12 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-
+import { imageResizer } from "../../helpers/ImageResizer";
+import { CircularProgress } from "@mui/material";
+import SnackbarComponent from "../SnackbarComponent";
 export default function AddTeacher() {
+  const [selectedImage, setSelectedImage] = useState(null);
   const [teacherInfo, setTeacherInfo] = useState({
-    picData: "",
     fullName: "",
     designation: "",
     fathersName: "",
@@ -31,6 +33,11 @@ export default function AddTeacher() {
     joined: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [severity, setSeverity] = useState("");
+
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",
@@ -42,6 +49,33 @@ export default function AddTeacher() {
     whiteSpace: "nowrap",
     width: 1,
   });
+
+  const handleFileSelection = async (event) => {
+    const resized = await imageResizer(event.target.files[0]);
+    setSelectedImage(resized.resizedData);
+  };
+
+  const handleClose = () => {
+    setSnackbarOpen(false);
+  };
+  const handleSubmit = async () => {
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("picData", selectedImage);
+    formData.append("info", teacherInfo);
+    const req = await fetch("http:localhost:3000/dashboard/editTeacher", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: formData,
+    });
+    const res = await req.json();
+    if (res) {
+      setLoading(false);
+      setSnackbarMessage(res.message);
+      setSnackbarOpen(true);
+      setSeverity(res.severity);
+    }
+  };
 
   return (
     <>
@@ -88,7 +122,11 @@ export default function AddTeacher() {
               }}
             >
               <Avatar
-                src="/images/black_profile.webp"
+                src={
+                  selectedImage ||
+                  teacherInfo.picData ||
+                  "/images/black_profile.webp"
+                }
                 sx={{ width: "30vmin", height: "30vmin", marginBottom: "2rem" }}
               />
               <Button
@@ -97,7 +135,11 @@ export default function AddTeacher() {
                 startIcon={<CloudUploadIcon />}
               >
                 Upload Profile Picture
-                <VisuallyHiddenInput type="file" accept="image/*" />
+                <VisuallyHiddenInput
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileSelection}
+                />
               </Button>
             </Box>
             <Grid
@@ -114,6 +156,12 @@ export default function AddTeacher() {
                   required
                   fullWidth
                   margin="none"
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      fullName: e.target.value,
+                    }));
+                  }}
                 />
               </Grid>
               <Grid item sm={6} xs={12}>
@@ -124,6 +172,12 @@ export default function AddTeacher() {
                   required
                   fullWidth
                   margin="none"
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      designation: e.target.value,
+                    }));
+                  }}
                 />
               </Grid>
 
@@ -135,6 +189,12 @@ export default function AddTeacher() {
                   required
                   fullWidth
                   margin="none"
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      fathersName: e.target.value,
+                    }));
+                  }}
                 />
               </Grid>
 
@@ -145,6 +205,12 @@ export default function AddTeacher() {
                   type="text"
                   required
                   fullWidth
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      mothersName: e.target.value,
+                    }));
+                  }}
                 />
               </Grid>
               <Grid item sm={6} xs={12}>
@@ -174,6 +240,12 @@ export default function AddTeacher() {
                   type="text"
                   required
                   fullWidth
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      education: e.target.value,
+                    }));
+                  }}
                 />
               </Grid>
               <Grid item sm={6} xs={12}>
@@ -182,6 +254,12 @@ export default function AddTeacher() {
                   variant="outlined"
                   type="text"
                   fullWidth
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      religion: e.target.value,
+                    }));
+                  }}
                 />
               </Grid>
               <Grid item sm={6} xs={12}>
@@ -192,6 +270,12 @@ export default function AddTeacher() {
                   required
                   fullWidth
                   InputLabelProps={{ shrink: true }}
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      dateOfBirth: e.target.value,
+                    }));
+                  }}
                 />
               </Grid>
               <Grid item sm={6} xs={12}>
@@ -200,6 +284,12 @@ export default function AddTeacher() {
                   variant="outlined"
                   type="number"
                   fullWidth
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      contact: e.target.value,
+                    }));
+                  }}
                 />
               </Grid>
               <Grid item sm={6} xs={12}>
@@ -209,6 +299,12 @@ export default function AddTeacher() {
                   type="email"
                   fullWidth
                   margin="none"
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      email: e.target.value,
+                    }));
+                  }}
                 />
               </Grid>
               <Grid item sm={6} xs={12}>
@@ -218,6 +314,12 @@ export default function AddTeacher() {
                   type="text"
                   fullWidth
                   margin="none"
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      bloodGroup: e.target.value,
+                    }));
+                  }}
                 />
               </Grid>
               <Grid item sm={6} xs={12}>
@@ -228,15 +330,43 @@ export default function AddTeacher() {
                   required
                   fullWidth
                   InputLabelProps={{ shrink: true }}
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      joined: e.target.value,
+                    }));
+                  }}
                 />
               </Grid>
             </Grid>
           </Stack>
           <Box textAlign="center">
-            <Button variant="contained">Save Changes</Button>
+            <Button
+              variant="contained"
+              disabled={
+                teacherInfo.fullName &&
+                teacherInfo.designation &&
+                teacherInfo.gender
+                  ? false
+                  : true
+              }
+              onClick={handleSubmit}
+            >
+              {loading ? (
+                <CircularProgress sx={{ color: "white" }} size="1rem" />
+              ) : (
+                "Save changes"
+              )}
+            </Button>
           </Box>
         </Container>
       </Box>
+      <SnackbarComponent
+        message={snackbarMessage}
+        open={snackbarOpen}
+        close={handleClose}
+        severity={severity}
+      />
     </>
   );
 }

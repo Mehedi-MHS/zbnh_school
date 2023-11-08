@@ -10,10 +10,26 @@ dashboardRouter.all("/*", (req, res, next) => {
 dashboardRouter.post("/editStudents", (req, res) => {
   const { cls, total } = req.body;
   if (cls && total) {
-    return res.json({ success: true });
+    return res.json({
+      success: true,
+      message: `class:${cls}, total:${total}`,
+      severity: "success",
+    });
   } else {
-    return res.json({ success: false });
+    return res.json({
+      success: false,
+      message: "Error updating students",
+      severity: "warning",
+    });
   }
 });
 
+dashboardRouter.post("/editTeacher", (req, res) => {
+  const { picData, info } = req.body;
+  return res.json({
+    success: true,
+    severity: "success",
+    message: `${info}-${picData.length}`,
+  });
+});
 module.exports = dashboardRouter;

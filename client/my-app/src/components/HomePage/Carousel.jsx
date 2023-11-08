@@ -16,7 +16,11 @@ export default function CarouselComponent() {
     });
     const res = await req.json();
     if (res.length > 0) {
-      setPosts(res);
+      if (res.length > 4) {
+        setPosts(res.slice(0, 4));
+      } else {
+        setPosts(res);
+      }
     }
   };
 

@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 //remove http://localhost:300  http://localhost:5173 in production mode.
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({

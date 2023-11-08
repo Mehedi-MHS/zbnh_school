@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 import { CircularProgress } from "@mui/material";
+import SnackbarComponent from "../SnackbarComponent";
 export default function EditStudents() {
   const [student, setStudent] = useState({
     class: null,
@@ -17,6 +18,9 @@ export default function EditStudents() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [severity, setSeverity] = useState("");
   const classOptions = [
     {
       label: "Six",
@@ -39,7 +43,9 @@ export default function EditStudents() {
       value: 10,
     },
   ];
-
+  const handleClose = () => {
+    setSnackbarOpen(false);
+  };
   const handleSubmit = async () => {
     setLoading(true);
     const data = { cls: student.class, total: student.total };
@@ -49,8 +55,11 @@ export default function EditStudents() {
       body: JSON.stringify(data),
     });
     const res = await req.json();
-    if (res.success) {
+    if (res) {
       setLoading(false);
+      setSnackbarMessage(res.message);
+      setSnackbarOpen(true);
+      setSeverity(res.severity);
     }
   };
 
@@ -62,6 +71,7 @@ export default function EditStudents() {
           height: "100vh",
           padding: "7% 2%",
           background: "rgba(0,0,0,0.1)",
+          mb: "2rem",
         }}
       >
         <Card
@@ -120,13 +130,12 @@ export default function EditStudents() {
             </Button>
           </CardActions>
         </Card>
-        <Typography variant="h3">{`Class:${
-          student.class || "null"
-        } - Students: ${student.total}`}</Typography>
-        <Button variant="contained">
-          {" "}
-          <CircularProgress sx={{ color: "white" }} size="1.5rem" />
-        </Button>
+        <SnackbarComponent
+          message={snackbarMessage}
+          open={snackbarOpen}
+          close={handleClose}
+          severity={severity}
+        />
       </Container>
     </>
   );
