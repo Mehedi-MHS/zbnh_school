@@ -17,8 +17,8 @@ import { imageResizer } from "../../helpers/ImageResizer";
 import { CircularProgress } from "@mui/material";
 import SnackbarComponent from "../SnackbarComponent";
 export default function AddTeacher() {
-  const [selectedImage, setSelectedImage] = useState(null);
   const [teacherInfo, setTeacherInfo] = useState({
+    picData: "",
     fullName: "",
     designation: "",
     fathersName: "",
@@ -52,7 +52,7 @@ export default function AddTeacher() {
 
   const handleFileSelection = async (event) => {
     const resized = await imageResizer(event.target.files[0]);
-    setSelectedImage(resized.resizedData);
+    setTeacherInfo((prev) => ({ ...prev, picData: resized.resizedData }));
   };
 
   const handleClose = () => {
@@ -61,19 +61,24 @@ export default function AddTeacher() {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const formData = new FormData();
-      // formData.append("picData", selectedImage);
-      formData.append("info", "hi");
-      console.log(formData);
-      const req = await fetch("http://localhost:3000/dashboard/editTeacher", {
-        method: "POST",
-        body: formData,
-      });
-      const res = await req.json();
-      if (res) {
-        setSnackbarMessage(res.message);
-        setSnackbarOpen(true);
-        setSeverity(res.severity);
+      if (
+        teacherInfo.fullName &&
+        teacherInfo.designation &&
+        teacherInfo.gender
+      ) {
+        const req = await fetch("http://localhost:3000/dashboard/editTeacher", {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(teacherInfo),
+        });
+        const res = await req.json();
+        if (res) {
+          setSnackbarMessage(res.message);
+          setSnackbarOpen(true);
+          setSeverity(res.severity);
+        }
+      } else {
+        return;
       }
     } catch (error) {
       console.error(error);
@@ -127,7 +132,7 @@ export default function AddTeacher() {
               }}
             >
               <Avatar
-                src={selectedImage || "/images/blank_profile.webp"}
+                src={teacherInfo.picData || "/images/blank_profile.webp"}
                 sx={{ width: "30vmin", height: "30vmin", marginBottom: "2rem" }}
               />
               <Button

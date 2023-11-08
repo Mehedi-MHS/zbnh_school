@@ -25,14 +25,14 @@ dashboardRouter.post("/editStudents", (req, res) => {
 });
 
 dashboardRouter.post("/editTeacher", (req, res) => {
-  const info = req.body;
+  const data = req.body;
   //const picData = req.body.picData;
-  console.log(info);
-  if (info) {
+  console.log(data);
+  if (data.fullName) {
     return res.json({
       success: true,
       severity: "success",
-      message: info,
+      message: data.fullName,
     });
   } else {
     return res.json({
