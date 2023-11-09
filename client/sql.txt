@@ -1,1 +1,6 @@
 Sql code for responsible features
+
+
+//Students table:
+create table zbnhs_students ( class int, total int);
+insert into zbnhs_students (class,total) values (6,60);
