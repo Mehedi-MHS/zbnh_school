@@ -60,6 +60,7 @@ export default function EditStudents() {
       setSnackbarMessage(res.message);
       setSnackbarOpen(true);
       setSeverity(res.severity);
+      setStudent({ cls: null, total: null });
     }
   };
 

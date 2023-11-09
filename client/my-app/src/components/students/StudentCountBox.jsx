@@ -19,6 +19,14 @@ export default function StudentCountBox() {
     console.log(res);
     setStudents(res);
   };
+  //class title
+  const classTitle = {
+    6: "Six",
+    7: "Seven",
+    8: "Eight",
+    9: "Nine",
+    10: "Ten",
+  };
   return (
     <>
       <Container sx={{ marginTop: "2rem" }}>
@@ -95,7 +103,7 @@ export default function StudentCountBox() {
                       fontWeight: "bold",
                     }}
                   >
-                    Class : {student.title}
+                    Class : {classTitle[student.class]}
                   </Typography>
                 </Box>
                 <Typography variant="h4" textAlign="center" color="silver">

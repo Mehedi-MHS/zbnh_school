@@ -1,6 +1,6 @@
 const express = require("express");
 const HomeRouter = express.Router();
-
+const promisePool = require("../lib/dbConfig");
 HomeRouter.get("/notice", (req, res) => {
   //get news from db order by date descending so that new notice appear on top
   const demoNotice = [
@@ -48,8 +48,12 @@ HomeRouter.get("/notice", (req, res) => {
   res.json(demoNotice);
 });
 
-HomeRouter.get("/getStudents", (req, res) => {
-  const demoStudents = [
+HomeRouter.get("/getStudents", async (req, res) => {
+  const [rows, fields] = await promisePool.query(
+    "SELECT * FROM `zbnhs_students`"
+  );
+  //console.log("rows:", rows, "fields:", fields);
+  /*const demoStudents = [
     {
       title: "Six",
       class: 6,
@@ -76,7 +80,8 @@ HomeRouter.get("/getStudents", (req, res) => {
       total: 130,
     },
   ];
-  res.json(demoStudents);
+  */
+  res.json(rows);
 });
 
 HomeRouter.get("/gallery", (req, res) => {
