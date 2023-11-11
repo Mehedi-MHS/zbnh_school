@@ -14,7 +14,7 @@ import { useState, useEffect } from "react";
 export default function TeachersProfileHome() {
   const [info, setInfo] = useState({
     id: "",
-    picUrl: "",
+    imageURL: "",
     fullName: "",
     designation: "",
     fathersName: "",
@@ -29,11 +29,12 @@ export default function TeachersProfileHome() {
     joined: "",
   });
   const { id } = useParams();
-  console.log(id);
+
   useEffect(() => {
-    getTeacherProfileInfo();
+    getProfile();
   }, []);
-  const getTeacherProfileInfo = async () => {
+
+  const getProfile = async () => {
     try {
       const req = await fetch(`http://localhost:3000/teachers/profile/${id}`, {
         method: "GET",
@@ -95,7 +96,7 @@ export default function TeachersProfileHome() {
                   <Avatar
                     alt={info.fullName}
                     src={
-                      info.picUrl ||
+                      info.imageURL ||
                       (info.gender?.toLowerCase() == "male"
                         ? "/images/avatar0.webp"
                         : "/images/Female.png")

@@ -66,8 +66,12 @@ export default function TeachersBox() {
                     alignItems={{ xs: "center", sm: "inherit" }}
                   >
                     <Avatar
-                      alt={teacher.name}
-                      src={teacher.pic ? teacher.pic : "/images/avatar0.webp"}
+                      alt={teacher.fullName}
+                      src={
+                        teacher.imageURL?.length > 0
+                          ? teacher.imageURL
+                          : "/images/avatar0.webp"
+                      }
                       sx={{ width: { xs: 85 }, height: { xs: 85 } }}
                     />
                     <Box>
@@ -76,7 +80,7 @@ export default function TeachersBox() {
                         sx={{ textAlign: { xs: "center" } }}
                         component="p"
                       >
-                        {teacher.name}
+                        {teacher.fullName}
                       </Typography>
                       <Typography
                         variant="p"

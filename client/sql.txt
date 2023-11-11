@@ -3,4 +3,32 @@ Sql code for responsible features
 
 //Students table:
 create table zbnhs_students ( class int, total int);
+//Students table demo data
 insert into zbnhs_students (class,total) values (6,60);
+insert into zbnhs_students (class,total) values (7,60);
+insert into zbnhs_students (class,total) values (8,60);
+insert into zbnhs_students (class,total) values (9,60);
+insert into zbnhs_students (class,total) values (10,60);
+
+//Teacher table
+create table zbnhs_teachers (
+id int NOT NULL auto_increment,
+fullName varchar(100) NOT NULL,
+imageURL varchar(200),
+designation varchar(50),
+fathersName varchar(100),
+mothersName varchar(100),
+gender varchar(20) NOT NULL,
+education varchar(200),
+religion varchar(50),
+dateOfBirth varchar(20),
+contact varchar(15),
+email varchar(100),
+bloodGroup varchar(20),
+joined varchar(20),
+PRIMARY KEY (id)
+        );
+
+//zbnhs_teachers demo data
+insert into zbnhs_teachers (fullName,imageURL,designation,fathersName,mothersName,gender,education,religion,dateOfBirth,contact,email,bloodGroup,joined) VALUES("MR Teacher 1","","Headmaster","MR Father", "Mrs Mother","Male","MSC is CSE","Islam","10/11/2023","01569158171","teacher@mail.com","B+ve","1/1/2021");
+

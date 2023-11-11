@@ -1,53 +1,27 @@
 const express = require("express");
+
+const promisePool = require("../lib/dbConfig");
 const TeachersRouter = express.Router();
 
-TeachersRouter.get("/", (req, res) => {
-  const DemoTeacherList = [
-    {
-      id: 1,
-      name: "MD Ismail Chowdhury",
-      designation: "Headmaster",
-      pic: "",
-      profile_url: "",
-    },
-    {
-      id: 6,
-      name: "Rahmat Ullah Sujon",
-      designation: "State Headmaster",
-      pic: "",
-      profile_url: "",
-    },
-    {
-      id: 3,
-      name: "Omor Faruk",
-      designation: "Senior IT teacher",
-      pic: "",
-      profile_url: "",
-    },
-    {
-      id: 4,
-      name: "Teacher4",
-      designation: "Assistant English Teacher ",
-      pic: "",
-      profile_url: "",
-    },
-    {
-      id: 5,
-      name: "Teacher5",
-      designation: "Guest Teacher",
-      pic: "",
-      profile_url: "",
-    },
-  ];
-  res.json(DemoTeacherList);
+TeachersRouter.get("/", async (req, res) => {
+  const [rows, fields] = await promisePool.query(
+    "SELECT `id`,`fullName`,`designation`,`imageURL` FROM `zbnhs_teachers`"
+  );
+
+  res.json(rows);
 });
 
 //profile route
-TeachersRouter.get("/profile/:id", (req, res) => {
+TeachersRouter.get("/profile/:id", async (req, res) => {
   const teacherId = req.params.id;
-  console.log("teacher Id: ", teacherId);
-  //Remove this demo section in production mode
+  const [rows, fields] = await promisePool.query(
+    "SELECT * FROM `zbnhs_teachers` WHERE `id`=?",
+    [teacherId]
+  );
 
+  //    console.log("teacher Id: ", teacherId);
+  //Remove this demo section in production mode
+  /*
   const demoInfo = [
     {
       id: 1,
@@ -82,10 +56,8 @@ TeachersRouter.get("/profile/:id", (req, res) => {
       joined: "1 Jan 2002",
     },
   ];
-  res.json(
-    demoInfo.filter((info) => {
-      return info.id == teacherId;
-    })
-  );
+  */
+
+  return res.json(rows);
 });
 module.exports = TeachersRouter;

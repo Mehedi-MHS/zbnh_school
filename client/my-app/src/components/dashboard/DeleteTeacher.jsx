@@ -9,7 +9,6 @@ import { FormControlLabel } from "@mui/material";
 import { useState, useEffect } from "react";
 export default function DeleteTeacher() {
   const [teachers, setTeachers] = useState([]);
-  const [teacherId, setTeacherId] = useState(null);
   useEffect(() => {
     getTeachers();
   }, []);
@@ -23,9 +22,31 @@ export default function DeleteTeacher() {
     setTeachers(res);
   };
 
+  //Handle Delete Requests
+  const handleDelete = async (id, imageURL) => {
+    const deleteRequest = await fetch(
+      "http://localhost:3000/dashboard/teachers",
+      {
+        method: "DELETE",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ id, imageURL }),
+      }
+    );
+    const deleteResponse = await deleteRequest.json();
+    if (deleteResponse.success) {
+      setTeachers(
+        teachers.filter((teacher) => {
+          return teacher.id !== id;
+        })
+      );
+    }
+
+    alert(deleteResponse.message);
+  };
+
   const columns = [
     { field: "serialNumber", headerName: "No", flex: 1 },
-    { field: "name", headerName: "Name", flex: 2, minWidth: 150 },
+    { field: "fullName", headerName: "Name", flex: 2, minWidth: 150 },
     {
       field: "action",
       headerName: "Delete",
@@ -50,7 +71,8 @@ export default function DeleteTeacher() {
                   color="secondary"
                   aria-label="delete posts"
                   onClick={() => {
-                    alert(params.row.id);
+                    //alert(params.row.id);
+                    handleDelete(params.row.id, params.row.imageURL);
                   }}
                 >
                   <DeleteIcon style={{ color: "red" }} />

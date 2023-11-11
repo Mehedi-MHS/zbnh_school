@@ -1,6 +1,13 @@
 const express = require("express");
 const HomeRouter = express.Router();
 const promisePool = require("../lib/dbConfig");
+
+//image
+HomeRouter.get("/uploads/images/:name", (req, res) => {
+  const imageName = req.params.name;
+  return res.sendFile(`${process.cwd()}/uploads/images/${imageName}`);
+});
+
 HomeRouter.get("/notice", (req, res) => {
   //get news from db order by date descending so that new notice appear on top
   const demoNotice = [
