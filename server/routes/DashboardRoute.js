@@ -138,4 +138,24 @@ dashboardRouter.delete("/teachers", async (req, res) => {
     return res.json({ success: false, message: "Failed to delete!" });
   }
 });
+
+dashboardRouter.post("/addSchoolInfo", async (req, res) => {
+  console.log(
+    "title:",
+    req.body.title,
+    "description:",
+    req.body.description,
+    "imageSize:",
+    req.body.picData.length
+  );
+  if (req.body.title && req.body.description) {
+    return res.json({ success: true, message: "Successfully added" });
+  } else {
+    return res.json({
+      success: false,
+      message: "Something went wrong, please try again!",
+    });
+  }
+});
+
 module.exports = dashboardRouter;

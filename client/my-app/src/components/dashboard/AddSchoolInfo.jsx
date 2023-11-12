@@ -9,12 +9,19 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { imageResizer } from "../../helpers/ImageResizer";
+import { CircularProgress } from "@mui/material";
+import SnackbarComponent from "../SnackbarComponent";
 export default function AddSchoolInfo() {
   const [info, setInfo] = useState({
     title: "",
     description: "",
     picData: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [severity, setSeverity] = useState("");
+
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",
@@ -31,6 +38,39 @@ export default function AddSchoolInfo() {
     setInfo((prev) => ({ ...prev, fileName: e.target.files[0].name }));
     const resizedImage = await imageResizer(e.target.files[0]);
     setInfo((prev) => ({ ...prev, picData: resizedImage.resizedData }));
+  };
+
+  const handleClose = () => {
+    setSnackbarOpen(false);
+  };
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      if (info.title && info.description) {
+        const req = await fetch(
+          "http://localhost:3000/dashboard/addSchoolInfo",
+          {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(info),
+          }
+        );
+        const res = await req.json();
+        if (res) {
+          setLoading(false);
+          setSnackbarMessage(res.message);
+          setSnackbarOpen(true);
+          setSeverity(res.severity);
+          setInfo({ title: "", description: "", picData: "" });
+        } else {
+          alert("Looks Like you are trying to edit the source code!");
+        }
+      }
+    } catch (error) {
+      if (error) {
+        alert("Something went wrong");
+      }
+    }
   };
 
   return (
@@ -101,12 +141,27 @@ export default function AddSchoolInfo() {
               ) : null}
             </CardContent>
             <CardActions>
-              <Button variant="contained" color="success" fullWidth>
-                Save Changes
+              <Button
+                variant="contained"
+                fullWidth
+                disabled={info.title && info.description ? false : true}
+                onClick={handleSubmit}
+              >
+                {loading ? (
+                  <CircularProgress sx={{ color: "white" }} size="1rem" />
+                ) : (
+                  "Save changes"
+                )}
               </Button>
             </CardActions>
           </Card>
         </Container>
+        <SnackbarComponent
+          message={snackbarMessage}
+          open={snackbarOpen}
+          close={handleClose}
+          severity={severity}
+        />
       </Box>
     </>
   );
