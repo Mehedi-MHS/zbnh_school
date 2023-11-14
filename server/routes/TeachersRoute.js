@@ -5,7 +5,7 @@ const TeachersRouter = express.Router();
 
 TeachersRouter.get("/", async (req, res) => {
   const [rows, fields] = await promisePool.query(
-    "SELECT `id`,`fullName`,`designation`,`imageURL` FROM `zbnhs_teachers`"
+    "SELECT `id`,`fullName`,`designation`,`imageURL`,`gender` FROM `zbnhs_teachers`"
   );
 
   res.json(rows);

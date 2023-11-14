@@ -50,7 +50,11 @@ export default function About() {
               >
                 <CardMedia
                   sx={{ height: 180 }}
-                  image={post.image}
+                  image={
+                    post.imageURL.length > 0
+                      ? post.imageURL
+                      : "../../public/images/school.jpg"
+                  }
                   title="School"
                 />
                 <CardContent>

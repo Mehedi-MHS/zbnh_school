@@ -68,6 +68,16 @@ export default function TeachersProfileHome() {
     { title: "Joined", value: info.joined || "Unknown" },
   ];
 
+  const handleProfileFilter = (url, gender) => {
+    if (!(url.length > 0) && gender.toLowerCase() == "male") {
+      return "/images/avatar0.webp";
+    } else if (url.length > 0 && gender.toLowerCase() == "male") {
+      return url;
+    } else {
+      return "/images/Female.png";
+    }
+  };
+
   return (
     <>
       {Object.keys(info).length === 0 ? (
@@ -95,12 +105,7 @@ export default function TeachersProfileHome() {
                 <Box sx={{ display: "flex", justifyContent: { xs: "center" } }}>
                   <Avatar
                     alt={info.fullName}
-                    src={
-                      info.imageURL ||
-                      (info.gender?.toLowerCase() == "male"
-                        ? "/images/avatar0.webp"
-                        : "/images/Female.png")
-                    }
+                    src={handleProfileFilter(info.imageURL, info.gender)}
                     sx={{ width: "150px", height: "150px" }}
                   />
                 </Box>

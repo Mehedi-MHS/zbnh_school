@@ -109,8 +109,10 @@ HomeRouter.get("/gallery", (req, res) => {
   res.json(demoData);
 });
 
-HomeRouter.get("/about", (req, res) => {
-  const demoPost = [
+HomeRouter.get("/about", async (req, res) => {
+  const [rows, fields] = await promisePool.query("SELECT * FROM `zbnhs_about`");
+
+  /*const demoPost = [
     {
       id: 1,
       title: "Our School At a Glance",
@@ -126,7 +128,9 @@ HomeRouter.get("/about", (req, res) => {
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpnemo animi maxime aliquid, itaque nobis eveniet quisquam istecupiditate eligendi corporis aspernatur, eos harum minima intemporibus facere hic omnis",
     },
   ];
-  res.json(demoPost);
+  */
+
+  res.json(rows);
 });
 
 module.exports = HomeRouter;

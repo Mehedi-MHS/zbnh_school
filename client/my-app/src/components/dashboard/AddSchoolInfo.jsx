@@ -100,6 +100,7 @@ export default function AddSchoolInfo() {
               <TextField
                 type="text"
                 label="Title"
+                value={info.title}
                 variant="standard"
                 sx={{ marginBottom: 2 }}
                 fullWidth
@@ -111,6 +112,7 @@ export default function AddSchoolInfo() {
                 type="text"
                 label="Description..."
                 fullWidth
+                value={info.description}
                 multiline
                 sx={{ marginBottom: 2 }}
                 rows={2}

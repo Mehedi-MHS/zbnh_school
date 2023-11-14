@@ -9,7 +9,6 @@ import { FormControlLabel } from "@mui/material";
 import { useState, useEffect } from "react";
 export default function DeleteSchoolInfo() {
   const [schoolPosts, setSchoolPosts] = useState([]);
-  const [postId, setPostId] = useState(null);
   useEffect(() => {
     getSchoolPosts();
   }, []);
@@ -21,6 +20,28 @@ export default function DeleteSchoolInfo() {
     });
     const res = await req.json();
     setSchoolPosts(res);
+  };
+
+  //Handle Delete Requests
+  const handleDelete = async (id, imageURL) => {
+    const deleteRequest = await fetch(
+      "http://localhost:3000/dashboard/schoolInfo",
+      {
+        method: "DELETE",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ id, imageURL }),
+      }
+    );
+    const deleteResponse = await deleteRequest.json();
+    if (deleteResponse.success) {
+      setSchoolPosts(
+        schoolPosts.filter((post) => {
+          return post.id !== id;
+        })
+      );
+    }
+
+    alert(deleteResponse.message);
   };
 
   const columns = [
@@ -50,7 +71,8 @@ export default function DeleteSchoolInfo() {
                   color="secondary"
                   aria-label="delete posts"
                   onClick={() => {
-                    alert(params.row.id);
+                    // alert(params.row.id);
+                    handleDelete(params.row.id, params.row.imageURL);
                   }}
                 >
                   <DeleteIcon style={{ color: "red" }} />

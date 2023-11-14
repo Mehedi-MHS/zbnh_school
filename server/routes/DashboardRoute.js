@@ -57,7 +57,8 @@ dashboardRouter.post("/editTeacher", async (req, res) => {
   } = req.body;
   console.log(dateOfBirth + "-" + joined);
   let file_name = "",
-    uploadDirectory = "";
+    uploadDirectory = "",
+    imageURL = "";
   console.log(req.body.dateOfBirth, " joined :", req.body.joined);
   if (fullName && designation && gender) {
     //handle Picture
@@ -74,8 +75,9 @@ dashboardRouter.post("/editTeacher", async (req, res) => {
         "-- filename:",
         file_name
       );
+
+      imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
     }
-    const imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
     const [rows, fields] = await promisePool.query(
       "INSERT INTO `zbnhs_teachers` (`fullName`,`imageURL`,`designation`,`fathersName`,`mothersName`,`gender`,`education`,`religion`,`dateOfBirth`,`contact`,`email`,`bloodGroup`,`joined`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
@@ -140,20 +142,76 @@ dashboardRouter.delete("/teachers", async (req, res) => {
 });
 
 dashboardRouter.post("/addSchoolInfo", async (req, res) => {
-  console.log(
-    "title:",
-    req.body.title,
-    "description:",
-    req.body.description,
-    "imageSize:",
-    req.body.picData.length
-  );
-  if (req.body.title && req.body.description) {
-    return res.json({ success: true, message: "Successfully added" });
+  const { title, description, picData } = req.body;
+
+  let file_name = "",
+    uploadDirectory = "",
+    imageURL = "";
+
+  if (title && description) {
+    //handle Picture
+    if (picData && picData.length > 0 && req.body.fileName) {
+      file_name = "ZBNHS_About_" + Date.now() + path.extname(req.body.fileName);
+      uploadDirectory = `${process.cwd()}/uploads/images/${file_name}`;
+      const imageData = picData.replace(/^data:image\/\w+;base64,/, "");
+      const imageBuffer = Buffer.from(imageData, "base64");
+      await fs.writeFile(uploadDirectory, imageBuffer);
+      console.log(
+        "uploadDirectory:",
+        uploadDirectory,
+        "-- filename:",
+        file_name
+      );
+      imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
+    }
+    const [rows, fields] = await promisePool.query(
+      "INSERT INTO `zbnhs_about` (`title`,`description`,`imageURL`) VALUES (?,?,?)",
+      [title, description, imageURL]
+    );
+    if (rows.affectedRows > 0) {
+      return res.json({
+        success: true,
+        severity: "success",
+        message: "Successfully saved school information",
+      });
+    } else {
+      return res.json({
+        success: false,
+        severity: "warning",
+        message: "Error! Failed to save data!",
+      });
+    }
   } else {
     return res.json({
       success: false,
-      message: "Something went wrong, please try again!",
+      severity: "warning",
+      message: "Missing data! Please Fill all the fields and try again.",
+    });
+  }
+});
+
+//Handle Delete School info
+dashboardRouter.delete("/schoolInfo", async (req, res) => {
+  const id = req.body.id;
+  if (req.body.imageURL.length > 0) {
+    const imageDir = req.body.imageURL.split("/").slice(3, 6).join("/");
+    try {
+      await fs.unlink(imageDir);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  console.log(JSON.stringify(req.body));
+  const [rows, fields] = await promisePool.query(
+    "DELETE FROM `zbnhs_about` WHERE `id`=?",
+    [id]
+  );
+  if (rows.affectedRows > 0) {
+    return res.json({ success: true, message: "Deleted Successfully!" });
+  } else {
+    return res.json({
+      success: false,
+      message: "Failed to delete! Please try again.",
     });
   }
 });

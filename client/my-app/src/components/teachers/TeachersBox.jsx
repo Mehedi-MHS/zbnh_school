@@ -25,6 +25,16 @@ export default function TeachersBox() {
     setTeacherList(res);
   };
 
+  const handleProfileFilter = (url, gender) => {
+    if (!(url.length > 0) && gender.toLowerCase() == "male") {
+      return "/images/avatar0.webp";
+    } else if (url.length > 0 && gender.toLowerCase() == "male") {
+      return url;
+    } else {
+      return "/images/Female.png";
+    }
+  };
+
   return (
     <>
       <Typography
@@ -67,11 +77,10 @@ export default function TeachersBox() {
                   >
                     <Avatar
                       alt={teacher.fullName}
-                      src={
-                        teacher.imageURL?.length > 0
-                          ? teacher.imageURL
-                          : "/images/avatar0.webp"
-                      }
+                      src={handleProfileFilter(
+                        teacher.imageURL,
+                        teacher.gender
+                      )}
                       sx={{ width: { xs: 85 }, height: { xs: 85 } }}
                     />
                     <Box>
