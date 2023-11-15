@@ -91,8 +91,12 @@ HomeRouter.get("/getStudents", async (req, res) => {
   res.json(rows);
 });
 
-HomeRouter.get("/gallery", (req, res) => {
-  const demoData = [
+HomeRouter.get("/gallery", async (req, res) => {
+  const [rows, fields] = await promisePool.query(
+    "SELECT * FROM `zbnhs_gallery`"
+  );
+
+  /*const demoData = [
     {
       id: 1,
       image: "/images/school.jpg",
@@ -106,7 +110,9 @@ HomeRouter.get("/gallery", (req, res) => {
         "Lorem Ipsum Dolor Sit amet condsid oi dlfjdlhf olj odifdj jfji odoiieur et nhodufodfidofuou od fiduf idf o",
     },
   ];
-  res.json(demoData);
+  */
+
+  res.json(rows);
 });
 
 HomeRouter.get("/about", async (req, res) => {

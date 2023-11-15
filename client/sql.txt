@@ -42,3 +42,11 @@ imageURL varchar(250),
 PRIMARY KEY (id)
         );
 
+//Gallery Post Table zbnhs_gallery
+create table zbnhs_gallery (
+id int not null auto_increment,
+description text,
+imageURL varchar(250),
+PRIMARY KEY (id)
+        );
+

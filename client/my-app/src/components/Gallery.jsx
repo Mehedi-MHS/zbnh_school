@@ -64,11 +64,11 @@ export default function Gallery() {
                   maxWidth: { xs: "100%", sm: "30%" },
                 }}
               >
-                <Link to={data.image}>
+                <Link to={data.imageURL}>
                   <CardMedia
                     component="img"
-                    image={data.image}
-                    alt="Demo"
+                    image={data.imageURL}
+                    alt={data.description}
                     sx={{ height: "200px" }}
                   />
                 </Link>

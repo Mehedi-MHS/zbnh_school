@@ -216,4 +216,81 @@ dashboardRouter.delete("/schoolInfo", async (req, res) => {
   }
 });
 
+//Manage Gallery Posts upload
+dashboardRouter.post("/addGalleryPost", async (req, res) => {
+  const { description, picData } = req.body;
+
+  let file_name = "",
+    uploadDirectory = "",
+    imageURL = "";
+
+  if (description) {
+    //handle Picture
+    if (picData && picData.length > 0 && req.body.fileName) {
+      file_name =
+        "ZBNHS_Gallery_" + Date.now() + path.extname(req.body.fileName);
+      uploadDirectory = `${process.cwd()}/uploads/images/${file_name}`;
+      const imageData = picData.replace(/^data:image\/\w+;base64,/, "");
+      const imageBuffer = Buffer.from(imageData, "base64");
+      await fs.writeFile(uploadDirectory, imageBuffer);
+      console.log(
+        "uploadDirectory:",
+        uploadDirectory,
+        "-- filename:",
+        file_name
+      );
+      imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
+    }
+    const [rows, fields] = await promisePool.query(
+      "INSERT INTO `zbnhs_gallery` (`description`,`imageURL`) VALUES (?,?)",
+      [description, imageURL]
+    );
+    if (rows.affectedRows > 0) {
+      return res.json({
+        success: true,
+        severity: "success",
+        message: "Successfully uploaded gallery post",
+      });
+    } else {
+      return res.json({
+        success: false,
+        severity: "warning",
+        message: "Error! Failed to save data!",
+      });
+    }
+  } else {
+    return res.json({
+      success: false,
+      severity: "warning",
+      message: "Missing data! Please Fill all the fields and try again.",
+    });
+  }
+});
+
+//Delete Gallery Posts
+dashboardRouter.delete("/galleryPost", async (req, res) => {
+  const id = req.body.id;
+  if (req.body.imageURL.length > 0) {
+    const imageDir = req.body.imageURL.split("/").slice(3, 6).join("/");
+    try {
+      await fs.unlink(imageDir);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  console.log(JSON.stringify(req.body));
+  const [rows, fields] = await promisePool.query(
+    "DELETE FROM `zbnhs_gallery` WHERE `id`=?",
+    [id]
+  );
+  if (rows.affectedRows > 0) {
+    return res.json({ success: true, message: "Deleted Successfully!" });
+  } else {
+    return res.json({
+      success: false,
+      message: "Failed to delete! Please try again.",
+    });
+  }
+});
+
 module.exports = dashboardRouter;

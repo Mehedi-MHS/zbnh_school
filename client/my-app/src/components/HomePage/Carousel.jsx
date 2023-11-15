@@ -68,7 +68,7 @@ function Item(props) {
       }}
     >
       <img
-        src={props.item.image}
+        src={props.item.imageURL}
         alt={props.item.description}
         style={{
           border: "5px solid white",
