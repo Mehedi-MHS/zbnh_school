@@ -1,5 +1,20 @@
 Sql code for responsible features
 
+//Set db encoding for any language support
+ALTER DATABASE your_database_name CHARACTER SET utf8;
+
+//Alter table column
+ALTER TABLE your_table_name
+MODIFY your_column_name VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+//Standard way to create table by bard.ai
+//From mysqlnotesforProfessionals: use ' name varchar(number) CHARACTER SET utf8mb4'
+CREATE TABLE IF NOT EXISTS `zbnh_one` (
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `imageURL` VARCHAR(255) NOT NULL,
+  `description` VARCHAR(1000) NOT NULL
+) default charset=utf8mb4;
+
 
 //Students table: zbnhs_students
 create table zbnhs_students ( class int, total int);
@@ -11,7 +26,7 @@ insert into zbnhs_students (class,total) values (9,60);
 insert into zbnhs_students (class,total) values (10,60);
 
 //Teacher table : zbnhs_teachers
-create table zbnhs_teachers (
+create table if not exists zbnhs_teachers (
 id int NOT NULL auto_increment,
 fullName varchar(100) NOT NULL,
 imageURL varchar(200),
@@ -19,7 +34,7 @@ designation varchar(50),
 fathersName varchar(100),
 mothersName varchar(100),
 gender varchar(20) NOT NULL,
-education varchar(200),
+education varchar(200), 
 religion varchar(50),
 dateOfBirth varchar(20),
 contact varchar(15),
@@ -27,26 +42,34 @@ email varchar(100),
 bloodGroup varchar(20),
 joined varchar(20),
 PRIMARY KEY (id)
-        );
+        ) default charset=utf8mb4;
 
 //zbnhs_teachers demo data
 insert into zbnhs_teachers (fullName,imageURL,designation,fathersName,mothersName,gender,education,religion,dateOfBirth,contact,email,bloodGroup,joined) VALUES("MR Teacher 1","","Headmaster","MR Father", "Mrs Mother","Male","MSC is CSE","Islam","10/11/2023","01569158171","teacher@mail.com","B+ve","1/1/2021");
 
 
 //About school Table :zbnhs_about
-create table zbnhs_about (
+create table if not exists zbnhs_about (
 id int not null auto_increment,
-title varchar(250),
-description text,
+title varchar(250)  ,
+description varchar(2000),
 imageURL varchar(250),
 PRIMARY KEY (id)
-        );
+        ) default charset=utf8mb4;
 
 //Gallery Post Table zbnhs_gallery
-create table zbnhs_gallery (
+create table if not exists zbnhs_gallery (
 id int not null auto_increment,
-description text,
+description varchar(2000),
 imageURL varchar(250),
 PRIMARY KEY (id)
-        );
+        ) default charset=utf8mb4;
+
+//NoticeBoard Table
+create table if not exists zbnhs_notice (
+id int not null auto_increment,
+title varchar(300),
+fileURL varchar(250),
+PRIMARY KEY (id)
+        ) default charset=utf8mb4;
 
