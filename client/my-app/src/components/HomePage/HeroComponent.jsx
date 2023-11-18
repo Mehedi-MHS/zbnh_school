@@ -35,7 +35,7 @@ export default function HeroSection() {
         <CardMedia
           component="img"
           height="400"
-          image={img || "/images/school.jpg"}
+          image={img.length > 0 ? img : "/images/school.jpg"}
           alt="Hero Image"
         />
         <Typography variant="h3" style={textStyle}>

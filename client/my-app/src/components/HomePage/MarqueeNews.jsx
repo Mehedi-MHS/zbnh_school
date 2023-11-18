@@ -27,7 +27,7 @@ export default function MarqueeNews() {
     });
     const res = await req.json();
     if (res.length > 0) {
-      setNotices([res[0].title, res[1].title]);
+      setNotices([res[0]?.title, res[1]?.title, res[2]?.title]);
     }
   };
 

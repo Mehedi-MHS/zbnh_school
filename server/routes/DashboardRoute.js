@@ -55,7 +55,7 @@ dashboardRouter.post("/editTeacher", async (req, res) => {
     bloodGroup,
     joined,
   } = req.body;
-  console.log(dateOfBirth + "-" + joined);
+
   let file_name = "",
     uploadDirectory = "",
     imageURL = "";
@@ -69,12 +69,6 @@ dashboardRouter.post("/editTeacher", async (req, res) => {
       const imageData = picData.replace(/^data:image\/\w+;base64,/, "");
       const imageBuffer = Buffer.from(imageData, "base64");
       await fs.writeFile(uploadDirectory, imageBuffer);
-      console.log(
-        "uploadDirectory:",
-        uploadDirectory,
-        "-- filename:",
-        file_name
-      );
 
       imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
     }
@@ -156,12 +150,7 @@ dashboardRouter.post("/addSchoolInfo", async (req, res) => {
       const imageData = picData.replace(/^data:image\/\w+;base64,/, "");
       const imageBuffer = Buffer.from(imageData, "base64");
       await fs.writeFile(uploadDirectory, imageBuffer);
-      console.log(
-        "uploadDirectory:",
-        uploadDirectory,
-        "-- filename:",
-        file_name
-      );
+
       imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
     }
     const [rows, fields] = await promisePool.query(
@@ -201,7 +190,7 @@ dashboardRouter.delete("/schoolInfo", async (req, res) => {
       console.log(err);
     }
   }
-  console.log(JSON.stringify(req.body));
+
   const [rows, fields] = await promisePool.query(
     "DELETE FROM `zbnhs_about` WHERE `id`=?",
     [id]
@@ -233,12 +222,7 @@ dashboardRouter.post("/addGalleryPost", async (req, res) => {
       const imageData = picData.replace(/^data:image\/\w+;base64,/, "");
       const imageBuffer = Buffer.from(imageData, "base64");
       await fs.writeFile(uploadDirectory, imageBuffer);
-      console.log(
-        "uploadDirectory:",
-        uploadDirectory,
-        "-- filename:",
-        file_name
-      );
+
       imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
     }
     const [rows, fields] = await promisePool.query(
@@ -278,7 +262,7 @@ dashboardRouter.delete("/galleryPost", async (req, res) => {
       console.log(err);
     }
   }
-  console.log(JSON.stringify(req.body));
+
   const [rows, fields] = await promisePool.query(
     "DELETE FROM `zbnhs_gallery` WHERE `id`=?",
     [id]
@@ -298,21 +282,19 @@ dashboardRouter.post("/addNotice", async (req, res) => {
   const title = req.body.title;
   let pdfData = req.files.pdf.data;
   let pdfName = req.files.pdf.name;
-  console.log(pdfData.length);
-  console.log(pdfName);
+
   let file_name = "",
     uploadDirectory = "",
     fileURL = "";
   let extension = path.extname(pdfName).toLowerCase();
-  console.log(extension.toLowerCase());
+
   if (title && extension == ".pdf") {
     //handle pdf
     file_name = "ZBNHS_Notice_" + Date.now() + extension;
     uploadDirectory = `${process.cwd()}/uploads/files/${file_name}`;
     await fs.writeFile(uploadDirectory, pdfData);
-    console.log("uploadDirectory:", uploadDirectory, "-- filename:", file_name);
+
     fileURL = process.env.DOMAIN + "/uploads/files/" + file_name;
-    console.log("fileURL:", fileURL);
   } else {
     return res.json({
       message: "Please Select a .pdf file!",
@@ -349,7 +331,7 @@ dashboardRouter.delete("/notice", async (req, res) => {
       console.log(err);
     }
   }
-  console.log(JSON.stringify(req.body));
+
   const [rows, fields] = await promisePool.query(
     "DELETE FROM `zbnhs_notice` WHERE `id`=?",
     [id]
@@ -375,16 +357,19 @@ dashboardRouter.post("/settings", async (req, res) => {
   //handle Picture
   if (picData && picData.length > 0 && req.body.fileName) {
     if (req.body.oldFileURL?.length > 0) {
-      const fileDir = req.body.oldFileURL.split("/").slice(3, 6).join("/");
+      try {
+        const fileDir = req.body.oldFileURL.split("/").slice(3, 6).join("/");
 
-      await fs.unlink(fileDir);
+        await fs.unlink(fileDir);
+      } catch (error) {
+        console.log(error);
+      }
     }
     file_name = "ZBNHS_Cover_" + Date.now() + path.extname(req.body.fileName);
     uploadDirectory = `${process.cwd()}/uploads/images/${file_name}`;
     const imageData = picData.replace(/^data:image\/\w+;base64,/, "");
     const imageBuffer = Buffer.from(imageData, "base64");
     await fs.writeFile(uploadDirectory, imageBuffer);
-    console.log("uploadDirectory:", uploadDirectory, "-- filename:", file_name);
     imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
   }
   const [rows, fields] = await promisePool.query(

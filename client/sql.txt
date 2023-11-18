@@ -82,5 +82,5 @@ fileURL varchar(250),
 PRIMARY KEY (id)
         ) default charset=utf8mb4;
 //!! Danger: Must insert manually
-insert into zbnhs_settings (id,fileURL) values (1,"https://www.abc.com")
+insert into zbnhs_settings (id,fileURL) values (1,"https://www.abc.com");
 
