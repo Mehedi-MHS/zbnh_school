@@ -9,18 +9,39 @@ import { FormControlLabel } from "@mui/material";
 import { useState, useEffect } from "react";
 export default function DeleteNotice() {
   const [notices, setNotices] = useState([]);
-  const [noticeId, setNoticeId] = useState(null);
   useEffect(() => {
-    getAllNotice();
+    getNotices();
   }, []);
 
-  const getAllNotice = async () => {
+  const getNotices = async () => {
     const req = await fetch("http://localhost:3000/notice", {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });
     const res = await req.json();
     setNotices(res);
+  };
+
+  //Handle Delete Requests
+  const handleDelete = async (id, fileURL) => {
+    const deleteRequest = await fetch(
+      "http://localhost:3000/dashboard/notice",
+      {
+        method: "DELETE",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ id, fileURL }),
+      }
+    );
+    const deleteResponse = await deleteRequest.json();
+    if (deleteResponse.success) {
+      setNotices(
+        notices.filter((notice) => {
+          return notice.id !== id;
+        })
+      );
+    }
+
+    alert(deleteResponse.message);
   };
 
   const columns = [
@@ -48,9 +69,10 @@ export default function DeleteNotice() {
               control={
                 <IconButton
                   color="secondary"
-                  aria-label="delete posts"
+                  aria-label="delete notices"
                   onClick={() => {
-                    alert(params.row.id);
+                    // alert(params.row.id);
+                    handleDelete(params.row.id, params.row.fileURL);
                   }}
                 >
                   <DeleteIcon style={{ color: "red" }} />

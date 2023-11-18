@@ -28,7 +28,7 @@ export default function Notice() {
     { field: "title", headerName: "Title", flex: 2, minWidth: 150 },
     { field: "date", headerName: "Date", flex: 1, minWidth: 100 },
     {
-      field: "url",
+      field: "fileURL",
       headerName: "File",
       flex: 1,
       minWidth: 100,
@@ -47,7 +47,7 @@ export default function Notice() {
           >
             <FormControlLabel
               control={
-                <Link to={params.row.file}>
+                <Link to={params.row.fileURL}>
                   <IconButton color="secondary" aria-label="add an alarm">
                     <PictureAsPdfIcon style={{ color: "red" }} />
                   </IconButton>

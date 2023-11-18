@@ -293,4 +293,117 @@ dashboardRouter.delete("/galleryPost", async (req, res) => {
   }
 });
 
+//Notice route
+dashboardRouter.post("/addNotice", async (req, res) => {
+  const title = req.body.title;
+  let pdfData = req.files.pdf.data;
+  let pdfName = req.files.pdf.name;
+  console.log(pdfData.length);
+  console.log(pdfName);
+  let file_name = "",
+    uploadDirectory = "",
+    fileURL = "";
+  let extension = path.extname(pdfName).toLowerCase();
+  console.log(extension.toLowerCase());
+  if (title && extension == ".pdf") {
+    //handle pdf
+    file_name = "ZBNHS_Notice_" + Date.now() + extension;
+    uploadDirectory = `${process.cwd()}/uploads/files/${file_name}`;
+    await fs.writeFile(uploadDirectory, pdfData);
+    console.log("uploadDirectory:", uploadDirectory, "-- filename:", file_name);
+    fileURL = process.env.DOMAIN + "/uploads/files/" + file_name;
+    console.log("fileURL:", fileURL);
+  } else {
+    return res.json({
+      message: "Please Select a .pdf file!",
+      severity: "warning",
+    });
+  }
+  const [rows, fields] = await promisePool.query(
+    "INSERT INTO `zbnhs_notice` (`title`,`fileURL`,`date`) VALUES (?,?,?)",
+    [title, fileURL, new Date().toUTCString().split(" ").slice(1, 4).join(" ")]
+  );
+  if (rows.affectedRows > 0) {
+    return res.json({
+      success: true,
+      severity: "success",
+      message: "Successfully created new notice",
+    });
+  } else {
+    return res.json({
+      success: false,
+      severity: "warning",
+      message: "Missing data! Please Fill all the fields and try again.",
+    });
+  }
+});
+
+//Delete Notice
+dashboardRouter.delete("/notice", async (req, res) => {
+  const id = req.body.id;
+  if (req.body.fileURL.length > 0) {
+    const fileDir = req.body.fileURL.split("/").slice(3, 6).join("/");
+    try {
+      await fs.unlink(fileDir);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  console.log(JSON.stringify(req.body));
+  const [rows, fields] = await promisePool.query(
+    "DELETE FROM `zbnhs_notice` WHERE `id`=?",
+    [id]
+  );
+  if (rows.affectedRows > 0) {
+    return res.json({ success: true, message: "Deleted Successfully!" });
+  } else {
+    return res.json({
+      success: false,
+      message: "Failed to delete! Please try again.",
+    });
+  }
+});
+
+//Manage Cover photo update
+dashboardRouter.post("/settings", async (req, res) => {
+  const { picData } = req.body;
+
+  let file_name = "",
+    uploadDirectory = "",
+    imageURL = "";
+
+  //handle Picture
+  if (picData && picData.length > 0 && req.body.fileName) {
+    if (req.body.oldFileURL?.length > 0) {
+      const fileDir = req.body.oldFileURL.split("/").slice(3, 6).join("/");
+
+      await fs.unlink(fileDir);
+    }
+    file_name = "ZBNHS_Cover_" + Date.now() + path.extname(req.body.fileName);
+    uploadDirectory = `${process.cwd()}/uploads/images/${file_name}`;
+    const imageData = picData.replace(/^data:image\/\w+;base64,/, "");
+    const imageBuffer = Buffer.from(imageData, "base64");
+    await fs.writeFile(uploadDirectory, imageBuffer);
+    console.log("uploadDirectory:", uploadDirectory, "-- filename:", file_name);
+    imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
+  }
+  const [rows, fields] = await promisePool.query(
+    "UPDATE `zbnhs_settings` SET `fileURL`=? WHERE `id`=1",
+    [imageURL]
+  );
+  if (rows.affectedRows > 0) {
+    return res.json({
+      success: true,
+      severity: "success",
+      message: "Successfully updated cover photo",
+    });
+  } else {
+    return res.json({
+      success: false,
+      severity: "warning",
+      message: "Error! Failed to save data!",
+    });
+  }
+});
+
 module.exports = dashboardRouter;

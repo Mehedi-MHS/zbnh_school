@@ -3,8 +3,23 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import "@fontsource/roboto/400.css";
-
+import { useState, useEffect } from "react";
 export default function HeroSection() {
+  const [img, setImg] = useState("");
+
+  useEffect(() => {
+    getCoverImage();
+  }, []);
+  const getCoverImage = async () => {
+    const req = await fetch("http://localhost:3000/settings", {
+      method: "GET",
+    });
+    const res = await req.json();
+    if (res.length > 0) {
+      setImg(res[0].fileURL);
+    }
+  };
+
   const textStyle = {
     position: "absolute",
     top: "50%",
@@ -20,7 +35,7 @@ export default function HeroSection() {
         <CardMedia
           component="img"
           height="400"
-          image="/images/school.jpg"
+          image={img || "/images/school.jpg"}
           alt="Hero Image"
         />
         <Typography variant="h3" style={textStyle}>

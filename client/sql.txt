@@ -70,6 +70,17 @@ create table if not exists zbnhs_notice (
 id int not null auto_increment,
 title varchar(300),
 fileURL varchar(250),
+date varchar(20),
 PRIMARY KEY (id)
         ) default charset=utf8mb4;
+
+
+//zbnh_settings table
+create table if not exists zbnhs_settings (
+id int not null,
+fileURL varchar(250),
+PRIMARY KEY (id)
+        ) default charset=utf8mb4;
+//!! Danger: Must insert manually
+insert into zbnhs_settings (id,fileURL) values (1,"https://www.abc.com")
 

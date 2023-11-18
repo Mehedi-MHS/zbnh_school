@@ -8,9 +8,19 @@ HomeRouter.get("/uploads/images/:name", (req, res) => {
   return res.sendFile(`${process.cwd()}/uploads/images/${imageName}`);
 });
 
-HomeRouter.get("/notice", (req, res) => {
+//pdf
+HomeRouter.get("/uploads/files/:name", (req, res) => {
+  const fileName = req.params.name;
+  return res.sendFile(`${process.cwd()}/uploads/files/${fileName}`);
+});
+
+HomeRouter.get("/notice", async (req, res) => {
+  const [rows, fields] = await promisePool.query(
+    "SELECT * FROM `zbnhs_notice`"
+  );
+
   //get news from db order by date descending so that new notice appear on top
-  const demoNotice = [
+  /*  const demoNotice = [
     {
       id: 1,
       title: "Post No 1 Lorem Ipusm Dolor Sit amet codfhd jjfljodfd ",
@@ -51,8 +61,9 @@ HomeRouter.get("/notice", (req, res) => {
       file: "/file1",
     },
   ];
+*/
 
-  res.json(demoNotice);
+  res.json(rows);
 });
 
 HomeRouter.get("/getStudents", async (req, res) => {
@@ -135,6 +146,15 @@ HomeRouter.get("/about", async (req, res) => {
     },
   ];
   */
+
+  res.json(rows);
+});
+
+//Settings table
+HomeRouter.get("/settings", async (req, res) => {
+  const [rows, fields] = await promisePool.query(
+    "SELECT * FROM `zbnhs_settings`"
+  );
 
   res.json(rows);
 });

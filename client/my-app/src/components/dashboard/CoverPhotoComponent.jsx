@@ -1,25 +1,37 @@
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { Card, CardContent, CardActions } from "@mui/material";
+import { Card, CardMedia, CardContent, CardActions } from "@mui/material";
 import Container from "@mui/material/Container";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { imageResizer } from "../../helpers/ImageResizer";
 import { CircularProgress } from "@mui/material";
 import SnackbarComponent from "../SnackbarComponent";
-export default function AddNotice() {
+export default function CoverPhotoComponent() {
   const [info, setInfo] = useState({
-    title: "",
-    fileName: "",
+    picData: "",
+    oldFileURL: "",
   });
-  const [pdf, setPdf] = useState(null);
   const [loading, setLoading] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [severity, setSeverity] = useState("");
+
+  useEffect(() => {
+    getCoverImage();
+  }, []);
+  const getCoverImage = async () => {
+    const req = await fetch("http://localhost:3000/settings", {
+      method: "GET",
+    });
+    const res = await req.json();
+    if (res.length > 0) {
+      setInfo((prev) => ({ ...prev, oldFileURL: res[0].fileURL }));
+    }
+  };
 
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
@@ -33,17 +45,10 @@ export default function AddNotice() {
     width: 1,
   });
 
-  const handlePDFInput = (e) => {
-    const file = e.target.files[0];
-    if (file.name.split(".").pop().toLowerCase() == "pdf") {
-      setPdf(e.target.files[0]);
-      setInfo((prev) => ({ ...prev, fileName: e.target.files[0].name }));
-    } else {
-      alert("Please selecct a pdf file!!");
-      setPdf(null);
-      setInfo({ title: "", fileName: "" });
-      return;
-    }
+  const handleImageInput = async (e) => {
+    setInfo((prev) => ({ ...prev, fileName: e.target.files[0].name }));
+    const resizedImage = await imageResizer(e.target.files[0]);
+    setInfo((prev) => ({ ...prev, picData: resizedImage.resizedData }));
   };
 
   const handleClose = () => {
@@ -52,16 +57,11 @@ export default function AddNotice() {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      if (
-        info.title &&
-        info.fileName.split(".").pop().toString().toLowerCase() === "pdf"
-      ) {
-        let formData = new FormData();
-        formData.append("pdf", pdf);
-        formData.append("title", info.title);
-        const req = await fetch("http://localhost:3000/dashboard/addNotice", {
+      if (info.picData.length > 0) {
+        const req = await fetch("http://localhost:3000/dashboard/settings", {
           method: "POST",
-          body: formData,
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(info),
         });
         const res = await req.json();
         if (res) {
@@ -69,14 +69,13 @@ export default function AddNotice() {
           setSnackbarMessage(res.message);
           setSnackbarOpen(true);
           setSeverity(res.severity);
-          setInfo({ title: "", fileName: "" });
         } else {
-          alert("Please enter title and select a pdf file.");
+          alert("Something went wrong! Please try again");
         }
       }
     } catch (error) {
       if (error) {
-        alert(error);
+        alert("Something went wrong");
       }
     }
   };
@@ -87,7 +86,6 @@ export default function AddNotice() {
         sx={{
           width: "100%",
           minHeight: "70vh",
-          background: "rgba(0,0,0,0.1)",
           top: 0,
           paddingTop: "3rem",
           paddingBottom: "2rem",
@@ -98,49 +96,56 @@ export default function AddNotice() {
             marginTop: "2rem",
           }}
         >
-          <Typography variant="h4" component="h1" textAlign="center">
-            Add New Notice
+          <Typography
+            variant="p"
+            component="p"
+            sx={{ textAlign: "center", color: "darkBlue" }}
+          >
+            Change Cover Photo
           </Typography>
           <Card
-            sx={{ maxWidth: { xs: "100%", sm: "40%" }, margin: " 2rem auto" }}
+            sx={{
+              maxWidth: { xs: "100%", sm: "80%" },
+              margin: " 2rem auto",
+              background: "none",
+              boxShadow: "none",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            <CardContent>
-              <TextField
-                type="text"
-                label="Title"
-                fullWidth
-                value={info.title}
-                sx={{ marginBottom: 2 }}
-                onChange={(e) =>
-                  setInfo((prev) => ({ ...prev, title: e.target.value }))
-                }
-              />
+            <CardMedia
+              component="img"
+              image={
+                info.picData
+                  ? info.picData
+                  : info.oldFileURL
+                  ? info.oldFileURL
+                  : "/images/school.jpg"
+              }
+              sx={{ width: { xs: "90%", sm: "60%" }, margin: "1rem auto" }}
+            />
+            <CardContent></CardContent>
+            <CardActions sx={{ margin: "0px auto", textAlign: "center" }}>
               <IconButton component="label" color="success">
-                <PictureAsPdfIcon />
+                <AddPhotoAlternateIcon />
                 <Typography
                   variant="body2"
                   color="text.secondary"
                   sx={{ marginLeft: "2px" }}
                 >
-                  Add PDF file
+                  Add Picture
                 </Typography>
                 <VisuallyHiddenInput
                   type="file"
-                  accept="application/pdf"
-                  onChange={handlePDFInput}
+                  accept="image/*"
+                  onChange={handleImageInput}
                 />
               </IconButton>
-              {info.fileName.length > 0 ? (
-                <IconButton>
-                  <Typography variant="body2">{info.fileName}</Typography>
-                </IconButton>
-              ) : null}
-            </CardContent>
-            <CardActions>
+
               <Button
                 variant="contained"
-                fullWidth
-                disabled={info.title && info.fileName.length > 0 ? false : true}
+                disabled={info.picData.length > 0 ? false : true}
                 onClick={handleSubmit}
               >
                 {loading ? (

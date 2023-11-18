@@ -3,6 +3,7 @@ const cors = require("cors");
 const DashboardRoute = require("./routes/DashboardRoute");
 const HomeRoute = require("./routes/HomeRoute");
 const TeachersRoute = require("./routes/TeachersRoute");
+const fileUpload = require("express-fileupload");
 //const dbConfig = require("./lib/dbConfig");
 
 const app = express();
@@ -16,7 +17,11 @@ app.use(
     origin: ["http://localhost:3000", "http://localhost:5173"],
   })
 );
-
+app.use(
+  fileUpload({
+    limits: { fileSize: 20 * 1024 * 1024 },
+  })
+);
 app.use("/", HomeRoute);
 app.use("/teachers", TeachersRoute);
 app.use("/dashboard", DashboardRoute);
