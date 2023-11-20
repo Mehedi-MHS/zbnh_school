@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 import { imageResizer } from "../../helpers/ImageResizer";
 import { CircularProgress } from "@mui/material";
 import SnackbarComponent from "../SnackbarComponent";
-export default function CoverPhotoComponent() {
+export default function SettingsComponent() {
   const [info, setInfo] = useState({
     picData: "",
     oldFileURL: "",

@@ -78,9 +78,12 @@ PRIMARY KEY (id)
 //zbnh_settings table
 create table if not exists zbnhs_settings (
 id int not null,
-fileURL varchar(250),
+coverURL varchar(250) default '/images/school.jpg',
+logoURL varchar(250) default '/images/logo.png',
+phone varchar(20),
+email varchar(50),
+location varchar(100),
 PRIMARY KEY (id)
         ) default charset=utf8mb4;
-//!! Danger: Must insert manually
-insert into zbnhs_settings (id,fileURL) values (1,"https://www.abc.com");
+
 

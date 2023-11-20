@@ -348,17 +348,20 @@ dashboardRouter.delete("/notice", async (req, res) => {
 
 //Manage Cover photo update
 dashboardRouter.post("/settings", async (req, res) => {
-  const { picData } = req.body;
+  const { coverPhotoData } = req.body;
 
   let file_name = "",
     uploadDirectory = "",
     imageURL = "";
 
   //handle Picture
-  if (picData && picData.length > 0 && req.body.fileName) {
-    if (req.body.oldFileURL?.length > 0) {
+  if (coverPhotoData && coverPhotoData.length > 0 && req.body.coverFileName) {
+    if (req.body.oldCoverPhotoURL?.length > 0) {
       try {
-        const fileDir = req.body.oldFileURL.split("/").slice(3, 6).join("/");
+        const fileDir = req.body.oldCoverPhotoURL
+          .split("/")
+          .slice(3, 6)
+          .join("/");
 
         await fs.unlink(fileDir);
       } catch (error) {

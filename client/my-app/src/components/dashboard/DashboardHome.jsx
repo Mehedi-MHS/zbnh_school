@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/material";
-import CoverPhotoComponent from "./CoverPhotoComponent";
+import SettingsComponent from "./SettingsComponent";
 export default function DashboardHome() {
   const renderOptions = [
     {
@@ -123,7 +123,7 @@ export default function DashboardHome() {
             </Card>
           ))}
         </Stack>
-        <CoverPhotoComponent />
+        <SettingsComponent />
       </Box>
     </>
   );
