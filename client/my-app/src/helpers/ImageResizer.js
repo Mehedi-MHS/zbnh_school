@@ -25,7 +25,7 @@ async function imageResizer(file) {
       img.onload = () => {
         info.realWidth = img.width;
         info.realHeight = img.height;
-        info.resizedWidth = 640;
+        info.resizedWidth = 740;
         info.resizedHeight = 512;
         resolve();
       };

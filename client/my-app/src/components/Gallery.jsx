@@ -52,7 +52,13 @@ export default function Gallery() {
         >
           Gallery
         </Typography>
-        <Stack direction={{ xs: "column", sm: "row" }} gap={3}>
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          gap={3}
+          flexWrap="wrap"
+          justifyContent="space-around"
+          sx={{ margin: "1px auto" }}
+        >
           {galleryData.length > 0 ? (
             galleryData.map((data, index) => (
               <Card

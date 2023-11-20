@@ -15,9 +15,10 @@ export default function CarouselComponent() {
       headers: { "Content-type": "application/json" },
     });
     const res = await req.json();
-    if (res.length > 0) {
-      if (res.length > 4) {
-        setPosts(res.slice(0, 4));
+    const res_length = res.length;
+    if (res_length > 0) {
+      if (res_length > 4) {
+        setPosts(res.slice(res_length - 4, res_length));
       } else {
         setPosts(res);
       }
