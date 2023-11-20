@@ -77,7 +77,7 @@ PRIMARY KEY (id)
 
 //zbnh_settings table
 create table if not exists zbnhs_settings (
-id int not null,
+id int not null default 1,
 coverURL varchar(250) default '/images/school.jpg',
 logoURL varchar(250) default '/images/logo.png',
 phone varchar(20),
@@ -85,5 +85,6 @@ email varchar(50),
 location varchar(100),
 PRIMARY KEY (id)
         ) default charset=utf8mb4;
-
+// important: insert this after creating db
+insert into zbnhs_settings (phone, email, location) VALUES ("01853-552668","tarekhasan1992bd@gmail.com","School Road. Jamidarhat. Begumgonj. Noakhali. Bangladesh, 3825, Begumganj, Bangladesh");
 
