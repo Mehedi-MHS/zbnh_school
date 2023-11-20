@@ -18,7 +18,7 @@ export default function CarouselComponent() {
     const res_length = res.length;
     if (res_length > 0) {
       if (res_length > 4) {
-        setPosts(res.slice(res_length - 4, res_length));
+        setPosts(res.slice(0, 4));
       } else {
         setPosts(res);
       }

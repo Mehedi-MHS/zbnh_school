@@ -16,7 +16,7 @@ export default function HeroSection() {
     });
     const res = await req.json();
     if (res.length > 0) {
-      setImg(res[0].fileURL);
+      setImg(res[0].coverURL);
     }
   };
 
@@ -39,7 +39,7 @@ export default function HeroSection() {
           alt="Hero Image"
         />
         <Typography variant="h3" style={textStyle}>
-          ZamiderHat Begum Nurunnahar High School
+          JamiderHat Begum Nurunnahar High School
         </Typography>
       </Box>
     </Card>

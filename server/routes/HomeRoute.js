@@ -16,7 +16,7 @@ HomeRouter.get("/uploads/files/:name", (req, res) => {
 
 HomeRouter.get("/notice", async (req, res) => {
   const [rows, fields] = await promisePool.query(
-    "SELECT * FROM `zbnhs_notice`"
+    "SELECT * FROM `zbnhs_notice` ORDER BY id DESC"
   );
 
   //get news from db order by date descending so that new notice appear on top
@@ -104,7 +104,7 @@ HomeRouter.get("/getStudents", async (req, res) => {
 
 HomeRouter.get("/gallery", async (req, res) => {
   const [rows, fields] = await promisePool.query(
-    "SELECT * FROM `zbnhs_gallery`"
+    "SELECT * FROM `zbnhs_gallery` ORDER BY id DESC"
   );
 
   /*const demoData = [
