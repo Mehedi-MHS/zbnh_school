@@ -347,16 +347,22 @@ dashboardRouter.delete("/notice", async (req, res) => {
 });
 
 //Manage Cover photo update
-dashboardRouter.post("/settings", async (req, res) => {
-  const { coverPhotoData } = req.body;
+dashboardRouter.post("/settings/coverPhoto", async (req, res) => {
+  const { coverData, oldCoverPhotoURL, coverPhotoName } = req.body;
+  /*
+ coverData: info.coverData,
+        oldCoverPhotoURL: info.coverURL,
+        coverPhotoName: info.coverPhotoName,
 
+ */
   let file_name = "",
     uploadDirectory = "",
     imageURL = "";
+  let extension = path.extname(coverPhotoName).toLowerCase();
 
   //handle Picture
-  if (coverPhotoData && coverPhotoData.length > 0 && req.body.coverFileName) {
-    if (req.body.oldCoverPhotoURL?.length > 0) {
+  if (coverData && coverData.length > 0 && coverPhotoName.length > 0) {
+    if (oldCoverPhotoURL?.length > 0) {
       try {
         const fileDir = req.body.oldCoverPhotoURL
           .split("/")
@@ -368,15 +374,15 @@ dashboardRouter.post("/settings", async (req, res) => {
         console.log(error);
       }
     }
-    file_name = "ZBNHS_Cover_" + Date.now() + path.extname(req.body.fileName);
+    file_name = "ZBNHS_Cover_" + Date.now() + extension;
     uploadDirectory = `${process.cwd()}/uploads/images/${file_name}`;
-    const imageData = picData.replace(/^data:image\/\w+;base64,/, "");
+    const imageData = coverData.replace(/^data:image\/\w+;base64,/, "");
     const imageBuffer = Buffer.from(imageData, "base64");
     await fs.writeFile(uploadDirectory, imageBuffer);
     imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
   }
   const [rows, fields] = await promisePool.query(
-    "UPDATE `zbnhs_settings` SET `fileURL`=? WHERE `id`=1",
+    "UPDATE `zbnhs_settings` SET `coverURL`=? WHERE `id`=1",
     [imageURL]
   );
   if (rows.affectedRows > 0) {
@@ -390,6 +396,86 @@ dashboardRouter.post("/settings", async (req, res) => {
       success: false,
       severity: "warning",
       message: "Error! Failed to save data!",
+    });
+  }
+});
+
+//Manage Logo update
+dashboardRouter.post("/settings/logo", async (req, res) => {
+  const { logoData, oldLogoURL, logoName } = req.body;
+  /*
+    logoData: info.logoData,
+        oldLogoURL: info.logoURL,
+        logoName: info.logoName,
+
+ */
+  let file_name = "",
+    uploadDirectory = "",
+    imageURL = "";
+  let extension = path.extname(logoName).toLowerCase();
+
+  //handle Picture
+  if (logoData && logoData.length > 0 && logoName.length > 0) {
+    if (oldLogoURL?.length > 0) {
+      try {
+        const fileDir = req.body.oldLogoURL.split("/").slice(3, 6).join("/");
+
+        await fs.unlink(fileDir);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    file_name = "ZBNHS_Logo_" + Date.now() + extension;
+    uploadDirectory = `${process.cwd()}/uploads/images/${file_name}`;
+    const imageData = logoData.replace(/^data:image\/\w+;base64,/, "");
+    const imageBuffer = Buffer.from(imageData, "base64");
+    await fs.writeFile(uploadDirectory, imageBuffer);
+    imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
+  }
+  const [rows, fields] = await promisePool.query(
+    "UPDATE `zbnhs_settings` SET `logoURL`=? WHERE `id`=1",
+    [imageURL]
+  );
+  if (rows.affectedRows > 0) {
+    return res.json({
+      success: true,
+      severity: "success",
+      message: "Successfully updated website logo",
+    });
+  } else {
+    return res.json({
+      success: false,
+      severity: "warning",
+      message: "Error! Failed to save data!",
+    });
+  }
+});
+
+//Handle footer information
+dashboardRouter.post("/settings/footer", async (req, res) => {
+  const { phone, email, location } = req.body;
+  if (phone.length > 0 && email.length > 0 && location.length > 0) {
+    const [rows, fields] = await promisePool.query(
+      "UPDATE `zbnhs_settings` SET `phone`=?,`email`=?,`location`=? WHERE `id`=1",
+      [phone, email, location]
+    );
+    if (rows.affectedRows > 0) {
+      return res.json({
+        success: true,
+        severity: "success",
+        message: "Successfully updated footer information",
+      });
+    } else {
+      return res.json({
+        success: false,
+        severity: "warning",
+        message: "Error! Failed to save data!",
+      });
+    }
+  } else {
+    return res.json({
+      message: "Please fill all the fields and try again!",
+      severity: "warning",
     });
   }
 });

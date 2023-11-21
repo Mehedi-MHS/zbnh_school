@@ -55,7 +55,7 @@ export default function AddTeacher() {
       ...prev,
       fileName: event.target.files[0].name,
     }));
-    const resized = await imageResizer(event.target.files[0]);
+    const resized = await imageResizer(event.target.files[0], "square");
     setTeacherInfo((prev) => ({ ...prev, picData: resized.resizedData }));
   };
 

@@ -36,7 +36,7 @@ export default function AddSchoolInfo() {
 
   const handleImageInput = async (e) => {
     setInfo((prev) => ({ ...prev, fileName: e.target.files[0].name }));
-    const resizedImage = await imageResizer(e.target.files[0]);
+    const resizedImage = await imageResizer(e.target.files[0], "banner");
     setInfo((prev) => ({ ...prev, picData: resizedImage.resizedData }));
   };
 

@@ -15,8 +15,32 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Link from "./custom/CustomLink";
 import Tooltip from "@mui/material/Tooltip";
-
+import { useState, useEffect } from "react";
 export default function Footer() {
+  const [info, setInfo] = useState({
+    phone: "",
+    email: "",
+    location: "",
+  });
+
+  useEffect(() => {
+    getFooterInfo();
+  }, []);
+
+  const getFooterInfo = async () => {
+    const req = await fetch("http://localhost:3000/settings", {
+      method: "GET",
+    });
+    const res = await req.json();
+    if (res.length > 0) {
+      setInfo({
+        phone: res[0].phone,
+        email: res[0].email,
+        location: res[0].location,
+      });
+    }
+  };
+
   const mainMenuOptions = [
     { title: "Notice", url: "/notice" },
     { title: "Teachers", url: "/teachers" },
@@ -36,17 +60,17 @@ export default function Footer() {
   const contactInfo = [
     {
       icon: <CallIcon sx={{ color: "orange" }} />,
-      title: "+88012354879",
-      url: "callto:+88012354879",
+      title: info.phone ? info.phone : "01xxxxxxxxx",
+      url: `callto:${info?.phone}`,
     },
     {
       icon: <EmailIcon sx={{ color: "orange" }} />,
-      title: "headmaster.zbnhschool@gmail.com",
-      url: "mailto:headmaster.zbnhschool@gmail.com",
+      title: info.email || "Not available",
+      url: `mailto:${info.email}`,
     },
     {
       icon: <LocationOnIcon sx={{ color: "orange" }} />,
-      title: "ZamiderHat, Begumgonj, Noakhali -3200",
+      title: info.location || "School road, ZamiderHat, Begumgonj, Noakhali",
       url: "#",
     },
   ];

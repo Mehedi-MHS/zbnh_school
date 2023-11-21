@@ -1,19 +1,26 @@
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Card, CardMedia, CardContent, CardActions } from "@mui/material";
+import { Card, CardMedia, CardActions } from "@mui/material";
 import Container from "@mui/material/Container";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import { useState, useEffect } from "react";
 import { imageResizer } from "../../helpers/ImageResizer";
 import { CircularProgress } from "@mui/material";
 import SnackbarComponent from "../SnackbarComponent";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
 export default function SettingsComponent() {
   const [info, setInfo] = useState({
-    picData: "",
-    oldFileURL: "",
+    coverData: "",
+    coverURL: "",
+    logoData: "",
+    logoURL: "",
+    phone: "",
+    email: "",
+    location: "",
   });
   const [loading, setLoading] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -21,15 +28,22 @@ export default function SettingsComponent() {
   const [severity, setSeverity] = useState("");
 
   useEffect(() => {
-    getCoverImage();
+    getSettingsInfo();
   }, []);
-  const getCoverImage = async () => {
+  const getSettingsInfo = async () => {
     const req = await fetch("http://localhost:3000/settings", {
       method: "GET",
     });
     const res = await req.json();
     if (res.length > 0) {
-      setInfo((prev) => ({ ...prev, oldFileURL: res[0].fileURL }));
+      setInfo((prev) => ({
+        ...prev,
+        coverURL: res[0]?.coverURL,
+        logoURL: res[0]?.logoURL,
+        phone: res[0]?.phone,
+        email: res[0]?.email,
+        location: res[0]?.location,
+      }));
     }
   };
 
@@ -45,38 +59,117 @@ export default function SettingsComponent() {
     width: 1,
   });
 
-  const handleImageInput = async (e) => {
-    setInfo((prev) => ({ ...prev, fileName: e.target.files[0].name }));
-    const resizedImage = await imageResizer(e.target.files[0]);
-    setInfo((prev) => ({ ...prev, picData: resizedImage.resizedData }));
+  const handleCoverPhotoInput = async (e) => {
+    const resizedImage = await imageResizer(e.target.files[0], "banner");
+    setInfo((prev) => ({
+      ...prev,
+      coverData: resizedImage.resizedData,
+      coverPhotoName: e.target.files[0].name,
+    }));
+  };
+
+  const handleLogoInput = async (e) => {
+    const resizedImage = await imageResizer(e.target.files[0], "square");
+    setInfo((prev) => ({
+      ...prev,
+      logoName: e.target.files[0].name,
+      logoData: resizedImage.resizedData,
+    }));
   };
 
   const handleClose = () => {
     setSnackbarOpen(false);
   };
-  const handleSubmit = async () => {
+
+  //Handle cover photo upload
+  const handleCoverUpload = async () => {
     setLoading(true);
     try {
-      if (info.picData.length > 0) {
-        const req = await fetch("http://localhost:3000/dashboard/settings", {
+      const data = {
+        coverData: info.coverData,
+        oldCoverPhotoURL: info.coverURL,
+        coverPhotoName: info.coverPhotoName,
+      };
+      const req = await fetch(
+        "http://localhost:3000/dashboard/settings/coverPhoto",
+        {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify(info),
-        });
-        const res = await req.json();
-        if (res) {
-          setLoading(false);
-          setSnackbarMessage(res.message);
-          setSnackbarOpen(true);
-          setSeverity(res.severity);
-        } else {
-          alert("Something went wrong! Please try again");
+          body: JSON.stringify(data),
         }
+      );
+      const res = await req.json();
+      if (res) {
+        setLoading(false);
+        setSnackbarMessage(res.message);
+        setSnackbarOpen(true);
+        setSeverity(res.severity);
+      } else {
+        alert("Something went wrong! Please try again");
       }
     } catch (error) {
-      if (error) {
-        alert("Something went wrong");
+      alert(error);
+    }
+  };
+  //////////
+  //handle logo upload
+
+  const handleLogoUpload = async () => {
+    setLoading(true);
+    try {
+      const data = {
+        logoData: info.logoData,
+        oldLogoURL: info.logoURL,
+        logoName: info.logoName,
+      };
+      const req = await fetch("http://localhost:3000/dashboard/settings/logo", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const res = await req.json();
+      if (res) {
+        setLoading(false);
+        setSnackbarMessage(res.message);
+        setSnackbarOpen(true);
+        setSeverity(res.severity);
+      } else {
+        alert("Something went wrong! Please try again");
       }
+    } catch (error) {
+      alert(error);
+    }
+  };
+  ////
+
+  /// Handle footer data upload
+  const handleFooterSubmit = async () => {
+    setLoading(true);
+    try {
+      const data = {
+        phone: info.phone,
+        email: info.email,
+        location: info.location,
+      };
+      const req = await fetch(
+        "http://localhost:3000/dashboard/settings/footer",
+        {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
+      const res = await req.json();
+      if (res) {
+        setLoading(false);
+        setSnackbarMessage(res.message);
+        setSnackbarOpen(true);
+        setSeverity(res.severity);
+      } else {
+        alert("Something went wrong! Please try again");
+      }
+    } catch (err) {
+      alert(err);
     }
   };
 
@@ -87,8 +180,11 @@ export default function SettingsComponent() {
           width: "100%",
           minHeight: "70vh",
           top: 0,
-          paddingTop: "3rem",
+          marginTop: "1rem",
+          paddingTop: "0.5rem",
           paddingBottom: "2rem",
+          background: "white",
+          borderRadius: "1rem",
         }}
       >
         <Container
@@ -99,10 +195,68 @@ export default function SettingsComponent() {
           <Typography
             variant="p"
             component="p"
-            sx={{ textAlign: "center", color: "darkBlue" }}
+            sx={{ textAlign: "left", color: "silver" }}
           >
-            Change Cover Photo
+            Cover Photo
           </Typography>
+          <Divider />
+          <Card
+            sx={{
+              maxWidth: { xs: "100%", sm: "80%" },
+              margin: " 1rem auto",
+              background: "none",
+              boxShadow: "none",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <CardMedia
+              component="img"
+              image={
+                info.coverData
+                  ? info.coverData
+                  : info.coverURL
+                  ? info.coverURL
+                  : "/images/school.jpg"
+              }
+              sx={{ width: { xs: "90%", sm: "60%" }, margin: "0.5rem auto" }}
+            />
+            <CardActions>
+              <Button
+                component="label"
+                variant="outlined"
+                startIcon={<AddPhotoAlternateIcon />}
+              >
+                Upload cover photo
+                <VisuallyHiddenInput
+                  type="file"
+                  accept="image/*"
+                  onChange={handleCoverPhotoInput}
+                />
+              </Button>
+              <Button
+                variant="contained"
+                disabled={info.coverData.length > 0 ? false : true}
+                onClick={handleCoverUpload}
+                sx={{ marginLeft: "1rem" }}
+              >
+                {loading ? (
+                  <CircularProgress sx={{ color: "white" }} size="1rem" />
+                ) : (
+                  "Save changes"
+                )}
+              </Button>
+            </CardActions>
+          </Card>
+          <Typography
+            variant="p"
+            component="p"
+            sx={{ textAlign: "left", color: "Silver" }}
+          >
+            Logo
+          </Typography>
+          <Divider />
           <Card
             sx={{
               maxWidth: { xs: "100%", sm: "80%" },
@@ -117,36 +271,32 @@ export default function SettingsComponent() {
             <CardMedia
               component="img"
               image={
-                info.picData
-                  ? info.picData
-                  : info.oldFileURL
-                  ? info.oldFileURL
-                  : "/images/school.jpg"
+                info.logoData
+                  ? info.logoData
+                  : info.logoURL
+                  ? info.logoURL
+                  : "/images/logo.png"
               }
-              sx={{ width: { xs: "90%", sm: "60%" }, margin: "1rem auto" }}
+              sx={{ width: { xs: "60%", sm: "60%" }, margin: "0.5rem auto" }}
             />
-            <CardContent></CardContent>
             <CardActions sx={{ margin: "0px auto", textAlign: "center" }}>
-              <IconButton component="label" color="success">
-                <AddPhotoAlternateIcon />
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  sx={{ marginLeft: "2px" }}
-                >
-                  Add Picture
-                </Typography>
+              <Button
+                component="label"
+                variant="outlined"
+                startIcon={<AddPhotoAlternateIcon />}
+              >
+                Upload logo
                 <VisuallyHiddenInput
                   type="file"
                   accept="image/*"
-                  onChange={handleImageInput}
+                  onChange={handleLogoInput}
                 />
-              </IconButton>
-
+              </Button>
               <Button
                 variant="contained"
-                disabled={info.picData.length > 0 ? false : true}
-                onClick={handleSubmit}
+                disabled={info.logoData.length > 0 ? false : true}
+                onClick={handleLogoUpload}
+                sx={{ marginLeft: "1rem" }}
               >
                 {loading ? (
                   <CircularProgress sx={{ color: "white" }} size="1rem" />
@@ -156,13 +306,66 @@ export default function SettingsComponent() {
               </Button>
             </CardActions>
           </Card>
+          <Typography color="silver">Footer Information</Typography>
+
+          <Divider />
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            gap={3}
+            sx={{ marginTop: "2rem" }}
+          >
+            <TextField
+              variant="outlined"
+              label="Phone number"
+              value={info.phone}
+              onChange={(e) =>
+                setInfo((prev) => ({ ...prev, phone: e.target.value }))
+              }
+            />
+            <TextField
+              variant="outlined"
+              label="email"
+              type="email"
+              value={info.email}
+              onChange={(e) =>
+                setInfo((prev) => ({ ...prev, email: e.target.value }))
+              }
+            />
+            <TextField
+              variant="outlined"
+              label="Location"
+              value={info.location}
+              onChange={(e) =>
+                setInfo((prev) => ({ ...prev, location: e.target.value }))
+              }
+            />
+          </Stack>
+          <Box sx={{ textAlign: "center", marginTop: "1rem" }}>
+            <Button
+              variant="contained"
+              disabled={
+                info.phone.length > 0 &&
+                info.email.length > 0 &&
+                info.location.length > 0
+                  ? false
+                  : true
+              }
+              onClick={handleFooterSubmit}
+            >
+              {loading ? (
+                <CircularProgress sx={{ color: "white" }} size="1rem" />
+              ) : (
+                "Save changes"
+              )}
+            </Button>
+          </Box>
+          <SnackbarComponent
+            message={snackbarMessage}
+            open={snackbarOpen}
+            close={handleClose}
+            severity={severity}
+          />
         </Container>
-        <SnackbarComponent
-          message={snackbarMessage}
-          open={snackbarOpen}
-          close={handleClose}
-          severity={severity}
-        />
       </Box>
     </>
   );

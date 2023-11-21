@@ -1,4 +1,4 @@
-async function imageResizer(file) {
+async function imageResizer(file, type = "banner") {
   var info = {
     realSize: (file.size / 1000).toFixed(2) + " KB",
     resizedSize: 0,
@@ -25,8 +25,13 @@ async function imageResizer(file) {
       img.onload = () => {
         info.realWidth = img.width;
         info.realHeight = img.height;
-        info.resizedWidth = 740;
-        info.resizedHeight = 512;
+        if (type == "banner") {
+          info.resizedWidth = 800;
+          info.resizedHeight = 500;
+        } else if (type == "square") {
+          info.resizedWidth = 200;
+          info.resizedHeight = 200;
+        }
         resolve();
       };
     });
