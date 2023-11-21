@@ -41,7 +41,12 @@ export default function About() {
           padding: { xs: "2rem 0.5rem", sm: "5rem 0.5rem" },
         }}
       >
-        <Stack direction={{ xs: "column", sm: "row" }} gap={3}>
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          gap={3}
+          flexWrap="wrap"
+          justifyItems="space-around"
+        >
           {post.length > 0 ? (
             post.map((post, index) => (
               <Card
