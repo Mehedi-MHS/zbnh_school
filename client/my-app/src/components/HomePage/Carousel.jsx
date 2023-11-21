@@ -42,7 +42,7 @@ export default function CarouselComponent() {
         </Typography>
         <Carousel
           animation="slide"
-          stopAutoPlayOnHover="false"
+          stopAutoPlayOnHover="true"
           cycleNavigation="true"
         >
           {posts.map((post, index) => (
