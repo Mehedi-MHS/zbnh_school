@@ -21,6 +21,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import Link from "./custom/CustomLink"; //created custom link to work mui with react-router-dom
 import Divider from "@mui/material/Divider";
 import { Stack } from "@mui/material";
+import { useState, useEffect } from "react";
 const drawerWidth = 240;
 const navItems = [
   {
@@ -61,6 +62,20 @@ const navItems = [
 ];
 
 export default function NavBar(props) {
+  const [logoURL, setLogoURL] = useState("/images/logo.png");
+  useEffect(() => {
+    getLogo();
+  }, []);
+  const getLogo = async () => {
+    const req = await fetch("http://localhost:3000/settings", {
+      method: "GET",
+    });
+    const res = await req.json();
+    if (res.length > 0) {
+      setLogoURL(res[0]?.logoURL);
+    }
+  };
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -112,7 +127,7 @@ export default function NavBar(props) {
 
           <Box
             component="img"
-            src="/images/logo.png"
+            src={logoURL ? logoURL : "/images/logo.png"}
             sx={{
               width: { xs: "60px", sm: "80px" },
               height: "auto",

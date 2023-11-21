@@ -277,7 +277,7 @@ export default function SettingsComponent() {
                   ? info.logoURL
                   : "/images/logo.png"
               }
-              sx={{ width: { xs: "60%", sm: "60%" }, margin: "0.5rem auto" }}
+              sx={{ width: { xs: "40%", sm: "30%" }, margin: "0.5rem auto" }}
             />
             <CardActions sx={{ margin: "0px auto", textAlign: "center" }}>
               <Button
@@ -318,6 +318,7 @@ export default function SettingsComponent() {
               variant="outlined"
               label="Phone number"
               value={info.phone}
+              fullWidth
               onChange={(e) =>
                 setInfo((prev) => ({ ...prev, phone: e.target.value }))
               }
@@ -327,6 +328,7 @@ export default function SettingsComponent() {
               label="email"
               type="email"
               value={info.email}
+              fullWidth
               onChange={(e) =>
                 setInfo((prev) => ({ ...prev, email: e.target.value }))
               }
@@ -335,6 +337,7 @@ export default function SettingsComponent() {
               variant="outlined"
               label="Location"
               value={info.location}
+              fullWidth
               onChange={(e) =>
                 setInfo((prev) => ({ ...prev, location: e.target.value }))
               }
