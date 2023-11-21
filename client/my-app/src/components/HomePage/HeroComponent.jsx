@@ -5,7 +5,10 @@ import { Box } from "@mui/material";
 import "@fontsource/roboto/400.css";
 import { useState, useEffect } from "react";
 export default function HeroSection() {
-  const [img, setImg] = useState("");
+  const [info, setInfo] = useState({
+    schoolName: "",
+    coverURL: "",
+  });
 
   useEffect(() => {
     getCoverImage();
@@ -16,7 +19,7 @@ export default function HeroSection() {
     });
     const res = await req.json();
     if (res.length > 0) {
-      setImg(res[0].coverURL);
+      setInfo({ schoolName: res[0]?.schoolName, coverURL: res[0]?.coverURL });
     }
   };
 
@@ -35,11 +38,15 @@ export default function HeroSection() {
         <CardMedia
           component="img"
           height="400"
-          image={img.length > 0 ? img : "/images/school.jpg"}
+          image={
+            info.coverURL.length > 0 ? info.coverURL : "/images/school.jpg"
+          }
           alt="Hero Image"
         />
         <Typography variant="h3" style={textStyle}>
-          JamiderHat Begum Nurunnahar High School
+          {info.schoolName
+            ? info.schoolName
+            : "JamiderHat Begum Nurunnahar High School"}
         </Typography>
       </Box>
     </Card>

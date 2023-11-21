@@ -453,17 +453,22 @@ dashboardRouter.post("/settings/logo", async (req, res) => {
 
 //Handle footer information
 dashboardRouter.post("/settings/footer", async (req, res) => {
-  const { phone, email, location } = req.body;
-  if (phone.length > 0 && email.length > 0 && location.length > 0) {
+  const { schoolName, phone, email, location } = req.body;
+  if (
+    schoolName.length > 0 &&
+    phone.length > 0 &&
+    email.length > 0 &&
+    location.length > 0
+  ) {
     const [rows, fields] = await promisePool.query(
-      "UPDATE `zbnhs_settings` SET `phone`=?,`email`=?,`location`=? WHERE `id`=1",
-      [phone, email, location]
+      "UPDATE `zbnhs_settings` SET `schoolName`=?,`phone`=?,`email`=?,`location`=? WHERE `id`=1",
+      [schoolName, phone, email, location]
     );
     if (rows.affectedRows > 0) {
       return res.json({
         success: true,
         severity: "success",
-        message: "Successfully updated footer information",
+        message: "Successfully updated information",
       });
     } else {
       return res.json({

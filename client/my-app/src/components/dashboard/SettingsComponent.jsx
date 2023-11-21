@@ -14,6 +14,7 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 export default function SettingsComponent() {
   const [info, setInfo] = useState({
+    schoolName: "",
     coverData: "",
     coverURL: "",
     logoData: "",
@@ -38,6 +39,7 @@ export default function SettingsComponent() {
     if (res.length > 0) {
       setInfo((prev) => ({
         ...prev,
+        schoolName: res[0]?.schoolName,
         coverURL: res[0]?.coverURL,
         logoURL: res[0]?.logoURL,
         phone: res[0]?.phone,
@@ -147,6 +149,7 @@ export default function SettingsComponent() {
     setLoading(true);
     try {
       const data = {
+        schoolName: info.schoolName,
         phone: info.phone,
         email: info.email,
         location: info.location,
@@ -314,6 +317,15 @@ export default function SettingsComponent() {
             gap={3}
             sx={{ marginTop: "2rem" }}
           >
+            <TextField
+              variant="outlined"
+              label="School Name"
+              value={info.schoolName}
+              fullWidth
+              onChange={(e) =>
+                setInfo((prev) => ({ ...prev, schoolName: e.target.value }))
+              }
+            />
             <TextField
               variant="outlined"
               label="Phone number"
