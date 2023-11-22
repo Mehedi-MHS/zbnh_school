@@ -25,11 +25,12 @@ export default function Login() {
     setLoading(true);
     try {
       if (info.name.length > 3 && info.password.length > 7) {
-        const req = await fetch("http://localhost:3000/auth", {
+        const req = await fetch("http://localhost:3000/login/", {
           method: "POST",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(info),
         });
+        const res = await req.json();
         if (res) {
           setLoading(false);
           setSnackbarMessage(res.message);

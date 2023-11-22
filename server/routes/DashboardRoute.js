@@ -7,7 +7,13 @@ const promisePool = require("../lib/dbConfig");
 dashboardRouter.all("/*", (req, res, next) => {
   //check user is logged in or not . applicable for all dashboard route
   //if logged in the call next(), otherwise return the request.
-  next();
+  if (req.session.userName && req.session.userName.length > 0) {
+    next();
+  } else {
+    return res
+      .status(403)
+      .json({ message: "You are not allowed to access this content!" });
+  }
 });
 
 dashboardRouter.post("/editStudents", async (req, res) => {
