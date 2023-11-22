@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import { CircularProgress } from "@mui/material";
 import SnackbarComponent from "./SnackbarComponent";
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 export default function Login() {
   const [info, setInfo] = useState({
     name: "",
@@ -36,7 +37,9 @@ export default function Login() {
           setSnackbarMessage(res.message);
           setSnackbarOpen(true);
           setSeverity(res.severity);
-          setInfo({ title: "", fileName: "" });
+          if (res.success) {
+            return <Navigate to="/dashboard" />;
+          }
         } else {
           alert("Please enter valid information.");
         }

@@ -2,29 +2,15 @@ const express = require("express");
 const LoginRouter = express.Router();
 const promisePool = require("../lib/dbConfig");
 const bcrypt = require("bcryptjs");
-//use session to block login for 5 minutes
-function blockLogin(req, res, next) {
-  /*
-    if (!req.session.wrongTry) {
-    next();
-  } else if (req.session.wrongTry && req.session.wrongTry >= 5) {
-    setTimeout(function () {
-      req.session.wrongTry = 0;
-    }, 5 * 60 * 1000);
-    return res.json({
-      message: "Too many wrong login, Please try again 5 minutes later!",
-      severity: "warning",
-    });
-  }
-  */
-  next();
-}
-LoginRouter.post("/", blockLogin, async (req, res) => {
+const CheckLogin = require("../helpers/CheckLogin");
+
+LoginRouter.post("/", async (req, res) => {
   const { name, password } = req.body;
   if (name.length == 0 || password.length == 0) {
     return res.json({
       message: "Please fill all the fields and try again!",
       severity: "warning",
+      success: false,
     });
   }
 
@@ -35,11 +21,18 @@ LoginRouter.post("/", blockLogin, async (req, res) => {
   );
   const db_userName = rows[0].name,
     db_userPassword = rows[0].password;
-  const hashedPassword = hashPassword(password);
-  const isSamePassword = bcrypt.compare(hashedPassword, db_userPassword);
-  if (db_userName === name && isSamePassword == true) {
+  /*
+    const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+  */
+  //console.log("password:", password, "- hashed:", hashedPassword);
+  const isSamePassword = await bcrypt.compare(password, db_userPassword);
+  if (db_userName === name && isSamePassword) {
     req.session.userName = name;
     req.session.cookie.maxAge = 10 * 60 * 1000; //10 minute
+    req.session.save((err) => {
+      console.log(err);
+    });
     console.log(
       "name:",
       name,
@@ -48,28 +41,30 @@ LoginRouter.post("/", blockLogin, async (req, res) => {
       "dbName",
       db_userName,
       "dbpwd",
-      db_userPassword,
-      "hashedPassword:",
-      hashedPassword
+      db_userPassword
     );
-    return res.json({ message: "Successfully logged in", severity: "success" });
+    return res.json({
+      message: "Successfully logged in",
+      severity: "success",
+      success: true,
+    });
   } else {
-    //set wrong try in session
-    if (req.session.wrongTry) {
-      req.session.wrongTry++;
-    } else {
-      req.session.wrongTry = 1;
-    }
     return res.json({
       message: "Incorrect username or password!",
       severity: "warning",
+      success: false,
     });
   }
 });
 
-function hashPassword(str) {
-  const salt = bcrypt.genSalt(10);
-  const hash = bcrypt.hash(str, salt);
-  return hash;
-}
+LoginRouter.post("/verify", async (req, res) => {
+  const isVerified = await CheckLogin(req, res, req.body.code);
+  console.log("isverified:", isVerified);
+  if (isVerified) {
+    return res.json({ isVerified: true });
+  } else {
+    return res.json({ isVerified: false });
+  }
+});
+
 module.exports = LoginRouter;
