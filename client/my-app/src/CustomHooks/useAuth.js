@@ -1,20 +1,13 @@
-import { useState, useEffect } from "react";
-
-export default function useAuth() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  useEffect(() => {
-    checkVerification();
-  }, []);
-  const checkVerification = async () => {
-    const req = await fetch("http://localhost:3000/login/verify", {
-      method: "POST",
-      body: JSON.stringify({ code: "zbnhs#secret" }),
-    });
-    const res = await req.json();
-    if (res) {
-      setIsAuthenticated(res.isAuthenticated);
-    }
-  };
-
-  return isAuthenticated;
+export default async function useAuth() {
+  const req = await fetch("http://localhost:3000/login/verify", {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({ code: "zbnhs#secret" }),
+  });
+  const res = await req.json();
+  if (res) {
+    return res?.isAuthenticated;
+  } else {
+    return false;
+  }
 }

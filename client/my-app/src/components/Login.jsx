@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import { CircularProgress } from "@mui/material";
 import SnackbarComponent from "./SnackbarComponent";
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [info, setInfo] = useState({
     name: "",
@@ -18,7 +18,7 @@ export default function Login() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [severity, setSeverity] = useState("");
-
+  const navigate = useNavigate();
   const handleClose = () => {
     setSnackbarOpen(false);
   };
@@ -38,10 +38,10 @@ export default function Login() {
           setSnackbarOpen(true);
           setSeverity(res.severity);
           if (res.success) {
-            return <Navigate to="/dashboard" />;
+            navigate("/dashboard");
           }
         } else {
-          alert("Please enter valid information.");
+          alert("Something went wrong! Please try again.");
         }
       } else {
         alert("Please fill all the fields and try again!");

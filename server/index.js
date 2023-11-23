@@ -1,21 +1,27 @@
-const express = require("express");
-const cors = require("cors");
-const DashboardRoute = require("./routes/DashboardRoute");
-const HomeRoute = require("./routes/HomeRoute");
-const TeachersRoute = require("./routes/TeachersRoute");
-const fileUpload = require("express-fileupload");
-const loginRoute = require("./routes/LoginRoute");
-const session = require("express-session");
-const app = express();
-const port = process.env.PORT || 3000;
+var express = require("express");
 
-app.use(
-  session({
-    secret: "Lorem#Ipsum#Dolor#Sit#Amet",
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+var session = require("express-session");
+var cors = require("cors");
+var DashboardRoute = require("./routes/DashboardRoute");
+var HomeRoute = require("./routes/HomeRoute");
+var TeachersRoute = require("./routes/TeachersRoute");
+var fileUpload = require("express-fileupload");
+var loginRoute = require("./routes/LoginRoute");
+var port = process.env.PORT || 3000;
+
+var app = express();
+var sess = {
+  secret: "Lorem#Ipsum",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {},
+};
+if (app.get("env") === "production") {
+  app.set("trust proxy", 1);
+  sess.cookie.secure = true;
+}
+
+app.use(session(sess));
 //remove http://localhost:300  http://localhost:5173 in production mode.
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: false }));
@@ -29,6 +35,7 @@ app.use(
     limits: { fileSize: 20 * 1024 * 1024 },
   })
 );
+
 app.use("/", HomeRoute);
 app.use("/teachers", TeachersRoute);
 app.use("/dashboard", DashboardRoute);

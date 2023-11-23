@@ -2,9 +2,8 @@ const express = require("express");
 const LoginRouter = express.Router();
 const promisePool = require("../lib/dbConfig");
 const bcrypt = require("bcryptjs");
-const CheckLogin = require("../helpers/CheckLogin");
 
-LoginRouter.post("/", async (req, res) => {
+LoginRouter.post("/", async (req, res, next) => {
   const { name, password } = req.body;
   if (name.length == 0 || password.length == 0) {
     return res.json({
@@ -29,20 +28,8 @@ LoginRouter.post("/", async (req, res) => {
   const isSamePassword = await bcrypt.compare(password, db_userPassword);
   if (db_userName === name && isSamePassword) {
     req.session.userName = name;
-    req.session.cookie.maxAge = 10 * 60 * 1000; //10 minute
-    req.session.save((err) => {
-      console.log(err);
-    });
-    console.log(
-      "name:",
-      name,
-      "pwd:",
-      password,
-      "dbName",
-      db_userName,
-      "dbpwd",
-      db_userPassword
-    );
+    console.log("login:session username:", req.session.userName);
+    res.setHeader("Access-Control-Allow-Credentials", true);
     return res.json({
       message: "Successfully logged in",
       severity: "success",
@@ -58,9 +45,23 @@ LoginRouter.post("/", async (req, res) => {
 });
 
 LoginRouter.post("/verify", async (req, res) => {
-  const isVerified = await CheckLogin(req, res, req.body.code);
-  console.log("isverified:", isVerified);
-  if (isVerified) {
+  const sessionUser = await req.session.userName;
+  console.log("session username:", sessionUser, "code:", req.body.code);
+  if (sessionUser && req.body.code == "zbnhs#secret") {
+    /*    const [rows, fields] = await promisePool.query(
+      "SELECT `name` FROM `zbnhs_admin`WHERE `id`=?",
+      [1]
+    );
+    if (rows.affectedRows > 0) {
+      const name = rows[0].name;
+      console.log("name-db:", name);
+      if (name == req.sessionUser) {
+        return res.json({ isVerified: true });
+      } else {
+        return res.json({ isVerified: false });
+      }
+    }
+    */
     return res.json({ isVerified: true });
   } else {
     return res.json({ isVerified: false });
