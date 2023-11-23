@@ -99,7 +99,7 @@ export default function Login() {
               {loading ? (
                 <CircularProgress sx={{ color: "white" }} size="1rem" />
               ) : (
-                "Save changes"
+                "Login"
               )}
             </Button>
           </CardActions>

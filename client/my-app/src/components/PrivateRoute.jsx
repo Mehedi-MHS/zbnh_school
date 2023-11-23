@@ -1,8 +1,7 @@
-//import useAuth from "../CustomHooks/useAuth";
 import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 export default function PrivateRoute({ children }) {
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(null);
   useEffect(() => {
     checkAuth();
   }, []);
@@ -13,10 +12,10 @@ export default function PrivateRoute({ children }) {
       body: JSON.stringify({ code: "zbnhs#secret" }),
     });
     const res = await req.json();
-    if (res) {
-      setAuth(res?.isVerified);
+    if (res?.isVerified) {
+      setAuth(res.isVerified);
     }
   };
 
-  return auth ? children : <Navigate to="/login" />;
+  return auth ? children : <Navigate to="/login" replace />;
 }
