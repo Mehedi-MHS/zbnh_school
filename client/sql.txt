@@ -101,3 +101,11 @@ PRIMARY KEY (id)
 insert into zbnhs_admin (name, password) VALUES ("admin#1","$2a$10$RLxPCMR9MzGSZFPbdPCBQu7oBTfJUub5TKEAFaiSlrKUQZ61gTXcW");
         ///abcd1234 (10 round hash below)
         //$2a$10$RLxPCMR9MzGSZFPbdPCBQu7oBTfJUub5TKEAFaiSlrKUQZ61gTXcW
+
+// CREATE SESSION TABLE:
+CREATE TABLE IF NOT EXISTS `sessions` (
+ `session_id` varchar(128) COLLATE utf8mb4_bin NOT NULL,
+ `expires` int(11) unsigned NOT NULL,
+ `data` mediumtext COLLATE utf8mb4_bin,
+ PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB

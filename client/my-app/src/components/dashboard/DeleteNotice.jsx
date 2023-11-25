@@ -28,6 +28,7 @@ export default function DeleteNotice() {
       "http://localhost:3000/dashboard/notice",
       {
         method: "DELETE",
+        credentials: "include",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ id, fileURL }),
       }

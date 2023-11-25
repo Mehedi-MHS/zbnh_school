@@ -61,6 +61,7 @@ export default function AddNotice() {
         formData.append("title", info.title);
         const req = await fetch("http://localhost:3000/dashboard/addNotice", {
           method: "POST",
+          credentials: "include",
           body: formData,
         });
         const res = await req.json();

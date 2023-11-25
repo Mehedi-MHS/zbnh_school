@@ -28,6 +28,7 @@ export default function DeleteTeacher() {
       "http://localhost:3000/dashboard/teachers",
       {
         method: "DELETE",
+        credentials: "include",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ id, imageURL }),
       }

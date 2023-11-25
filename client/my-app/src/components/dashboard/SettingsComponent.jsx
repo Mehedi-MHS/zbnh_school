@@ -96,6 +96,7 @@ export default function SettingsComponent() {
         "http://localhost:3000/dashboard/settings/coverPhoto",
         {
           method: "POST",
+          credentials: "include",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(data),
         }
@@ -126,6 +127,7 @@ export default function SettingsComponent() {
       };
       const req = await fetch("http://localhost:3000/dashboard/settings/logo", {
         method: "POST",
+        credentials: "include",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(data),
       });
@@ -158,6 +160,7 @@ export default function SettingsComponent() {
         "http://localhost:3000/dashboard/settings/footer",
         {
           method: "POST",
+          credentials: "include",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(data),
         }

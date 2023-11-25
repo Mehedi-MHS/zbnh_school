@@ -51,6 +51,7 @@ export default function AddSchoolInfo() {
           "http://localhost:3000/dashboard/addSchoolInfo",
           {
             method: "POST",
+            credentials: "include",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(info),
           }

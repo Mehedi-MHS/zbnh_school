@@ -72,6 +72,7 @@ export default function AddTeacher() {
       ) {
         const req = await fetch("http://localhost:3000/dashboard/editTeacher", {
           method: "POST",
+          credentials: "include",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(teacherInfo),
         });

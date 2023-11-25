@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 
 LoginRouter.post("/", async (req, res) => {
   const { name, password } = req.body;
-
+  console.log("from client:", name, "-", password);
   if (name.length === 0 || password.length === 0) {
     return res.json({
       message: "Please fill all the fields and try again!",
@@ -21,13 +21,13 @@ LoginRouter.post("/", async (req, res) => {
   );
   const db_userName = rows[0].name;
   const db_userPassword = rows[0].password;
-
+  console.log("db:", db_userName, "-", db_userPassword);
   // Validate credentials
   const isSamePassword = await bcrypt.compare(password, db_userPassword);
   if (db_userName === name && isSamePassword) {
     // Set session username before calling verifySession
     req.session.userName = name;
-    await req.session.save();
+
     return res.json({
       success: true,
       severity: "success",
@@ -44,9 +44,11 @@ LoginRouter.post("/", async (req, res) => {
 
 LoginRouter.post("/verify", (req, res) => {
   console.log("verify: req.session.userName:", req.session.userName);
-  if (req.session?.userName) {
+  if (req.session.userName) {
+    console.log("verified:true");
     return res.json({ isVerified: true });
   } else {
+    console.log("verified:false");
     return res.json({ isVerified: false });
   }
 });

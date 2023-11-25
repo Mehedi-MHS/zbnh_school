@@ -16,6 +16,7 @@ export default function DeleteSchoolInfo() {
   const getGalleryPosts = async () => {
     const req = await fetch("http://localhost:3000/gallery", {
       method: "GET",
+
       headers: { "Content-type": "application/json" },
     });
     const res = await req.json();
@@ -28,6 +29,7 @@ export default function DeleteSchoolInfo() {
       "http://localhost:3000/dashboard/galleryPost",
       {
         method: "DELETE",
+        credentials: "include",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ id, imageURL }),
       }

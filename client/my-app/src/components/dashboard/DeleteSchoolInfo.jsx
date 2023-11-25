@@ -28,6 +28,7 @@ export default function DeleteSchoolInfo() {
       "http://localhost:3000/dashboard/schoolInfo",
       {
         method: "DELETE",
+        credentials: "include",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ id, imageURL }),
       }

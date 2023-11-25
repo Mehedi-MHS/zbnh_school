@@ -26,8 +26,9 @@ export default function Login() {
     setLoading(true);
     try {
       if (info.name.length > 3 && info.password.length > 7) {
-        const req = await fetch("http://localhost:3000/login/", {
+        const req = await fetch("http://localhost:3000/login", {
           method: "POST",
+          credentials: "include",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(info),
         });
@@ -38,7 +39,9 @@ export default function Login() {
           setSnackbarOpen(true);
           setSeverity(res.severity);
           if (res.success) {
-            navigate("/dashboard");
+            setTimeout(() => {
+              navigate("/dashboard");
+            }, 1000);
           }
         } else {
           alert("Something went wrong! Please try again.");
