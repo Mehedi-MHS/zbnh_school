@@ -21,12 +21,7 @@ export default function Logout() {
   return (
     <>
       <Container sx={{ margin: "2rem auto" }}>
-        <Button
-          variant="outlined"
-          color="warning"
-          startIcon={<LogoutIcon />}
-          onClick={handleLogout}
-        >
+        <Button color="error" startIcon={<LogoutIcon />} onClick={handleLogout}>
           Logout
         </Button>
       </Container>

@@ -93,6 +93,7 @@ export default function Login() {
             <TextField
               type="text"
               label="Your name"
+              autoComplete="off"
               fullWidth
               sx={{ marginBottom: "0.5rem" }}
               onChange={(e) =>
@@ -102,6 +103,7 @@ export default function Login() {
             <TextField
               type="password"
               label="Enter password"
+              autoComplete="off"
               fullWidth
               onChange={(e) =>
                 setInfo((prev) => ({ ...prev, password: e.target.value }))
