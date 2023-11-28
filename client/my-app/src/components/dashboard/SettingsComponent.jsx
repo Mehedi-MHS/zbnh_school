@@ -312,7 +312,7 @@ export default function SettingsComponent() {
               </Button>
             </CardActions>
           </Card>
-          <Typography color="silver">Footer Information</Typography>
+          <Typography color="silver">Other Information</Typography>
 
           <Divider />
           <Stack
