@@ -5,6 +5,7 @@ import CarouselComponent from "./Carousel";
 import NavigationBox from "./NavigationBox";
 import Box from "@mui/material/Box";
 import { Divider } from "@mui/material";
+import MessageBox from "./MessageBox";
 export default function Home() {
   return (
     <>
@@ -18,6 +19,7 @@ export default function Home() {
         <HeroSection />
         <MarqueeNews />
         <NavigationBox />
+        <MessageBox />
         <Divider />
         <CarouselComponent />
       </Box>

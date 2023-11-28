@@ -33,7 +33,7 @@ export default function HeroSection() {
   };
 
   return (
-    <Card sx={{ borderRadius: 0, background: "red" }}>
+    <Card sx={{ borderRadius: 0, background: "lightGray" }}>
       <Box style={{ position: "relative", maxWidth: "100%" }}>
         <CardMedia
           component="img"

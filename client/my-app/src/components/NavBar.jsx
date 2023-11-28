@@ -124,7 +124,6 @@ export default function NavBar(props) {
           >
             <MenuIcon />
           </IconButton>
-
           <Box
             component="img"
             src={logoURL ? logoURL : "/images/logo.png"}
@@ -134,7 +133,6 @@ export default function NavBar(props) {
               ml: { xs: "30%", sm: 0 },
             }}
           />
-
           {/* <Typography
             variant="h6"
             component="div"
