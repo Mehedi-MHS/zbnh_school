@@ -13,7 +13,7 @@ export default function MessageBox() {
         "I welcome you all the faculty members and lorem ipsum Dolor sit amet. Toe build a digital bangladesh",
     },
     {
-      title: "Message of the Assistant Headmaster",
+      title: "Message of Assistant Headmaster",
       picURL: "",
       message:
         "I welcome you all the faculty members and lorem ipsum Dolor sit amet. Toe build a digital bangladesh",
@@ -32,7 +32,7 @@ export default function MessageBox() {
             <Box
               key={index}
               sx={{
-                width: { xs: "100%", sm: "300px" },
+                width: { xs: "100%", sm: "400px" },
                 minHeight: "150px",
                 borderRadius: "10px",
                 padding: "0.5rem",

@@ -12,7 +12,6 @@ var fileUpload = require("express-fileupload");
 var loginRoute = require("./routes/LoginRoute");
 require("dotenv").config();
 const promisePool = require("./lib/dbConfig");
-const bcrypt = require("bcryptjs");
 
 var port = process.env.PORT || 3000;
 

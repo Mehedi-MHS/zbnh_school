@@ -7,7 +7,7 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import { CircularProgress } from "@mui/material";
 import SnackbarComponent from "./SnackbarComponent";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [info, setInfo] = useState({
@@ -19,6 +19,24 @@ export default function Login() {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [severity, setSeverity] = useState("");
   const navigate = useNavigate();
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const checkAuth = async () => {
+    const req = await fetch("http://localhost:3000/login/verify", {
+      method: "POST",
+      credentials: "include",
+    });
+    const res = await req.json();
+    if (res) {
+      if (res.isVerified) {
+        navigate("/dashboard");
+      } else {
+        navigate("/login");
+      }
+    }
+  };
   const handleClose = () => {
     setSnackbarOpen(false);
   };
