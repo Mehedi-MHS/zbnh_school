@@ -76,6 +76,12 @@ export default function DashboardHome() {
         },
       ],
     },
+    {
+      id: 6,
+      title: "Headmaster Message",
+      subheader: "Edit Headmaster Message",
+      buttons: [{ title: "Edit", link: "/dashboard/headmasterMessage" }],
+    },
   ];
   return (
     <>

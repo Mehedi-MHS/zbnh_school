@@ -457,6 +457,68 @@ dashboardRouter.post("/settings/logo", async (req, res) => {
   }
 });
 
+///**** Handle headmaster message */
+dashboardRouter.post("/headmasterMessage", async (req, res) => {
+  const { description, picData, oldPicURL } = req.body;
+  console.log(
+    "description:",
+    description,
+    "-picdata:",
+    picData.length,
+    "-oldPicURL:",
+    oldPicURL
+  );
+
+  if (description.length === 0 || oldPicURL.length == 0) {
+    return res.json({
+      success: false,
+      severity: "warning",
+      message: "Message or Picture is empty. Please try again",
+    });
+  }
+  let file_name = "",
+    uploadDirectory = "",
+    imageURL = "",
+    imageName = req.body?.fileName;
+
+  //handle Picture
+  if (picData && picData.length > 0 && imageName.length > 0) {
+    if (oldPicURL?.length > 0) {
+      try {
+        const fileDir = req.body.oldPicURL.split("/").slice(3, 6).join("/");
+
+        await fs.unlink(fileDir);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    file_name =
+      "ZBNHS_HeadMaster_" + Date.now() + path.extname(req.body.fileName);
+    uploadDirectory = `${process.cwd()}/uploads/images/${file_name}`;
+    const imageData = logoData.replace(/^data:image\/\w+;base64,/, "");
+    const imageBuffer = Buffer.from(imageData, "base64");
+    await fs.writeFile(uploadDirectory, imageBuffer);
+    imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
+  }
+  const [rows, fields] = await promisePool.query(
+    "UPDATE `zbnhs_headMessage` SET `picURL`=?, `description`=? WHERE `name`=?",
+    [imageURL, description, "hm"]
+  );
+  if (rows.affectedRows > 0) {
+    return res.json({
+      success: true,
+      severity: "success",
+      message: "Successfully updated Headmaster message",
+    });
+  } else {
+    return res.json({
+      success: false,
+      severity: "warning",
+      message: "Error! Failed to save data!",
+    });
+  }
+});
+
 //Handle footer information
 dashboardRouter.post("/settings/footer", async (req, res) => {
   const { schoolName, phone, email, location } = req.body;

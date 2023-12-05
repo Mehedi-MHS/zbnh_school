@@ -159,4 +159,14 @@ HomeRouter.get("/settings", async (req, res) => {
   res.json(rows);
 });
 
+//Headmasters table
+HomeRouter.get("/getHeadmasterMessage", async (req, res) => {
+  const [rows, fields] = await promisePool.query(
+    "SELECT * FROM `zbnhs_headMessage` WHERE `name`=?",
+    ["hm"]
+  );
+  console.log(rows);
+  res.json(rows);
+});
+
 module.exports = HomeRouter;
