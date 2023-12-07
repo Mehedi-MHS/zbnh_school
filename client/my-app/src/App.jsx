@@ -20,6 +20,7 @@ import DeleteTeacher from "./components/dashboard/DeleteTeacher";
 import DeleteNotice from "./components/dashboard/DeleteNotice";
 import DeleteGalleryPost from "./components/dashboard/DeleteGalleryPost";
 import HeadmasterMessage from "./components/dashboard/HeadmasterMessage";
+import AssistantHeadmasterMessage from "./components/dashboard/AssistantHeadmasterMessage";
 import PrivateRoute from "./components/PrivateRoute";
 import { Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
@@ -94,6 +95,14 @@ export default function App() {
             element={
               <PrivateRoute>
                 <HeadmasterMessage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard/assistantHeadmasterMessage"
+            element={
+              <PrivateRoute>
+                <AssistantHeadmasterMessage />
               </PrivateRoute>
             }
           />
