@@ -457,19 +457,32 @@ dashboardRouter.post("/settings/logo", async (req, res) => {
   }
 });
 
-///**** Handle headmaster message */
+///**** Handle headmaster and assistant headmaster message */
 dashboardRouter.post("/headmasterMessage", async (req, res) => {
-  const { description, picData, oldPicURL } = req.body;
+  const { title, description, picData, oldPicURL, person } = req.body;
+
+  const verifyPerson = () => {
+    if (person === "headmaster") {
+      return "hm";
+    } else if (person === "assistantHeadmaster") {
+      return "ahm";
+    }
+  };
+
   console.log(
+    "title:",
+    title,
     "description:",
     description,
     "-picdata:",
     picData.length,
     "-oldPicURL:",
-    oldPicURL
+    oldPicURL,
+    "Person:",
+    person
   );
 
-  if (description.length === 0 || oldPicURL.length == 0) {
+  if (title.length === 0 || description.length === 0 || person.length === 0) {
     return res.json({
       success: false,
       severity: "warning",
@@ -495,20 +508,25 @@ dashboardRouter.post("/headmasterMessage", async (req, res) => {
     file_name =
       "ZBNHS_HeadMaster_" + Date.now() + path.extname(req.body.fileName);
     uploadDirectory = `${process.cwd()}/uploads/images/${file_name}`;
-    const imageData = logoData.replace(/^data:image\/\w+;base64,/, "");
+    const imageData = picData.replace(/^data:image\/\w+;base64,/, "");
     const imageBuffer = Buffer.from(imageData, "base64");
     await fs.writeFile(uploadDirectory, imageBuffer);
     imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
   }
   const [rows, fields] = await promisePool.query(
-    "UPDATE `zbnhs_headMessage` SET `picURL`=?, `description`=? WHERE `name`=?",
-    [imageURL, description, "hm"]
+    "UPDATE `zbnhs_headMessage` SET `picURL`=?, `title`=?, `description`=? WHERE `name`=?",
+    [
+      imageURL.length > 0 ? imageURL : oldPicURL,
+      title,
+      description,
+      verifyPerson(),
+    ]
   );
   if (rows.affectedRows > 0) {
     return res.json({
       success: true,
       severity: "success",
-      message: "Successfully updated Headmaster message",
+      message: `Successfully updated ${person} message`,
     });
   } else {
     return res.json({

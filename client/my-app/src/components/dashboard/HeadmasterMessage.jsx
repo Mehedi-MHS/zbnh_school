@@ -14,9 +14,11 @@ import { CircularProgress } from "@mui/material";
 import SnackbarComponent from "../SnackbarComponent";
 export default function HeadmasterMessage() {
   const [info, setInfo] = useState({
+    title: "",
     description: "",
     picData: "",
     oldPicURL: "",
+    person: "headmaster",
   });
   const [loading, setLoading] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -33,9 +35,9 @@ export default function HeadmasterMessage() {
       credentials: "include",
     });
     const res = await req.json();
-
     setInfo((prev) => ({
       ...prev,
+      title: res[0].title,
       description: res[0].description,
       oldPicURL: res[0].picURL,
     }));
@@ -84,7 +86,6 @@ export default function HeadmasterMessage() {
           setSnackbarMessage(res.message);
           setSnackbarOpen(true);
           setSeverity(res.severity);
-          setInfo({ description: "" });
         } else {
           alert("Looks Like you are trying to edit the source code!");
         }
@@ -121,11 +122,11 @@ export default function HeadmasterMessage() {
           >
             <CardContent>
               <Avatar
-                alt="Headmaster profile picturef"
+                alt="Headmaster profile picture"
                 src={
-                  info.picData
+                  info.picData.length > 0
                     ? info.picData
-                    : info.oldPicURL
+                    : info.oldPicURL.length > 0
                     ? info.oldPicURL
                     : "/images/avatar0.webp"
                 }
@@ -137,11 +138,23 @@ export default function HeadmasterMessage() {
               />
               <TextField
                 type="text"
+                label="Title"
+                fullWidth
+                value={info.title}
+                sx={{ marginBottom: 2 }}
+                InputLabelProps={{ shrink: true }}
+                onChange={(e) =>
+                  setInfo((prev) => ({ ...prev, title: e.target.value }))
+                }
+              />
+              <TextField
+                type="text"
                 label="Message..."
                 fullWidth
                 value={info.description}
                 multiline
                 sx={{ marginBottom: 2 }}
+                InputLabelProps={{ shrink: true }}
                 rows={2}
                 onChange={(e) =>
                   setInfo((prev) => ({ ...prev, description: e.target.value }))
@@ -168,7 +181,10 @@ export default function HeadmasterMessage() {
                 variant="contained"
                 fullWidth
                 disabled={
-                  info.description && info.picData.length > 0 ? false : true
+                  info.description &&
+                  (info.picData.length > 0 || info.oldPicURL.length > 0)
+                    ? false
+                    : true
                 }
                 onClick={handleSubmit}
               >

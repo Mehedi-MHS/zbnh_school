@@ -116,11 +116,12 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 create table if not exists zbnhs_headMessage (
 id int not null,
 name varchar(10) not null,
-description varchar(500) not null,
+title varchar(300) not null,
+description varchar(700) not null,
 picURL varchar(200) ,
 PRIMARY KEY (id)
         ) default charset=utf8mb4;
 
         // important : insert demo data.
-insert into zbnhs_headMessage (id,name,description,picURL) values(1,'hm','Lorem ipsum headmaster','/images/profile0.webp');
-insert into zbnhs_headMessage (id,name,description,picURL) values(2,'ahm','Lorem ipsum assistant headmaster','/images/profile0.webp');
+insert into zbnhs_headMessage (id,name,title,description,picURL) values(1,'hm','Message of Headmaster','Lorem ipsum headmaster','/images/avatar0.webp');
+insert into zbnhs_headMessage (id,name,title,description,picURL) values(2,'ahm','Message of assistant Headmaster','Lorem ipsum assistant headmaster','/images/avatar0.webp');

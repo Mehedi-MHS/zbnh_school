@@ -3,8 +3,24 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Divider } from "@mui/material";
 import Box from "@mui/material/Box";
-
+import { useState, useEffect } from "react";
 export default function MessageBox() {
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    getMessages();
+  }, []);
+  const getMessages = async () => {
+    const req = await fetch("http://localhost:3000/getHeadmasterMessage", {
+      method: "get",
+      headers: { "Content-type": "application/json" },
+      credentials: "include",
+    });
+    const res = await req.json();
+    setMessages(res);
+  };
+
+  /*
   const demoInfo = [
     {
       title: "Message of the Headmaster",
@@ -19,7 +35,7 @@ export default function MessageBox() {
         "I welcome you all the faculty members and lorem ipsum Dolor sit amet. Toe build a digital bangladesh",
     },
   ];
-
+*/
   return (
     <>
       <Container sx={{ width: "100%", margin: "2rem auto" }}>
@@ -28,7 +44,7 @@ export default function MessageBox() {
           gap={2}
           justifyContent="space-around"
         >
-          {demoInfo.map((info, index) => (
+          {messages.map((info, index) => (
             <Box
               key={index}
               sx={{
@@ -42,8 +58,7 @@ export default function MessageBox() {
             >
               <Box sx={{ width: "100%" }}>
                 <Typography variant="h6" color="purple" textAlign="center">
-                  {info.title.toUpperCase() ||
-                    "Message of the Headmaster".toUpperCase()}
+                  {info.title || "Message of the Headmaster".toUpperCase()}
                 </Typography>
               </Box>
               <Divider />
@@ -68,7 +83,7 @@ export default function MessageBox() {
                 </Box>
                 <Box sx={{ width: { xs: "100%", sm: "70%" } }}>
                   <Typography variant="p" textAlign="justify">
-                    {info.message}
+                    {info.description}
                   </Typography>
                 </Box>
               </Stack>
