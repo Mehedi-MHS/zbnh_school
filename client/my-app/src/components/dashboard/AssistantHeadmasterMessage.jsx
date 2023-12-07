@@ -57,7 +57,7 @@ export default function HeadmasterMessage() {
 
   const handleImageInput = async (e) => {
     setInfo((prev) => ({ ...prev, fileName: e.target.files[0].name }));
-    const resizedImage = await imageResizer(e.target.files[0], "banner");
+    const resizedImage = await imageResizer(e.target.files[0], "square");
     setInfo((prev) => ({ ...prev, picData: resizedImage.resizedData }));
   };
 
