@@ -571,4 +571,30 @@ dashboardRouter.post("/settings/footer", async (req, res) => {
   }
 });
 
+//Handle ChangeUsername & password
+dashboardRouter.post("/settings/changePassword", async (req, res) => {
+  const { oldUser, oldPassword, newUser, newPassword } = req.body;
+
+  if (
+    oldUser.length == 0 ||
+    oldPassword.length == 0 ||
+    newUser.length == 0 ||
+    newPassword.length == 0
+  ) {
+    return res.json({
+      severity: "warning",
+      message: "Please fill all the fields and try again",
+    });
+  }
+
+  const [rows, fields] = await promisePool.query(
+    " SELECT * FROM `zbnhs_admin`"
+  );
+
+  console.log(oldUser, "-", oldPassword, "-", newUser, "-", newPassword);
+  return res.json({
+    message: ` ${oldUser}, ${oldPassword}, ${newUser}, ${newPassword}`,
+  });
+});
+
 module.exports = dashboardRouter;

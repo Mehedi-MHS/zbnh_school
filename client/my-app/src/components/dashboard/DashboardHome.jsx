@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/material";
 import SettingsComponent from "./SettingsComponent";
+import ChangePasswordComponent from "./ChangePasswordComponent";
 import Logout from "./Logout";
 export default function DashboardHome() {
   const renderOptions = [
@@ -139,6 +140,7 @@ export default function DashboardHome() {
           ))}
         </Stack>
         <SettingsComponent />
+        <ChangePasswordComponent />
         <Logout />
       </Box>
     </>
