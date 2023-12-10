@@ -3,6 +3,7 @@ require("dotenv").config();
 const dashboardRouter = express.Router();
 const fs = require("fs/promises");
 const path = require("path");
+const bcrypt = require("bcryptjs");
 const promisePool = require("../lib/dbConfig");
 dashboardRouter.all("/*", (req, res, next) => {
   //check user is logged in or not . applicable for all dashboard route
@@ -587,14 +588,49 @@ dashboardRouter.post("/settings/changePassword", async (req, res) => {
     });
   }
 
+  // Collect info from db
   const [rows, fields] = await promisePool.query(
-    " SELECT * FROM `zbnhs_admin`"
+    "SELECT `name`,`password` FROM zbnhs_admin WHERE `id`=?",
+    [1]
   );
+  const db_userName = rows[0].name;
+  const db_userPassword = rows[0].password;
+  //console.log("db:", db_userName, "-", db_userPassword);
+  // Validate credentials
+  const isSamePassword = await bcrypt.compare(oldPassword, db_userPassword);
+  if (db_userName === oldUser && isSamePassword) {
+    // Set session username before calling verifySession
+    req.session.userName = newUser;
 
-  console.log(oldUser, "-", oldPassword, "-", newUser, "-", newPassword);
-  return res.json({
-    message: ` ${oldUser}, ${oldPassword}, ${newUser}, ${newPassword}`,
-  });
+    //create new password hash.
+    const salt = await bcrypt.genSalt(10);
+    const passwordHash = await bcrypt.hash(newPassword, salt);
+    console.log("newPassword:", newPassword, " - hash:", passwordHash);
+    //update new password in database
+    const [rows, fields] = await promisePool.query(
+      "UPDATE `zbnhs_admin` SET `name`=?,`password`=? WHERE `id`=?",
+      [newUser, passwordHash, 1]
+    );
+    if (rows.affectedRows > 0) {
+      return res.json({
+        success: true,
+        severity: "success",
+        message: "Successfully updated Username and Password",
+      });
+    } else {
+      return res.json({
+        success: false,
+        severity: "warning",
+        message: "Error! Failed to Update data!",
+      });
+    }
+  } else {
+    return res.json({
+      message: "Incorrect username or password!",
+      severity: "warning",
+      success: false,
+    });
+  }
 });
 
 module.exports = dashboardRouter;
