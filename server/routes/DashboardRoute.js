@@ -469,7 +469,7 @@ dashboardRouter.post("/headmasterMessage", async (req, res) => {
       return "ahm";
     }
   };
-
+  /*
   console.log(
     "title:",
     title,
@@ -482,7 +482,7 @@ dashboardRouter.post("/headmasterMessage", async (req, res) => {
     "Person:",
     person
   );
-
+*/
   if (title.length === 0 || description.length === 0 || person.length === 0) {
     return res.json({
       success: false,
@@ -605,7 +605,7 @@ dashboardRouter.post("/settings/changePassword", async (req, res) => {
     //create new password hash.
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(newPassword, salt);
-    console.log("newPassword:", newPassword, " - hash:", passwordHash);
+    //console.log("newPassword:", newPassword, " - hash:", passwordHash);
     //update new password in database
     const [rows, fields] = await promisePool.query(
       "UPDATE `zbnhs_admin` SET `name`=?,`password`=? WHERE `id`=?",
