@@ -17,20 +17,54 @@ import { imageResizer } from "../../helpers/ImageResizer";
 import { CircularProgress } from "@mui/material";
 import SnackbarComponent from "../SnackbarComponent";
 export default function AddTeacher() {
+  /*
+শিক্ষকের নাম
+পদবী
+পিতার নাম
+মাতার নাম
+ইনডেক্স নং
+জন্ম তারিখ
+স্থায়ী ঠিকানা
+বর্তমান ঠিকানা
+১ম এম.পি.ও ভুক্তির তারিখ
+অত্র বিদ্যালয়ে এম.পি.ও ভুক্তির তারিখ
+চাকুরীতে প্রথম যোগদানের তারিখ
+অত্র বিদ্যালয়ে যোগদানের তারিখ
+বি. এড স্কেল প্রাপ্তির তারিখ
+১ম উচ্চতর স্কেল প্রাপ্তির তারিখ
+২য় উচ্চতর স্কেল প্রাপ্তির তারিখ
+শিক্ষাগত যোগ্যতা 
+ব্যাংক হিসাব নং
+এন.আইডি নং
+মোবাইল নং
+প্রশিক্ষণ সংক্রান্ত তথ্য
+
+*/
+
   const [teacherInfo, setTeacherInfo] = useState({
     picData: "",
     fullName: "",
     designation: "",
     fathersName: "",
     mothersName: "",
+    index: "",
     gender: "",
-    education: "",
-    religion: "",
     dateOfBirth: "",
+    permanentAddress: "",
+    presentAddress: "",
+    firstMPOdate: "",
+    currentSchoolMPOdate: "",
+    firstJoined: "",
+    joinedHere: "",
+    BEDscaleDate: "",
+    firstScaleDate: "",
+    secondScaleDate: "",
+    education: "",
+    bank: "",
+    NID: "",
     contact: "",
-    email: "",
-    bloodGroup: "",
-    joined: "",
+    information: "",
+    religion: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -99,7 +133,10 @@ export default function AddTeacher() {
           width: "100vw",
           minHeight: "100vh",
           paddingTop: "2rem",
-          background: "skyblue",
+          background: "url(/images/nature00.jpg) no-repeat ",
+          backgroundColor: "skyblue",
+          backgroundSize: "cover",
+          paddingBottom: "1rem",
         }}
       >
         <Typography
@@ -117,7 +154,8 @@ export default function AddTeacher() {
 
         <Container
           sx={{
-            background: "#fff",
+            backgroundColor: "#fff",
+            background: "rgba(255,255,255,0.9)",
             paddingBottom: "1rem",
             borderRadius: "0.5rem",
           }}
@@ -155,13 +193,13 @@ export default function AddTeacher() {
             </Box>
             <Grid
               container
-              rowSpacing={{ xs: 1, sm: 0 }}
+              rowSpacing={{ xs: 1, sm: 1 }}
               columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             >
               <Grid item sm={6} xs={12}>
                 <TextField
                   id="full-name"
-                  label="Full Name"
+                  label="শিক্ষকের নাম"
                   variant="outlined"
                   type="text"
                   required
@@ -177,7 +215,7 @@ export default function AddTeacher() {
               </Grid>
               <Grid item sm={6} xs={12}>
                 <TextField
-                  label="Designation"
+                  label="পদবী"
                   variant="outlined"
                   type="text"
                   required
@@ -194,7 +232,7 @@ export default function AddTeacher() {
 
               <Grid item sm={6} xs={12}>
                 <TextField
-                  label="Father's Name"
+                  label="পিতার নাম"
                   variant="outlined"
                   type="text"
                   required
@@ -211,7 +249,7 @@ export default function AddTeacher() {
 
               <Grid item sm={6} xs={12}>
                 <TextField
-                  label="Mother's Name"
+                  label="মাতার নাম"
                   variant="outlined"
                   type="text"
                   required
@@ -220,6 +258,242 @@ export default function AddTeacher() {
                     setTeacherInfo((prevData) => ({
                       ...prevData,
                       mothersName: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="ইনডেক্স নং"
+                  variant="outlined"
+                  type="text"
+                  required
+                  fullWidth
+                  margin="none"
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      index: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="জন্মতারিখ"
+                  variant="outlined"
+                  type="date"
+                  required
+                  fullWidth
+                  InputLabelProps={{ shrink: true }}
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      dateOfBirth: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="স্থায়ী ঠিকানা"
+                  variant="outlined"
+                  type="text"
+                  required
+                  fullWidth
+                  margin="none"
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      permanentAddress: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="বর্তমান ঠিকানা"
+                  variant="outlined"
+                  type="text"
+                  required
+                  fullWidth
+                  margin="none"
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      presentAddress: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="১ম এম.পি.ও ভুক্তির তারিখ"
+                  variant="outlined"
+                  type="date"
+                  required
+                  fullWidth
+                  InputLabelProps={{ shrink: true }}
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      firstMPOdate: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="অত্র বিদ্যালয়ে এম.পি.ও ভুক্তির তারিখ"
+                  variant="outlined"
+                  type="date"
+                  required
+                  fullWidth
+                  InputLabelProps={{ shrink: true }}
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      currentSchoolMPOdate: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="চাকুরীতে প্রথম যোগদানের তারিখ"
+                  variant="outlined"
+                  type="date"
+                  required
+                  fullWidth
+                  InputLabelProps={{ shrink: true }}
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      firstJoined: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="অত্র বিদ্যালয়ে যোগদানের তারিখ"
+                  variant="outlined"
+                  type="date"
+                  required
+                  fullWidth
+                  InputLabelProps={{ shrink: true }}
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      joinedHere: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="বি.এড স্কেল প্রাপ্তির তারিখ"
+                  variant="outlined"
+                  type="date"
+                  required
+                  fullWidth
+                  InputLabelProps={{ shrink: true }}
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      BEDscaleDate: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="প্রথম উচ্চতর স্কেল প্রাপ্তির তারিখ"
+                  variant="outlined"
+                  type="date"
+                  required
+                  fullWidth
+                  InputLabelProps={{ shrink: true }}
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      firstScaleDate: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="দ্বিতীয় উচ্চতর স্কেল প্রাপ্তির তারিখ"
+                  variant="outlined"
+                  type="date"
+                  required
+                  fullWidth
+                  InputLabelProps={{ shrink: true }}
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      secondScaleDate: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="শিক্ষাগত যোগ্যতা"
+                  variant="outlined"
+                  type="text"
+                  required
+                  fullWidth
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      education: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="ব্যাংক হিসাব নং"
+                  variant="outlined"
+                  type="text"
+                  required
+                  fullWidth
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      bank: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="এন.আই.ডি নং"
+                  variant="outlined"
+                  type="text"
+                  required
+                  fullWidth
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      NID: e.target.value,
+                    }));
+                  }}
+                />
+              </Grid>
+              <Grid item sm={6} xs={12}>
+                <TextField
+                  label="মোবাইল নং"
+                  variant="outlined"
+                  type="number"
+                  fullWidth
+                  onChange={(e) => {
+                    setTeacherInfo((prevData) => ({
+                      ...prevData,
+                      contact: e.target.value,
                     }));
                   }}
                 />
@@ -244,21 +518,7 @@ export default function AddTeacher() {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item sm={6} xs={12}>
-                <TextField
-                  label="Education"
-                  variant="outlined"
-                  type="text"
-                  required
-                  fullWidth
-                  onChange={(e) => {
-                    setTeacherInfo((prevData) => ({
-                      ...prevData,
-                      education: e.target.value,
-                    }));
-                  }}
-                />
-              </Grid>
+
               <Grid item sm={6} xs={12}>
                 <TextField
                   label="Religion"
@@ -273,54 +533,10 @@ export default function AddTeacher() {
                   }}
                 />
               </Grid>
+
               <Grid item sm={6} xs={12}>
                 <TextField
-                  label="Date of Birth"
-                  variant="outlined"
-                  type="date"
-                  required
-                  fullWidth
-                  InputLabelProps={{ shrink: true }}
-                  onChange={(e) => {
-                    setTeacherInfo((prevData) => ({
-                      ...prevData,
-                      dateOfBirth: e.target.value,
-                    }));
-                  }}
-                />
-              </Grid>
-              <Grid item sm={6} xs={12}>
-                <TextField
-                  label="Contact Number"
-                  variant="outlined"
-                  type="number"
-                  fullWidth
-                  onChange={(e) => {
-                    setTeacherInfo((prevData) => ({
-                      ...prevData,
-                      contact: e.target.value,
-                    }));
-                  }}
-                />
-              </Grid>
-              <Grid item sm={6} xs={12}>
-                <TextField
-                  label="E-mail"
-                  variant="outlined"
-                  type="email"
-                  fullWidth
-                  margin="none"
-                  onChange={(e) => {
-                    setTeacherInfo((prevData) => ({
-                      ...prevData,
-                      email: e.target.value,
-                    }));
-                  }}
-                />
-              </Grid>
-              <Grid item sm={6} xs={12}>
-                <TextField
-                  label="Blood Group"
+                  label="প্রশিক্ষণ সংক্রান্ত তথ্য"
                   variant="outlined"
                   type="text"
                   fullWidth
@@ -328,23 +544,7 @@ export default function AddTeacher() {
                   onChange={(e) => {
                     setTeacherInfo((prevData) => ({
                       ...prevData,
-                      bloodGroup: e.target.value,
-                    }));
-                  }}
-                />
-              </Grid>
-              <Grid item sm={6} xs={12}>
-                <TextField
-                  label="Joined"
-                  variant="outlined"
-                  type="date"
-                  required
-                  fullWidth
-                  InputLabelProps={{ shrink: true }}
-                  onChange={(e) => {
-                    setTeacherInfo((prevData) => ({
-                      ...prevData,
-                      joined: e.target.value,
+                      information: e.target.value,
                     }));
                   }}
                 />
