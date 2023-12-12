@@ -302,6 +302,7 @@ export default function AddTeacher() {
                   type="text"
                   required
                   fullWidth
+                  multiline
                   margin="none"
                   onChange={(e) => {
                     setTeacherInfo((prevData) => ({
@@ -318,6 +319,7 @@ export default function AddTeacher() {
                   type="text"
                   required
                   fullWidth
+                  multiline
                   margin="none"
                   onChange={(e) => {
                     setTeacherInfo((prevData) => ({
@@ -445,6 +447,7 @@ export default function AddTeacher() {
                   variant="outlined"
                   type="text"
                   required
+                  multiline
                   fullWidth
                   onChange={(e) => {
                     setTeacherInfo((prevData) => ({
@@ -541,6 +544,7 @@ export default function AddTeacher() {
                   type="text"
                   fullWidth
                   margin="none"
+                  multiline
                   onChange={(e) => {
                     setTeacherInfo((prevData) => ({
                       ...prevData,

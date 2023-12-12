@@ -2,7 +2,6 @@ import NavBar from "./components/NavBar";
 import Home from "./components/HomePage/Home";
 import Students from "./components/students/StudentsHome";
 import DashboardHome from "./components/dashboard/DashboardHome";
-import DynamicPost from "./components/DynamicPosts";
 import Teachers from "./components/teachers/TeachersHome";
 import TeachersProfileHome from "./components/teachers/profile/TeachersProfileHome";
 import AddTeacher from "./components/dashboard/AddTeacher";
@@ -140,7 +139,6 @@ export default function App() {
           />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/about" element={<About />} />
-          <Route path="/posts/:id" element={<DynamicPost />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

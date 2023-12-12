@@ -53,7 +53,7 @@ dashboardRouter.post("/editTeacher", async (req, res) => {
     designation,
     fathersName,
     mothersName,
-    index,
+    indexNo,
     gender,
     dateOfBirth,
     permanentAddress,
@@ -116,21 +116,31 @@ dashboardRouter.post("/editTeacher", async (req, res) => {
       imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
     }
     const [rows, fields] = await promisePool.query(
-      "INSERT INTO `zbnhs_teachers` (`fullName`,`imageURL`,`designation`,`fathersName`,`mothersName`,`gender`,`education`,`religion`,`dateOfBirth`,`contact`,`email`,`bloodGroup`,`joined`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO `zbnhs_teachers` (`fullName`,`imageURL`,`designation`,`fathersName`,`mothersName`,`indexNo`,`gender`,`dateOfBirth`,`permanentAddress`,`presentAddress`,`firstMPOdate`,`currentSchoolMPOdate`,`firstJoined`,`joinedHere`,`BEDscaleDate`,`firstScaleDate`,`secondScaleDate`,`education`,`bank`,`NID`,`contact`,`information`,`religion`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         fullName,
         imageURL,
         designation,
         fathersName,
         mothersName,
+        indexNo,
         gender,
-        education,
-        religion,
         dateOfBirth,
+        permanentAddress,
+        presentAddress,
+        firstMPOdate,
+        currentSchoolMPOdate,
+        firstJoined,
+        joinedHere,
+        BEDscaleDate,
+        firstScaleDate,
+        secondScaleDate,
+        education,
+        bank,
+        NID,
         contact,
-        email,
-        bloodGroup,
-        joined,
+        information,
+        religion,
       ]
     );
     if (rows.affectedRows > 0) {
