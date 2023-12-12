@@ -54,11 +54,11 @@ export default function ChangePasswordComponent() {
       <Box
         sx={{
           width: "100%",
-          minHeight: "70vh",
+          minHeight: "40vh",
           top: 0,
           marginTop: "1rem",
           paddingTop: "0.5rem",
-          paddingBottom: "2rem",
+          paddingBottom: "1rem",
           background: "white",
           borderRadius: "1rem",
         }}

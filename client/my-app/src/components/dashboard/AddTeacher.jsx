@@ -47,7 +47,7 @@ export default function AddTeacher() {
     designation: "",
     fathersName: "",
     mothersName: "",
-    index: "",
+    indexNo: "",
     gender: "",
     dateOfBirth: "",
     permanentAddress: "",
@@ -274,7 +274,7 @@ export default function AddTeacher() {
                   onChange={(e) => {
                     setTeacherInfo((prevData) => ({
                       ...prevData,
-                      index: e.target.value,
+                      indexNo: e.target.value,
                     }));
                   }}
                 />

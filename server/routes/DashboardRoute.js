@@ -73,6 +73,32 @@ dashboardRouter.post("/editTeacher", async (req, res) => {
     religion,
   } = req.body;
 
+  console.log(
+    picData,
+    fullName,
+    designation,
+    fathersName,
+    mothersName,
+    indexNo,
+    gender,
+    dateOfBirth,
+    permanentAddress,
+    presentAddress,
+    firstMPOdate,
+    currentSchoolMPOdate,
+    firstJoined,
+    joinedHere,
+    BEDscaleDate,
+    firstScaleDate,
+    secondScaleDate,
+    education,
+    bank,
+    NID,
+    contact,
+    information,
+    religion
+  );
+
   let file_name = "",
     uploadDirectory = "",
     imageURL = "";

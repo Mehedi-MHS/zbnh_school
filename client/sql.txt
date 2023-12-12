@@ -33,19 +33,32 @@ imageURL varchar(200),
 designation varchar(50),
 fathersName varchar(100),
 mothersName varchar(100),
-gender varchar(20) NOT NULL,
-education varchar(200), 
-religion varchar(50),
+indexNo varchar(100),
+gender varchar(10),
 dateOfBirth varchar(20),
-contact varchar(15),
-email varchar(100),
-bloodGroup varchar(20),
-joined varchar(20),
+permanentAddress varchar(300),
+presentAddress varchar(300),
+firstMPOdate varchar(20),
+currentSchoolMPOdate varchar(20),
+firstJoined varchar(20),
+joinedHere varchar(20),
+BEDscaleDate varchar(20),
+firstScaleDate varchar(20),
+secondScaleDate varchar(20),
+education varchar(500),
+bank varchar(50),
+NID varchar(30),
+contact varchar(20),
+information varchar(1000),
+religion varchar(20),
 PRIMARY KEY (id)
         ) default charset=utf8mb4;
 
+
+
+
 //zbnhs_teachers demo data
-insert into zbnhs_teachers (fullName,imageURL,designation,fathersName,mothersName,gender,education,religion,dateOfBirth,contact,email,bloodGroup,joined) VALUES("MR Teacher 1","","Headmaster","MR Father", "Mrs Mother","Male","MSC is CSE","Islam","10/11/2023","01569158171","teacher@mail.com","B+ve","1/1/2021");
+insert into zbnhs_teachers (fullName,imageURL,designation,fathersName,mothersName,indexNo,gender,dateOfBirth,permanentAddress,presentAddress,firstMPOdate,currentSchoolMPOdate,firstJoined,joinedHere,BEDscaleDate,firstScaleDate,secondScaleDate,education,bank,NID,contact,information,religion) VALUES("MR Teacher 1","","Headmaster","MR Father", "Mrs Mother",10,"Male","10/11/2023","permanentAddress","presentAddress","10/11/2023","10/11/2023","10/11/2023","10/11/2023","10/11/2023","10/11/2023","10/11/2023","MSC is CSE","021557450154478","7510785421578","01569158171","information","islam");
 
 
 //About school Table :zbnhs_about
