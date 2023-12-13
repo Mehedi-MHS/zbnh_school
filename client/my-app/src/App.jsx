@@ -24,6 +24,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Footer from "./components/Footer";
+import ClassHomeRoute from "./components/students/ClassHomeRoute";
 export default function App() {
   return (
     <>
@@ -39,6 +40,7 @@ export default function App() {
             element={<TeachersProfileHome />}
           />
           <Route path="/students" element={<Students />} />
+          <Route path="/students/class/:cls" element={<ClassHomeRoute />} />
           <Route path="/login" element={<Login />} />
 
           <Route

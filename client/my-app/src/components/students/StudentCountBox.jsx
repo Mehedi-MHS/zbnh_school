@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
 import Skeleton from "@mui/material/Skeleton";
+import { Button } from "@mui/material";
+import Link from "../custom/CustomLink";
 export default function StudentCountBox() {
   const [students, setStudents] = useState([]);
   useEffect(() => {
@@ -113,10 +115,23 @@ export default function StudentCountBox() {
                   variant="h2"
                   textAlign="center"
                   component="p"
-                  sx={{ color: "#fff" }}
+                  sx={{ color: "#fff", marginBottom: "1rem" }}
                 >
                   {student.total}
                 </Typography>
+                <Link to={`/students/class/${student.class}`}>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      position: "absolute",
+                      bottom: "7px",
+                      right: "7px",
+                      background: "#000",
+                    }}
+                  >
+                    View details
+                  </Button>
+                </Link>
               </Box>
             ))
           ) : (
