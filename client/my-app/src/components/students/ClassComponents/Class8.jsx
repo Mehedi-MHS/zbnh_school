@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import "../../../styles/TableStyle.css";
-export default function Class7() {
+export default function Class8() {
   const demoData = [
     {
       section: "ক",
@@ -178,7 +178,7 @@ export default function Class7() {
         fontFamily="SolaimanLipi"
         gutterBottom
       >
-        সপ্তম শ্রেণীর শিক্ষার্থীদের তালিকা
+        অষ্টম শ্রেণীর শিক্ষার্থীদের তালিকা
       </Typography>
       <Container sx={{ marginBottom: "2rem" }}>
         <Stack
