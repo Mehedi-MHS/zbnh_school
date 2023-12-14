@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-
+import Class6 from "./ClassComponents/Class6";
 export default function ClassHomeRoute() {
   const { cls } = useParams();
   return (
     <>
-      <h1>Class : {cls}</h1>
+      <div>{cls == 6 ? <Class6 /> : "Null"}</div>
     </>
   );
 }
