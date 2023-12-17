@@ -9,6 +9,11 @@ import Notice from "./components/Notice";
 import About from "./components/About";
 import Gallery from "./components/Gallery";
 import EditStudents from "./components/dashboard/EditStudents";
+import EditClass6 from "./components/dashboard/EditStudents/EditClass6";
+import EditClass7 from "./components/dashboard/EditStudents/EditClass7";
+import EditClass8 from "./components/dashboard/EditStudents/EditClass8";
+import EditClass9 from "./components/dashboard/EditStudents/EditClass9";
+import EditClass10 from "./components/dashboard/EditStudents/EditClass10";
 import NotFound from "./components/404";
 import Login from "./components/Login";
 import AddSchoolInfo from "./components/dashboard/AddSchoolInfo";
@@ -52,13 +57,46 @@ export default function App() {
             }
           />
           <Route
-            path="dashboard/editStudents"
+            path="dashboard/editStudents/class6"
             element={
               <PrivateRoute>
-                <EditStudents />
+                <EditClass6 />
               </PrivateRoute>
             }
           />
+          <Route
+            path="dashboard/editStudents/class7"
+            element={
+              <PrivateRoute>
+                <EditClass7 />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="dashboard/editStudents/class8"
+            element={
+              <PrivateRoute>
+                <EditClass8 />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="dashboard/editStudents/class9"
+            element={
+              <PrivateRoute>
+                <EditClass9 />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="dashboard/editStudents/class10"
+            element={
+              <PrivateRoute>
+                <EditClass10 />
+              </PrivateRoute>
+            }
+          />
+
           <Route
             path="dashboard/addTeacher"
             element={

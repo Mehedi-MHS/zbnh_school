@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import "../../../styles/TableStyle.css";
-export default function Class10() {
+export default function EditClass10() {
   const demoScienceGroup = [
     {
       group: "science",
@@ -507,7 +507,7 @@ export default function Class10() {
         fontFamily="SolaimanLipi"
         gutterBottom
       >
-        দশম শ্রেণীর শিক্ষার্থীদের তালিকা
+        দশম শ্রেণীর শিক্ষার্থীদের তালিকা এন্ট্রি
       </Typography>
       <Container sx={{ marginBottom: "2rem" }}>
         <Typography

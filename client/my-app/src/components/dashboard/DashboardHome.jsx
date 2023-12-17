@@ -19,9 +19,29 @@ export default function DashboardHome() {
       subheader: "Manage students here",
       buttons: [
         {
-          title: "Edit Students",
+          title: "6",
           color: "info",
-          link: "/dashboard/editStudents",
+          link: "/dashboard/editStudents/class6",
+        },
+        {
+          title: "7",
+          color: "info",
+          link: "/dashboard/editStudents/class7",
+        },
+        {
+          title: "8",
+          color: "info",
+          link: "/dashboard/editStudents/class8",
+        },
+        {
+          title: "9",
+          color: "info",
+          link: "/dashboard/editStudents/class9",
+        },
+        {
+          title: "10",
+          color: "info",
+          link: "/dashboard/editStudents/class10",
         },
       ],
     },

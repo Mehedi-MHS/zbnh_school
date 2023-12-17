@@ -46,7 +46,10 @@ export default function HeroSection() {
         <Typography
           variant="h3"
           style={textStyle}
-          sx={{ fontSize: { sm: "5rem" }, textAlign: "center" }}
+          sx={{
+            fontSize: { sm: "5rem" },
+            textAlign: "center",
+          }}
         >
           {info.schoolName
             ? info.schoolName
