@@ -231,47 +231,168 @@ export default function EditClass6() {
                       <td>
                         <InputComponent
                           propName="total"
+                          gender="boy"
                           value={data.total.boy}
                           index={index}
                           setStudentData={setStudentData}
                         />
                       </td>
-                      <td>{data.total.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="total"
+                          gender="girl"
+                          value={data.total.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.muslim.title || "Loading"}</td>
-                      <td>{data.muslim.boy || "Loading"}</td>
-                      <td>{data.muslim.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="muslim"
+                          gender="boy"
+                          value={data.muslim.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="muslim"
+                          gender="girl"
+                          value={data.muslim.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.hindu.title || "Loading"}</td>
-                      <td>{data.hindu.boy || "Loading"}</td>
-                      <td>{data.hindu.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="hindu"
+                          gender="boy"
+                          value={data.hindu.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="hindu"
+                          gender="girl"
+                          value={data.hindu.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.stipend.title || "Loading"}</td>
-                      <td>{data.stipend.boy || "Loading"}</td>
-                      <td>{data.stipend.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="stipend"
+                          gender="boy"
+                          value={data.stipend.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="stipend"
+                          gender="girl"
+                          value={data.stipend.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.merit.title || "Loading"}</td>
-                      <td>{data.merit.boy || "Loading"}</td>
-                      <td>{data.merit.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="merit"
+                          gender="boy"
+                          value={data.merit.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="merit"
+                          gender="girl"
+                          value={data.merit.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.repeater.title || "Loading"}</td>
-                      <td>{data.repeater.boy || "Loading"}</td>
-                      <td>{data.repeater.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="repeater"
+                          gender="boy"
+                          value={data.repeater.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="repeater"
+                          gender="girl"
+                          value={data.repeater.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.transferIn.title || "Loading"}</td>
-                      <td>{data.transferIn.boy || "Loading"}</td>
-                      <td>{data.transferIn.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="transferIn"
+                          gender="boy"
+                          value={data.transferIn.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="transferIn"
+                          gender="girl"
+                          value={data.transferIn.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.transferOut.title || "Loading"}</td>
-                      <td>{data.transferOut.boy || "Loading"}</td>
-                      <td>{data.transferOut.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="transferOut"
+                          gender="boy"
+                          value={data.transferOut.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="transferOut"
+                          gender="girl"
+                          value={data.transferOut.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.finalExamAttendence.title || "Loading"}</td>
@@ -290,11 +411,12 @@ export default function EditClass6() {
           ))}
         </Stack>
       </Container>
+      <Typography>{JSON.stringify(studentData)}</Typography>
     </>
   );
 }
 
-function InputComponent({ propName, value, index, setStudentData }) {
+function InputComponent({ propName, value, index, setStudentData, gender }) {
   const handleChange = (e) => {
     const newValue = e.target.value;
 
@@ -305,7 +427,7 @@ function InputComponent({ propName, value, index, setStudentData }) {
               ...data,
               [propName]: {
                 ...data[propName],
-                boy: newValue,
+                [gender]: newValue,
               },
             }
           : data

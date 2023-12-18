@@ -18,3 +18,9 @@ thead > tr {
 td {
   font-size: large;
 }
+
+input {
+  font-family: SolaimanLipi;
+  font-size: large;
+  background-color: antiquewhite;
+}
