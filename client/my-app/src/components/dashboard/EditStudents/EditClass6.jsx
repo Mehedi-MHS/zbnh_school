@@ -1,10 +1,17 @@
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import { useState } from "react";
+import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
+import { CircularProgress } from "@mui/material";
+import SnackbarComponent from "../../SnackbarComponent";
 import "../../../styles/TableStyle.css";
 export default function EditClass6() {
+  const [loading, setLoading] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [severity, setSeverity] = useState("");
   const [studentData, setStudentData] = useState([
     {
       section: "ক",
@@ -166,6 +173,32 @@ export default function EditClass6() {
       },
     },
   ]);
+
+  const handleClose = () => {
+    setSnackbarOpen(false);
+  };
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      const req = await fetch("http://localhost:3000/dashboard/addNotice", {
+        method: "POST",
+        credentials: "include",
+      });
+      const res = await req.json();
+      if (res) {
+        setLoading(false);
+        setSnackbarMessage(res.message);
+        setSnackbarOpen(true);
+        setSeverity(res.severity);
+      } else {
+        alert("Please enter title and select a pdf file.");
+      }
+    } catch (error) {
+      if (error) {
+        alert(error);
+      }
+    }
+  };
 
   return (
     <>
@@ -396,13 +429,45 @@ export default function EditClass6() {
                     </tr>
                     <tr>
                       <td>{data.finalExamAttendence.title || "Loading"}</td>
-                      <td>{data.finalExamAttendence.boy || "Loading"}</td>
-                      <td>{data.finalExamAttendence.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="finalExamAttendence"
+                          gender="boy"
+                          value={data.finalExamAttendence.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="finalExamAttendence"
+                          gender="girl"
+                          value={data.finalExamAttendence.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.finalExamPromotion.title || "Loading"}</td>
-                      <td>{data.finalExamPromotion.boy || "Loading"}</td>
-                      <td>{data.finalExamPromotion.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="finalExamPromotion"
+                          gender="boy"
+                          value={data.finalExamPromotion.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="finalExamPromotion"
+                          gender="girl"
+                          value={data.finalExamPromotion.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -411,11 +476,31 @@ export default function EditClass6() {
           ))}
         </Stack>
       </Container>
+      <Box sx={{ width: "100%" }}>
+        <Button
+          variant="contained"
+          sx={{ margin: "1rem auto" }}
+          onClick={handleSubmit}
+        >
+          {loading ? (
+            <CircularProgress sx={{ color: "white" }} size="1rem" />
+          ) : (
+            "Save changes"
+          )}
+        </Button>
+        <SnackbarComponent
+          message={snackbarMessage}
+          open={snackbarOpen}
+          close={handleClose}
+          severity={severity}
+        />
+      </Box>
       <Typography>{JSON.stringify(studentData)}</Typography>
     </>
   );
 }
 
+//Custom input component
 function InputComponent({ propName, value, index, setStudentData, gender }) {
   const handleChange = (e) => {
     const newValue = e.target.value;
