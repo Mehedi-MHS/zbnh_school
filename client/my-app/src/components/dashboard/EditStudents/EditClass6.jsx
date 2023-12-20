@@ -180,10 +180,15 @@ export default function EditClass6() {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const req = await fetch("http://localhost:3000/dashboard/addNotice", {
-        method: "POST",
-        credentials: "include",
-      });
+      const req = await fetch(
+        "http://localhost:3000/dashboard/editStudents/class6",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(studentData),
+        }
+      );
       const res = await req.json();
       if (res) {
         setLoading(false);
@@ -476,7 +481,7 @@ export default function EditClass6() {
           ))}
         </Stack>
       </Container>
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "100%", display: "grid", placeItems: "center" }}>
         <Button
           variant="contained"
           sx={{ margin: "1rem auto" }}
@@ -495,7 +500,6 @@ export default function EditClass6() {
           severity={severity}
         />
       </Box>
-      <Typography>{JSON.stringify(studentData)}</Typography>
     </>
   );
 }

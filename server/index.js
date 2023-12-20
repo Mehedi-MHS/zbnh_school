@@ -8,6 +8,7 @@ var cors = require("cors");
 var DashboardRoute = require("./routes/DashboardRoute");
 var HomeRoute = require("./routes/HomeRoute");
 var TeachersRoute = require("./routes/TeachersRoute");
+var StudentsRoute = require("./routes/StudentRoute");
 var fileUpload = require("express-fileupload");
 var loginRoute = require("./routes/LoginRoute");
 require("dotenv").config();
@@ -60,7 +61,7 @@ app.use(
 
 app.use("/", HomeRoute);
 app.use("/teachers", TeachersRoute);
-
+app.use("/editStudents", StudentsRoute);
 app.use("/login", loginRoute);
 app.use("/dashboard", DashboardRoute);
 
