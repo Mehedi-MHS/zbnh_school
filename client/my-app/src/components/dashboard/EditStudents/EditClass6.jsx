@@ -180,15 +180,12 @@ export default function EditClass6() {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const req = await fetch(
-        "http://localhost:3000/dashboard/editStudents/class6",
-        {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify(studentData),
-        }
-      );
+      const req = await fetch("http://localhost:3000/editStudents/class6", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(studentData),
+      });
       const res = await req.json();
       if (res) {
         setLoading(false);
@@ -196,7 +193,7 @@ export default function EditClass6() {
         setSnackbarOpen(true);
         setSeverity(res.severity);
       } else {
-        alert("Please enter title and select a pdf file.");
+        alert("Something went wrong! please try again.");
       }
     } catch (error) {
       if (error) {

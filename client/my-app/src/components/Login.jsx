@@ -75,10 +75,13 @@ export default function Login() {
     <>
       <Box
         sx={{
-          width: "100vw",
+          width: "100%",
           minHeight: "100vh",
           padding: "2rem auto",
           background: "linear-gradient(to top right, darkBlue,magenta)",
+          backgroundImage: "url('/images/security.jpg')",
+          backgroundPosition: "center",
+          overflow: "hidden",
           display: "flex",
           justifyContent: "Center",
           alignItems: "center",

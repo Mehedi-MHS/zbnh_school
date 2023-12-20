@@ -1,10 +1,18 @@
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
+import { useState } from "react";
+import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
+import { CircularProgress } from "@mui/material";
+import SnackbarComponent from "../../SnackbarComponent";
 import "../../../styles/TableStyle.css";
 export default function EditClass7() {
-  const demoData = [
+  const [loading, setLoading] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [severity, setSeverity] = useState("");
+  const [studentData, setStudentData] = useState([
     {
       section: "ক",
       total: {
@@ -164,7 +172,35 @@ export default function EditClass7() {
         girl: 2,
       },
     },
-  ];
+  ]);
+
+  const handleClose = () => {
+    setSnackbarOpen(false);
+  };
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      const req = await fetch("http://localhost:3000/editStudents/class7", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(studentData),
+      });
+      const res = await req.json();
+      if (res) {
+        setLoading(false);
+        setSnackbarMessage(res.message);
+        setSnackbarOpen(true);
+        setSeverity(res.severity);
+      } else {
+        alert("Something went wrong! please try again.");
+      }
+    } catch (error) {
+      if (error) {
+        alert(error);
+      }
+    }
+  };
 
   return (
     <>
@@ -186,7 +222,7 @@ export default function EditClass7() {
           direction={{ xs: "column", sm: "row" }}
           justifyContent="center"
         >
-          {demoData.map((data, index) => (
+          {studentData.map((data, index) => (
             <Box
               sx={{
                 width: { xs: "100%", sm: "30%" },
@@ -196,7 +232,7 @@ export default function EditClass7() {
             >
               <Box
                 sx={{
-                  background: "darkBlue",
+                  background: "darkGreen",
                   width: "100%",
                   padding: "5px",
                   color: "#fff",
@@ -227,53 +263,213 @@ export default function EditClass7() {
                   <tbody>
                     <tr>
                       <td>{data.total.title || "Loading"}</td>
-                      <td>{data.total.boy || "Loading"}</td>
-                      <td>{data.total.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="total"
+                          gender="boy"
+                          value={data.total.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="total"
+                          gender="girl"
+                          value={data.total.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.muslim.title || "Loading"}</td>
-                      <td>{data.muslim.boy || "Loading"}</td>
-                      <td>{data.muslim.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="muslim"
+                          gender="boy"
+                          value={data.muslim.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="muslim"
+                          gender="girl"
+                          value={data.muslim.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.hindu.title || "Loading"}</td>
-                      <td>{data.hindu.boy || "Loading"}</td>
-                      <td>{data.hindu.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="hindu"
+                          gender="boy"
+                          value={data.hindu.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="hindu"
+                          gender="girl"
+                          value={data.hindu.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.stipend.title || "Loading"}</td>
-                      <td>{data.stipend.boy || "Loading"}</td>
-                      <td>{data.stipend.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="stipend"
+                          gender="boy"
+                          value={data.stipend.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="stipend"
+                          gender="girl"
+                          value={data.stipend.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.merit.title || "Loading"}</td>
-                      <td>{data.merit.boy || "Loading"}</td>
-                      <td>{data.merit.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="merit"
+                          gender="boy"
+                          value={data.merit.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="merit"
+                          gender="girl"
+                          value={data.merit.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.repeater.title || "Loading"}</td>
-                      <td>{data.repeater.boy || "Loading"}</td>
-                      <td>{data.repeater.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="repeater"
+                          gender="boy"
+                          value={data.repeater.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="repeater"
+                          gender="girl"
+                          value={data.repeater.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.transferIn.title || "Loading"}</td>
-                      <td>{data.transferIn.boy || "Loading"}</td>
-                      <td>{data.transferIn.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="transferIn"
+                          gender="boy"
+                          value={data.transferIn.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="transferIn"
+                          gender="girl"
+                          value={data.transferIn.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.transferOut.title || "Loading"}</td>
-                      <td>{data.transferOut.boy || "Loading"}</td>
-                      <td>{data.transferOut.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="transferOut"
+                          gender="boy"
+                          value={data.transferOut.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="transferOut"
+                          gender="girl"
+                          value={data.transferOut.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.finalExamAttendence.title || "Loading"}</td>
-                      <td>{data.finalExamAttendence.boy || "Loading"}</td>
-                      <td>{data.finalExamAttendence.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="finalExamAttendence"
+                          gender="boy"
+                          value={data.finalExamAttendence.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="finalExamAttendence"
+                          gender="girl"
+                          value={data.finalExamAttendence.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td>{data.finalExamPromotion.title || "Loading"}</td>
-                      <td>{data.finalExamPromotion.boy || "Loading"}</td>
-                      <td>{data.finalExamPromotion.girl || "Loading"}</td>
+                      <td>
+                        <InputComponent
+                          propName="finalExamPromotion"
+                          gender="boy"
+                          value={data.finalExamPromotion.boy}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
+                      <td>
+                        <InputComponent
+                          propName="finalExamPromotion"
+                          gender="girl"
+                          value={data.finalExamPromotion.girl}
+                          index={index}
+                          setStudentData={setStudentData}
+                        />
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -282,6 +478,61 @@ export default function EditClass7() {
           ))}
         </Stack>
       </Container>
+      <Box sx={{ width: "100%", display: "grid", placeItems: "center" }}>
+        <Button
+          variant="contained"
+          sx={{ margin: "1rem auto" }}
+          onClick={handleSubmit}
+        >
+          {loading ? (
+            <CircularProgress sx={{ color: "white" }} size="1rem" />
+          ) : (
+            "Save changes"
+          )}
+        </Button>
+        <SnackbarComponent
+          message={snackbarMessage}
+          open={snackbarOpen}
+          close={handleClose}
+          severity={severity}
+        />
+      </Box>
     </>
+  );
+}
+
+//Custom input component
+function InputComponent({ propName, value, index, setStudentData, gender }) {
+  const handleChange = (e) => {
+    const newValue = e.target.value;
+
+    setStudentData((prev) =>
+      prev.map((data, i) =>
+        i === index
+          ? {
+              ...data,
+              [propName]: {
+                ...data[propName],
+                [gender]: newValue,
+              },
+            }
+          : data
+      )
+    );
+  };
+
+  return (
+    <input
+      type="text"
+      style={{
+        width: "100%",
+        height: "100%",
+        padding: "1px",
+        textAlign: "center",
+        border: "none",
+      }}
+      value={value}
+      onChange={handleChange}
+    />
   );
 }
