@@ -169,7 +169,7 @@ id int not null auto_increment primary key,
 `girls` varchar(500),
 `classID` int
         ) default charset=utf8mb4;
-//insert data in zbnhs_students
+
 insert into zbnhs_students (`category`,`boys`,`girls`,`classID`) values 
 ('total','0','0',1),('muslim','0','0',1),('hindu','0','0',1),('stipend','0','0',1),('merit_stipend','0','0',1),('repeater','0','0',1),('transfer_in','0','0',1),('transfer_out','0','0',1),('final_attendence','0','0',1),('final_promotion','0','0',1),
 ('total','0','0',2),('muslim','0','0',2),('hindu','0','0',2),('stipend','0','0',2),('merit_stipend','0','0',2),('repeater','0','0',2),('transfer_in','0','0',2),('transfer_out','0','0',2),('final_attendence','0','0',2),('final_promotion','0','0',2),

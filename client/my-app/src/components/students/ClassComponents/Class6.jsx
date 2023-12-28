@@ -3,7 +3,13 @@ import { Box } from "@mui/material";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import "../../../styles/TableStyle.css";
+import { useState, useEffect } from "react";
 export default function Class6() {
+  const section = {
+    A: "ক",
+    B: "খ",
+    C: "গ",
+  };
   const demoData = [
     {
       section: "ক",
@@ -226,52 +232,52 @@ export default function Class6() {
 
                   <tbody>
                     <tr>
-                      <td>{data.total.title || "Loading"}</td>
+                      <td> মোট</td>
                       <td>{data.total.boy || "Loading"}</td>
                       <td>{data.total.girl || "Loading"}</td>
                     </tr>
                     <tr>
-                      <td>{data.muslim.title || "Loading"}</td>
+                      <td>মুসলিম</td>
                       <td>{data.muslim.boy || "Loading"}</td>
                       <td>{data.muslim.girl || "Loading"}</td>
                     </tr>
                     <tr>
-                      <td>{data.hindu.title || "Loading"}</td>
+                      <td>হিন্দু</td>
                       <td>{data.hindu.boy || "Loading"}</td>
                       <td>{data.hindu.girl || "Loading"}</td>
                     </tr>
                     <tr>
-                      <td>{data.stipend.title || "Loading"}</td>
+                      <td>উপবৃত্তিপ্রাপ্ত</td>
                       <td>{data.stipend.boy || "Loading"}</td>
                       <td>{data.stipend.girl || "Loading"}</td>
                     </tr>
                     <tr>
-                      <td>{data.merit.title || "Loading"}</td>
+                      <td>মেধাবৃত্তিপ্রাপ্ত</td>
                       <td>{data.merit.boy || "Loading"}</td>
                       <td>{data.merit.girl || "Loading"}</td>
                     </tr>
                     <tr>
-                      <td>{data.repeater.title || "Loading"}</td>
+                      <td>রিপিটার শিক্ষার্থী</td>
                       <td>{data.repeater.boy || "Loading"}</td>
                       <td>{data.repeater.girl || "Loading"}</td>
                     </tr>
                     <tr>
-                      <td>{data.transferIn.title || "Loading"}</td>
+                      <td>ট্রান্সফার ইন</td>
                       <td>{data.transferIn.boy || "Loading"}</td>
                       <td>{data.transferIn.girl || "Loading"}</td>
                     </tr>
                     <tr>
-                      <td>{data.transferOut.title || "Loading"}</td>
+                      <td>ট্রান্সফার আউট</td>
                       <td>{data.transferOut.boy || "Loading"}</td>
                       <td>{data.transferOut.girl || "Loading"}</td>
                     </tr>
                     <tr>
-                      <td>{data.finalExamAttendence.title || "Loading"}</td>
+                      <td>বার্ষিক পরীক্ষায় অংশগ্রহণ</td>
                       <td>{data.finalExamAttendence.boy || "Loading"}</td>
                       <td>{data.finalExamAttendence.girl || "Loading"}</td>
                     </tr>
                     <tr>
-                      <td>{data.finalExamPromotion.title || "Loading"}</td>
+                      <td>বার্ষিক পরীক্ষায় প্রমোশন</td>
                       <td>{data.finalExamPromotion.boy || "Loading"}</td>
                       <td>{data.finalExamPromotion.girl || "Loading"}</td>
                     </tr>
