@@ -61,7 +61,7 @@ app.use(
 
 app.use("/", HomeRoute);
 app.use("/teachers", TeachersRoute);
-app.use("/editStudents", StudentsRoute);
+app.use("/students", StudentsRoute);
 app.use("/login", loginRoute);
 app.use("/dashboard", DashboardRoute);
 
