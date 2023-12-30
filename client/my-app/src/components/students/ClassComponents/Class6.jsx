@@ -9,130 +9,130 @@ export default function Class6() {
     {
       section: "A",
       total: {
-        boy: 10,
-        girl: 5,
+        boys: 10,
+        girls: 5,
       },
       muslim: {
-        boy: 7,
-        girl: 3,
+        boys: 7,
+        girls: 3,
       },
       hindu: {
-        boy: 2,
-        girl: 3,
+        boys: 2,
+        girls: 3,
       },
       stipend: {
-        boy: 2,
-        girl: 1,
+        boys: 2,
+        girls: 1,
       },
       merit_stipend: {
-        boy: 4,
-        girl: 2,
+        boys: 4,
+        girls: 2,
       },
       repeater: {
-        boy: 2,
-        girl: 2,
+        boys: 2,
+        girls: 2,
       },
       transfer_in: {
-        boy: 2,
-        girl: 2,
+        boys: 2,
+        girls: 2,
       },
       transfer_out: {
-        boy: 2,
-        girl: 2,
+        boys: 2,
+        girls: 2,
       },
       final_attendence: {
-        boy: 2,
-        girl: 2,
+        boys: 2,
+        girls: 2,
       },
       final_promotion: {
-        boy: 2,
-        girl: 2,
+        boys: 2,
+        girls: 2,
       },
     },
     {
       section: "B",
       total: {
-        boy: 10,
-        girl: 5,
+        boys: 10,
+        girls: 5,
       },
       muslim: {
-        boy: 7,
-        girl: 3,
+        boys: 7,
+        girls: 3,
       },
       hindu: {
-        boy: 2,
-        girl: 3,
+        boys: 2,
+        girls: 3,
       },
       stipend: {
-        boy: 2,
-        girl: 1,
+        boys: 2,
+        girls: 1,
       },
       merit_stipend: {
-        boy: 4,
-        girl: 2,
+        boys: 4,
+        girls: 2,
       },
       repeater: {
-        boy: 2,
-        girl: 2,
+        boys: 2,
+        girls: 2,
       },
       transfer_in: {
-        boy: 2,
-        girl: 2,
+        boys: 2,
+        girls: 2,
       },
       transfer_out: {
-        boy: 2,
-        girl: 2,
+        boys: 2,
+        girls: 2,
       },
       final_attendence: {
-        boy: 2,
-        girl: 2,
+        boys: 2,
+        girls: 2,
       },
       final_promotion: {
-        boy: 2,
-        girl: 2,
+        boys: 2,
+        girls: 2,
       },
     },
     {
       section: "C",
       total: {
-        boy: 10,
-        girl: 5,
+        boys: 10,
+        girls: 5,
       },
       muslim: {
-        boy: 7,
-        girl: 3,
+        boys: 7,
+        girls: 3,
       },
       hindu: {
-        boy: 2,
-        girl: 3,
+        boys: 2,
+        girls: 3,
       },
       stipend: {
-        boy: 2,
-        girl: 1,
+        boys: 2,
+        girls: 1,
       },
       merit_stipend: {
-        boy: 4,
-        girl: 2,
+        boys: 4,
+        girls: 2,
       },
       repeater: {
-        boy: 2,
-        girl: 2,
+        boys: 2,
+        girls: 2,
       },
       transfer_in: {
-        boy: 2,
-        girl: 2,
+        boys: 2,
+        girls: 2,
       },
       transfer_out: {
-        boy: 2,
-        girl: 2,
+        boys: 2,
+        girls: 2,
       },
       final_attendence: {
-        boy: 2,
-        girl: 2,
+        boys: 2,
+        girls: 2,
       },
       final_promotion: {
-        boy: 2,
-        girl: 2,
+        boys: 2,
+        girls: 2,
       },
     },
   ]);
@@ -147,6 +147,7 @@ export default function Class6() {
       .then((res) => res.json())
       .then((data) => {
         setServerData(data);
+        alert(data[0].total.boys);
       });
   };
 
@@ -217,53 +218,53 @@ export default function Class6() {
                   <tbody>
                     <tr>
                       <td> মোট</td>
-                      <td>{data.total.boy || "Loading"}</td>
-                      <td>{data.total.girl || "Loading"}</td>
+                      <td>{data.total.boys || "Loading"}</td>
+                      <td>{data.total.girls || "Loading"}</td>
                     </tr>
                     <tr>
                       <td>মুসলিম</td>
-                      <td>{data.muslim.boy || "Loading"}</td>
-                      <td>{data.muslim.girl || "Loading"}</td>
+                      <td>{data.muslim.boys || "Loading"}</td>
+                      <td>{data.muslim.girls || "Loading"}</td>
                     </tr>
                     <tr>
                       <td>হিন্দু</td>
-                      <td>{data.hindu.boy || "Loading"}</td>
-                      <td>{data.hindu.girl || "Loading"}</td>
+                      <td>{data.hindu.boys || "Loading"}</td>
+                      <td>{data.hindu.girls || "Loading"}</td>
                     </tr>
                     <tr>
                       <td>উপবৃত্তিপ্রাপ্ত</td>
-                      <td>{data.stipend.boy || "Loading"}</td>
-                      <td>{data.stipend.girl || "Loading"}</td>
+                      <td>{data.stipend.boys || "Loading"}</td>
+                      <td>{data.stipend.girls || "Loading"}</td>
                     </tr>
                     <tr>
                       <td>মেধাবৃত্তিপ্রাপ্ত</td>
-                      <td>{data.merit.boy || "Loading"}</td>
-                      <td>{data.merit.girl || "Loading"}</td>
+                      <td>{data.merit_stipend.boys || "Loading"}</td>
+                      <td>{data.merit_stipend.girls || "Loading"}</td>
                     </tr>
                     <tr>
                       <td>রিপিটার শিক্ষার্থী</td>
-                      <td>{data.repeater.boy || "Loading"}</td>
-                      <td>{data.repeater.girl || "Loading"}</td>
+                      <td>{data.repeater.boys || "Loading"}</td>
+                      <td>{data.repeater.girls || "Loading"}</td>
                     </tr>
                     <tr>
                       <td>ট্রান্সফার ইন</td>
-                      <td>{data.transfer_in.boy || "Loading"}</td>
-                      <td>{data.transfer_in.girl || "Loading"}</td>
+                      <td>{data.transfer_in.boys || "Loading"}</td>
+                      <td>{data.transfer_in.girls || "Loading"}</td>
                     </tr>
                     <tr>
                       <td>ট্রান্সফার আউট</td>
-                      <td>{data.transfer_out.boy || "Loading"}</td>
-                      <td>{data.transfer_out.girl || "Loading"}</td>
+                      <td>{data.transfer_out.boys || "Loading"}</td>
+                      <td>{data.transfer_out.girls || "Loading"}</td>
                     </tr>
                     <tr>
                       <td>বার্ষিক পরীক্ষায় অংশগ্রহণ</td>
-                      <td>{data.final_attendence.boy || "Loading"}</td>
-                      <td>{data.final_attendence.girl || "Loading"}</td>
+                      <td>{data.final_attendence.boys || "Loading"}</td>
+                      <td>{data.final_attendence.girls || "Loading"}</td>
                     </tr>
                     <tr>
                       <td>বার্ষিক পরীক্ষায় প্রমোশন</td>
-                      <td>{data.final_promotion.boy || "Loading"}</td>
-                      <td>{data.final_promotion.girl || "Loading"}</td>
+                      <td>{data.final_promotion.boys || "Loading"}</td>
+                      <td>{data.final_promotion.girls || "Loading"}</td>
                     </tr>
                   </tbody>
                 </table>
