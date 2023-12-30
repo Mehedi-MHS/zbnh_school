@@ -5,172 +5,156 @@ import Stack from "@mui/material/Stack";
 import "../../../styles/TableStyle.css";
 import { useState, useEffect } from "react";
 export default function Class6() {
-  const section = {
+  const [serverData, setServerData] = useState([
+    {
+      section: "A",
+      total: {
+        boy: 10,
+        girl: 5,
+      },
+      muslim: {
+        boy: 7,
+        girl: 3,
+      },
+      hindu: {
+        boy: 2,
+        girl: 3,
+      },
+      stipend: {
+        boy: 2,
+        girl: 1,
+      },
+      merit_stipend: {
+        boy: 4,
+        girl: 2,
+      },
+      repeater: {
+        boy: 2,
+        girl: 2,
+      },
+      transfer_in: {
+        boy: 2,
+        girl: 2,
+      },
+      transfer_out: {
+        boy: 2,
+        girl: 2,
+      },
+      final_attendence: {
+        boy: 2,
+        girl: 2,
+      },
+      final_promotion: {
+        boy: 2,
+        girl: 2,
+      },
+    },
+    {
+      section: "B",
+      total: {
+        boy: 10,
+        girl: 5,
+      },
+      muslim: {
+        boy: 7,
+        girl: 3,
+      },
+      hindu: {
+        boy: 2,
+        girl: 3,
+      },
+      stipend: {
+        boy: 2,
+        girl: 1,
+      },
+      merit_stipend: {
+        boy: 4,
+        girl: 2,
+      },
+      repeater: {
+        boy: 2,
+        girl: 2,
+      },
+      transfer_in: {
+        boy: 2,
+        girl: 2,
+      },
+      transfer_out: {
+        boy: 2,
+        girl: 2,
+      },
+      final_attendence: {
+        boy: 2,
+        girl: 2,
+      },
+      final_promotion: {
+        boy: 2,
+        girl: 2,
+      },
+    },
+    {
+      section: "C",
+      total: {
+        boy: 10,
+        girl: 5,
+      },
+      muslim: {
+        boy: 7,
+        girl: 3,
+      },
+      hindu: {
+        boy: 2,
+        girl: 3,
+      },
+      stipend: {
+        boy: 2,
+        girl: 1,
+      },
+      merit_stipend: {
+        boy: 4,
+        girl: 2,
+      },
+      repeater: {
+        boy: 2,
+        girl: 2,
+      },
+      transfer_in: {
+        boy: 2,
+        girl: 2,
+      },
+      transfer_out: {
+        boy: 2,
+        girl: 2,
+      },
+      final_attendence: {
+        boy: 2,
+        girl: 2,
+      },
+      final_promotion: {
+        boy: 2,
+        girl: 2,
+      },
+    },
+  ]);
+  useEffect(() => {
+    getClassData();
+  }, []);
+
+  const getClassData = async () => {
+    await fetch("http://localhost:3000/students/class/6", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setServerData(data);
+      });
+  };
+
+  let sectionName = {
     A: "ক",
     B: "খ",
     C: "গ",
   };
-  const demoData = [
-    {
-      section: "ক",
-      total: {
-        title: "মোট",
-        boy: 10,
-        girl: 5,
-      },
-      muslim: {
-        title: "মুসলিম",
-        boy: 7,
-        girl: 3,
-      },
-      hindu: {
-        title: "হিন্দু",
-        boy: 2,
-        girl: 3,
-      },
-      stipend: {
-        title: "উপবৃত্তিপ্রাপ্ত",
-        boy: 2,
-        girl: 1,
-      },
-      merit: {
-        title: "মেধাবৃত্তিপ্রাপ্ত",
-        boy: 4,
-        girl: 2,
-      },
-      repeater: {
-        title: "রিপিটার শিক্ষার্থী",
-        boy: 2,
-        girl: 2,
-      },
-      transferIn: {
-        title: "ট্রান্সফার ইন",
-        boy: 2,
-        girl: 2,
-      },
-      transferOut: {
-        title: "ট্রান্সফার আউট",
-        boy: 2,
-        girl: 2,
-      },
-      finalExamAttendence: {
-        title: "বার্ষিক পরীক্ষায় অংশগ্রহণ",
-        boy: 2,
-        girl: 2,
-      },
-      finalExamPromotion: {
-        title: "বার্ষিক পরীক্ষায় প্রমোশন",
-        boy: 2,
-        girl: 2,
-      },
-    },
-    {
-      section: "খ",
-      total: {
-        title: "মোট",
-        boy: 10,
-        girl: 5,
-      },
-      muslim: {
-        title: "মুসলিম",
-        boy: 7,
-        girl: 3,
-      },
-      hindu: {
-        title: "হিন্দু",
-        boy: 2,
-        girl: 3,
-      },
-      stipend: {
-        title: "উপবৃত্তিপ্রাপ্ত",
-        boy: 2,
-        girl: 1,
-      },
-      merit: {
-        title: "মেধাবৃত্তিপ্রাপ্ত",
-        boy: 4,
-        girl: 2,
-      },
-      repeater: {
-        title: "রিপিটার শিক্ষার্থী",
-        boy: 2,
-        girl: 2,
-      },
-      transferIn: {
-        title: "ট্রান্সফার ইন",
-        boy: 2,
-        girl: 2,
-      },
-      transferOut: {
-        title: "ট্রান্সফার আউট",
-        boy: 2,
-        girl: 2,
-      },
-      finalExamAttendence: {
-        title: "বার্ষিক পরীক্ষায় অংশগ্রহণ",
-        boy: 2,
-        girl: 2,
-      },
-      finalExamPromotion: {
-        title: "বার্ষিক পরীক্ষায় প্রমোশন",
-        boy: 2,
-        girl: 2,
-      },
-    },
-    {
-      section: "গ",
-      total: {
-        title: "মোট",
-        boy: 10,
-        girl: 5,
-      },
-      muslim: {
-        title: "মুসলিম",
-        boy: 7,
-        girl: 3,
-      },
-      hindu: {
-        title: "হিন্দু",
-        boy: 2,
-        girl: 3,
-      },
-      stipend: {
-        title: "উপবৃত্তিপ্রাপ্ত",
-        boy: 2,
-        girl: 1,
-      },
-      merit: {
-        title: "মেধাবৃত্তিপ্রাপ্ত",
-        boy: 4,
-        girl: 2,
-      },
-      repeater: {
-        title: "রিপিটার শিক্ষার্থী",
-        boy: 2,
-        girl: 2,
-      },
-      transferIn: {
-        title: "ট্রান্সফার ইন",
-        boy: 2,
-        girl: 2,
-      },
-      transferOut: {
-        title: "ট্রান্সফার আউট",
-        boy: 2,
-        girl: 2,
-      },
-      finalExamAttendence: {
-        title: "বার্ষিক পরীক্ষায় অংশগ্রহণ",
-        boy: 2,
-        girl: 2,
-      },
-      finalExamPromotion: {
-        title: "বার্ষিক পরীক্ষায় প্রমোশন",
-        boy: 2,
-        girl: 2,
-      },
-    },
-  ];
 
   return (
     <>
@@ -192,7 +176,7 @@ export default function Class6() {
           direction={{ xs: "column", sm: "row" }}
           justifyContent="center"
         >
-          {demoData.map((data, index) => (
+          {serverData.map((data, index) => (
             <Box
               sx={{
                 width: { xs: "100%", sm: "30%" },
@@ -217,7 +201,7 @@ export default function Class6() {
                   fontFamily="SolaimanLipi"
                 >
                   {" "}
-                  শাখা: {data.section || "Loading.."}
+                  শাখা: {sectionName[data.section] || "Loading.."}
                 </Typography>
               </Box>
               <Box>
@@ -263,23 +247,23 @@ export default function Class6() {
                     </tr>
                     <tr>
                       <td>ট্রান্সফার ইন</td>
-                      <td>{data.transferIn.boy || "Loading"}</td>
-                      <td>{data.transferIn.girl || "Loading"}</td>
+                      <td>{data.transfer_in.boy || "Loading"}</td>
+                      <td>{data.transfer_in.girl || "Loading"}</td>
                     </tr>
                     <tr>
                       <td>ট্রান্সফার আউট</td>
-                      <td>{data.transferOut.boy || "Loading"}</td>
-                      <td>{data.transferOut.girl || "Loading"}</td>
+                      <td>{data.transfer_out.boy || "Loading"}</td>
+                      <td>{data.transfer_out.girl || "Loading"}</td>
                     </tr>
                     <tr>
                       <td>বার্ষিক পরীক্ষায় অংশগ্রহণ</td>
-                      <td>{data.finalExamAttendence.boy || "Loading"}</td>
-                      <td>{data.finalExamAttendence.girl || "Loading"}</td>
+                      <td>{data.final_attendence.boy || "Loading"}</td>
+                      <td>{data.final_attendence.girl || "Loading"}</td>
                     </tr>
                     <tr>
                       <td>বার্ষিক পরীক্ষায় প্রমোশন</td>
-                      <td>{data.finalExamPromotion.boy || "Loading"}</td>
-                      <td>{data.finalExamPromotion.girl || "Loading"}</td>
+                      <td>{data.final_promotion.boy || "Loading"}</td>
+                      <td>{data.final_promotion.girl || "Loading"}</td>
                     </tr>
                   </tbody>
                 </table>

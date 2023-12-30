@@ -19,6 +19,7 @@ StudentsRouter.get("/class/6", async (req, res) => {
   const [rows, fields] = await promisePool.query(
     "SELECT `category`,`boys`,`girls`,`section` from `zbnhs_students` left join `zbnhs_classes` on `zbnhs_classes`.id=`zbnhs_students`.classID where `zbnhs_classes`.class = 6"
   );
+
   const arrangedData = arrageData(rows, 6);
 
   return res.json(arrangedData);

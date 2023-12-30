@@ -1,34 +1,20 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import SchoolIcon from "@mui/icons-material/School";
-import { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
-import Skeleton from "@mui/material/Skeleton";
 import { Button } from "@mui/material";
 import Link from "../custom/CustomLink";
 export default function StudentCountBox() {
-  const [students, setStudents] = useState([]);
-  useEffect(() => {
-    getStudents();
-  }, []);
-  const getStudents = async () => {
-    const req = await fetch("http://localhost:3000/getStudents", {
-      method: "GET",
-      headers: { "Content-type": "application/json" },
-    });
-    const res = await req.json();
-    console.log(res);
-    setStudents(res);
-  };
   //class title
-  const classTitle = {
-    6: "Six",
-    7: "Seven",
-    8: "Eight",
-    9: "Nine",
-    10: "Ten",
-  };
+  const classes = [
+    { cls: 6, title: "Six" },
+    { cls: 7, title: "Seven" },
+    { cls: 8, title: "Eight" },
+    { cls: 9, title: "Nine" },
+    { cls: 10, title: "Ten" },
+  ];
+
   return (
     <>
       <Container sx={{ marginTop: "2rem" }}>
@@ -65,110 +51,65 @@ export default function StudentCountBox() {
             overflow: "hidden",
           }}
         >
-          {students.length > 0 ? (
-            students.map((student, index) => (
+          {classes.map((cls, index) => (
+            <Box
+              key={index}
+              sx={{
+                padding: "2.5rem 1rem",
+                border: "1px solid gray",
+                background: "linear-gradient(to top right,magenta,Blue)",
+                width: { xs: "250px", sm: "300px" },
+                position: "relative",
+                borderRadius: "0.5rem",
+                "&:hover": {
+                  boxShadow: "0px 2px 5px cyan",
+                  background: "linear-gradient(to top right,Blue,magenta)",
+                  transition: "5s ease",
+                  cursor: "pointer",
+                },
+              }}
+            >
               <Box
-                key={index}
                 sx={{
-                  padding: "2.5rem 1rem",
-                  border: "1px solid gray",
-                  background: "linear-gradient(to top right,magenta,Blue)",
-                  width: { xs: "250px", sm: "300px" },
-                  position: "relative",
-                  borderRadius: "0.5rem",
-                  "&:hover": {
-                    boxShadow: "0px 2px 5px cyan",
-                    background: "linear-gradient(to top right,Blue,magenta)",
-                    transition: "5s ease",
-                    cursor: "pointer",
-                  },
+                  position: "absolute",
+                  marginBottom: "10px",
+                  background: "black",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  textAlign: "center",
+                  padding: "4px 0.5rem",
+                  borderTopLeftRadius: "0.5rem",
                 }}
+              ></Box>
+              <Typography variant="h4" textAlign="center" color="silver">
+                Class :
+              </Typography>
+              <Typography
+                variant="h2"
+                textAlign="center"
+                component="p"
+                sx={{ color: "#fff", marginBottom: "1rem" }}
               >
-                <Box
+                {cls.title}
+              </Typography>
+              <Link to={`/students/class/${cls.cls}`}>
+                <Button
+                  variant="contained"
                   sx={{
                     position: "absolute",
-                    marginBottom: "10px",
-                    background: "black",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    textAlign: "center",
-                    padding: "4px 0.5rem",
-                    borderTopLeftRadius: "0.5rem",
+                    bottom: "7px",
+                    right: "7px",
+                    background: "#000",
                   }}
                 >
-                  <Typography
-                    variant="p"
-                    sx={{
-                      textAlign: "center",
-                      color: "white",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Class : {classTitle[student.class]}
-                  </Typography>
-                </Box>
-                <Typography variant="h4" textAlign="center" color="silver">
-                  Total Students:
-                </Typography>
-                <Typography
-                  variant="h2"
-                  textAlign="center"
-                  component="p"
-                  sx={{ color: "#fff", marginBottom: "1rem" }}
-                >
-                  {student.total}
-                </Typography>
-                <Link to={`/students/class/${student.class}`}>
-                  <Button
-                    variant="contained"
-                    sx={{
-                      position: "absolute",
-                      bottom: "7px",
-                      right: "7px",
-                      background: "#000",
-                    }}
-                  >
-                    View details
-                  </Button>
-                </Link>
-              </Box>
-            ))
-          ) : (
-            <StudentsSkeleton />
-          )}
+                  View details
+                </Button>
+              </Link>
+            </Box>
+          ))}
         </Stack>
       </Container>
-    </>
-  );
-}
-
-function StudentsSkeleton() {
-  return (
-    <>
-      <Stack direction={{ sm: "row" }} gap={3}>
-        {[1, 2, 3].map((num, index) => (
-          <Box
-            key={index}
-            sx={{
-              width: { xs: "90vw", sm: "30vw" },
-              maxWidth: { sm: "30vw", xs: "100%" },
-              height: "300px",
-            }}
-          >
-            <Skeleton
-              variant="text"
-              animation="wave"
-              sx={{ width: "100%", marginTop: "1rem" }}
-            />
-            <Skeleton
-              variant="rectangular"
-              sx={{ width: "100%", height: "200px" }}
-              animation="wave"
-            />
-          </Box>
-        ))}
-      </Stack>
     </>
   );
 }
