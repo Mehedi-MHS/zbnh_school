@@ -9,130 +9,130 @@ export default function Class6() {
     {
       section: "A",
       total: {
-        boys: 10,
-        girls: 5,
+        boys: 0,
+        girls: 0,
       },
       muslim: {
-        boys: 7,
-        girls: 3,
+        boys: 0,
+        girls: 0,
       },
       hindu: {
-        boys: 2,
-        girls: 3,
+        boys: 0,
+        girls: 0,
       },
       stipend: {
-        boys: 2,
-        girls: 1,
+        boys: 0,
+        girls: 0,
       },
       merit_stipend: {
-        boys: 4,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
       repeater: {
-        boys: 2,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
       transfer_in: {
-        boys: 2,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
       transfer_out: {
-        boys: 2,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
       final_attendence: {
-        boys: 2,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
       final_promotion: {
-        boys: 2,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
     },
     {
       section: "B",
       total: {
-        boys: 10,
-        girls: 5,
+        boys: 0,
+        girls: 0,
       },
       muslim: {
-        boys: 7,
-        girls: 3,
+        boys: 0,
+        girls: 0,
       },
       hindu: {
-        boys: 2,
-        girls: 3,
+        boys: 0,
+        girls: 0,
       },
       stipend: {
-        boys: 2,
-        girls: 1,
+        boys: 0,
+        girls: 0,
       },
       merit_stipend: {
-        boys: 4,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
       repeater: {
-        boys: 2,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
       transfer_in: {
-        boys: 2,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
       transfer_out: {
-        boys: 2,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
       final_attendence: {
-        boys: 2,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
       final_promotion: {
-        boys: 2,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
     },
     {
       section: "C",
       total: {
-        boys: 10,
-        girls: 5,
+        boys: 0,
+        girls: 0,
       },
       muslim: {
-        boys: 7,
-        girls: 3,
+        boys: 0,
+        girls: 0,
       },
       hindu: {
-        boys: 2,
-        girls: 3,
+        boys: 0,
+        girls: 0,
       },
       stipend: {
-        boys: 2,
-        girls: 1,
+        boys: 0,
+        girls: 0,
       },
       merit_stipend: {
-        boys: 4,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
       repeater: {
-        boys: 2,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
       transfer_in: {
-        boys: 2,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
       transfer_out: {
-        boys: 2,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
       final_attendence: {
-        boys: 2,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
       final_promotion: {
-        boys: 2,
-        girls: 2,
+        boys: 0,
+        girls: 0,
       },
     },
   ]);
@@ -147,7 +147,6 @@ export default function Class6() {
       .then((res) => res.json())
       .then((data) => {
         setServerData(data);
-        alert(data[0].total.boys);
       });
   };
 

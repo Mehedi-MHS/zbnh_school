@@ -101,6 +101,7 @@ export default function StudentCountBox() {
                     bottom: "7px",
                     right: "7px",
                     background: "#000",
+                    border: "1px solid white",
                   }}
                 >
                   View details

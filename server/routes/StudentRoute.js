@@ -25,6 +25,26 @@ StudentsRouter.get("/class/6", async (req, res) => {
   return res.json(arrangedData);
 });
 
+StudentsRouter.get("/class/7", async (req, res) => {
+  const [rows, fields] = await promisePool.query(
+    "SELECT `category`,`boys`,`girls`,`section` from `zbnhs_students` left join `zbnhs_classes` on `zbnhs_classes`.id=`zbnhs_students`.classID where `zbnhs_classes`.class = 7"
+  );
+
+  const arrangedData = arrageData(rows, 7);
+
+  return res.json(arrangedData);
+});
+
+StudentsRouter.get("/class/8", async (req, res) => {
+  const [rows, fields] = await promisePool.query(
+    "SELECT `category`,`boys`,`girls`,`section` from `zbnhs_students` left join `zbnhs_classes` on `zbnhs_classes`.id=`zbnhs_students`.classID where `zbnhs_classes`.class = 8"
+  );
+
+  const arrangedData = arrageData(rows, 8);
+
+  return res.json(arrangedData);
+});
+
 //Get requests - Dynamic
 
 //Class 6
