@@ -45,6 +45,16 @@ StudentsRouter.get("/class/8", async (req, res) => {
   return res.json(arrangedData);
 });
 
+StudentsRouter.get("/class/9", async (req, res) => {
+  const [rows, fields] = await promisePool.query(
+    " SELECT `group`,`section`,`category`,`boys`,`girls` FROM `zbnhs_students` LEFT JOIN `zbnhs_classes` ON `zbnhs_classes`.id = `zbnhs_students`.classID WHERE `zbnhs_classes`.class = 9 "
+  );
+
+  const arrangedData = arrageData(rows, 9);
+
+  return res.json(rows);
+});
+
 //Get requests - Dynamic
 
 //Class 6
