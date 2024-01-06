@@ -236,6 +236,17 @@ export default function EditStudents() {
     return obj;
   };
 
+  //handleInputChange :
+  const handleInputChange = (category, gender, value) => {
+    setServerData((prevData) => ({
+      ...prevData,
+      [category]: {
+        ...prevData[category],
+        [gender]: value,
+      },
+    }));
+  };
+
   return (
     <>
       <Container
@@ -248,7 +259,7 @@ export default function EditStudents() {
         }}
       >
         <Card
-          sx={{ minWidth: 275, maxWidth: { sm: "30vw" }, margin: "0px auto" }}
+          sx={{ minWidth: 275, maxWidth: { sm: "50vw" }, margin: "0px auto" }}
         >
           <CardContent>
             <Typography
@@ -274,7 +285,12 @@ export default function EditStudents() {
               label="Select Class & Section"
             >
               {classOptions.map((cls, index) => (
-                <MenuItem key={index} value={cls.value} label={cls.label}>
+                <MenuItem
+                  key={index}
+                  value={cls.value}
+                  label={cls.label}
+                  sx={{ fontFamily: "SolaimanLipi" }}
+                >
                   {cls.label}
                 </MenuItem>
               ))}
@@ -300,7 +316,15 @@ export default function EditStudents() {
                   <tbody>
                     <tr>
                       <td> মোট</td>
-                      <td><input type="text" value={serverData.total.boys || "Loading"} onChange={(e)=>{setServerData((prev)=>({...prev,total:{boys:e.target.value})})}}/></td>
+                      <td>
+                        <input
+                          type="text"
+                          value={serverData.total.boys || "Loading"}
+                          onChange={(e) =>
+                            handleInputChange("total", "boys", e.target.value)
+                          }
+                        />
+                      </td>
                       <td>{serverData.total.girls || "Loading"}</td>
                     </tr>
                     <tr>
