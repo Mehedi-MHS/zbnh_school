@@ -52,10 +52,38 @@ StudentsRouter.get("/class/9", async (req, res) => {
 
   const arrangedData = arrageData(rows, 9);
 
-  return res.json(rows);
+  return res.json(arrangedData);
 });
 
-//Get requests - Dynamic
+StudentsRouter.get("/class/10", async (req, res) => {
+  const [rows, fields] = await promisePool.query(
+    " SELECT `group`,`section`,`category`,`boys`,`girls` FROM `zbnhs_students` LEFT JOIN `zbnhs_classes` ON `zbnhs_classes`.id = `zbnhs_students`.classID WHERE `zbnhs_classes`.class = 10 "
+  );
+
+  const arrangedData = arrageData(rows, 9);
+
+  return res.json(arrangedData);
+});
+
+// Get request from dashboard
+StudentsRouter.post("/info", CheckVerification, async (req, res) => {
+  try {
+    const { cls, group, section } = req.body;
+    console.log(cls, group, section);
+
+    const [rows, fields] = await promisePool.query(
+      "SELECT `category`,`boys`,`girls` FROM `zbnhs_students` LEFT JOIN `zbnhs_classes` ON `zbnhs_classes`.id=`zbnhs_students`.classID WHERE `zbnhs_classes`.class=? AND `zbnhs_classes`.group=? AND `zbnhs_classes`.section=?",
+      [cls, group, section]
+    );
+    if (rows.length > 0) {
+      return res.json(rows);
+    } else {
+      return res.json({ message: "Something went wrong", severity: "warning" });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 //Class 6
 StudentsRouter.post("/class6", CheckVerification, (req, res) => {
