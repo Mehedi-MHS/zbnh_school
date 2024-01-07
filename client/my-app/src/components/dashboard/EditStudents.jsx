@@ -19,6 +19,7 @@ export default function EditStudents() {
     section: null,
     group: null,
   });
+  const [selected, setSelected] = useState(false);
   const [serverData, setServerData] = useState({
     total: {
       boys: 0,
@@ -181,11 +182,11 @@ export default function EditStudents() {
   };
   const handleSubmit = async () => {
     setLoading(true);
-    const req = await fetch("http://localhost:3000/dashboard/editStudents", {
+    const req = await fetch("http://localhost:3000/students/edit", {
       method: "POST",
       credentials: "include",
       headers: { "Content-type": "application/json" },
-      body: "hello",
+      body: JSON.stringify({ serverData, classInfo }),
     });
     const res = await req.json();
     if (res) {
@@ -197,6 +198,7 @@ export default function EditStudents() {
   };
 
   const handleClassChange = async (e) => {
+    setSelected(true);
     setClassInfo({
       title: e.target.value.label,
       class: e.target.value.class,
@@ -295,87 +297,313 @@ export default function EditStudents() {
                 </MenuItem>
               ))}
             </TextField>
-            <Typography>{JSON.stringify(classInfo)}</Typography>
-            <Box
-              sx={{
-                width: "100%",
-                borderRadius: "7px 7px 0 0",
-                marginTop: "1rem",
-              }}
-            >
-              <Box>
-                <table>
-                  <thead>
-                    <tr>
-                      <td>বিবরণ</td>
-                      <td>ছাত্র</td>
-                      <td>ছাত্রী</td>
-                    </tr>
-                  </thead>
 
-                  <tbody>
-                    <tr>
-                      <td> মোট</td>
-                      <td>
-                        <input
-                          type="text"
-                          value={serverData.total.boys || "Loading"}
-                          onChange={(e) =>
-                            handleInputChange("total", "boys", e.target.value)
-                          }
-                        />
-                      </td>
-                      <td>{serverData.total.girls || "Loading"}</td>
-                    </tr>
-                    <tr>
-                      <td>মুসলিম</td>
-                      <td>{serverData.muslim.boys || "Loading"}</td>
-                      <td>{serverData.muslim.girls || "Loading"}</td>
-                    </tr>
-                    <tr>
-                      <td>হিন্দু</td>
-                      <td>{serverData.hindu.boys || "Loading"}</td>
-                      <td>{serverData.hindu.girls || "Loading"}</td>
-                    </tr>
-                    <tr>
-                      <td>উপবৃত্তিপ্রাপ্ত</td>
-                      <td>{serverData.stipend.boys || "Loading"}</td>
-                      <td>{serverData.stipend.girls || "Loading"}</td>
-                    </tr>
-                    <tr>
-                      <td>মেধাবৃত্তিপ্রাপ্ত</td>
-                      <td>{serverData.merit_stipend.boys || "Loading"}</td>
-                      <td>{serverData.merit_stipend.girls || "Loading"}</td>
-                    </tr>
-                    <tr>
-                      <td>রিপিটার শিক্ষার্থী</td>
-                      <td>{serverData.repeater.boys || "Loading"}</td>
-                      <td>{serverData.repeater.girls || "Loading"}</td>
-                    </tr>
-                    <tr>
-                      <td>ট্রান্সফার ইন</td>
-                      <td>{serverData.transfer_in.boys || "Loading"}</td>
-                      <td>{serverData.transfer_in.girls || "Loading"}</td>
-                    </tr>
-                    <tr>
-                      <td>ট্রান্সফার আউট</td>
-                      <td>{serverData.transfer_out.boys || "Loading"}</td>
-                      <td>{serverData.transfer_out.girls || "Loading"}</td>
-                    </tr>
-                    <tr>
-                      <td>বার্ষিক পরীক্ষায় অংশগ্রহণ</td>
-                      <td>{serverData.final_attendence.boys || "Loading"}</td>
-                      <td>{serverData.final_attendence.girls || "Loading"}</td>
-                    </tr>
-                    <tr>
-                      <td>বার্ষিক পরীক্ষায় প্রমোশন</td>
-                      <td>{serverData.final_promotion.boys || "Loading"}</td>
-                      <td>{serverData.final_promotion.girls || "Loading"}</td>
-                    </tr>
-                  </tbody>
-                </table>
+            {selected && (
+              <Box
+                sx={{
+                  width: "100%",
+                  borderRadius: "7px 7px 0 0",
+                  marginTop: "1rem",
+                }}
+              >
+                <Box>
+                  <table>
+                    <thead>
+                      <tr>
+                        <td>বিবরণ</td>
+                        <td>ছাত্র</td>
+                        <td>ছাত্রী</td>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+                        <td> মোট</td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.total.boys}
+                            onChange={(e) =>
+                              handleInputChange("total", "boys", e.target.value)
+                            }
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.total.girls}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "total",
+                                "girls",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>মুসলিম</td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.muslim.boys}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "muslim",
+                                "boys",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.muslim.girls}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "muslim",
+                                "girls",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>হিন্দু</td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.hindu.boys}
+                            onChange={(e) =>
+                              handleInputChange("hindu", "boys", e.target.value)
+                            }
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.hindu.girls}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "hindu",
+                                "girls",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>উপবৃত্তিপ্রাপ্ত</td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.stipend.boys}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "stipend",
+                                "boys",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.stipend.girls}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "stipend",
+                                "girls",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>মেধাবৃত্তিপ্রাপ্ত</td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.merit_stipend.boys}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "merit_stipend",
+                                "boys",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.merit_stipend.girls}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "merit_stipend",
+                                "girls",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>রিপিটার শিক্ষার্থী</td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.repeater.boys}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "repeater",
+                                "boys",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.repeater.girls}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "repeater",
+                                "girls",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>ট্রান্সফার ইন</td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.transfer_in.boys}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "transfer_in",
+                                "boys",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.transfer_in.girls}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "transfer_in",
+                                "girls",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>ট্রান্সফার আউট</td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.transfer_out.boys}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "transfer_out",
+                                "boys",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.transfer_out.girls}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "transfer_out",
+                                "girls",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>বার্ষিক পরীক্ষায় অংশগ্রহণ</td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.final_attendence.boys}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "final_attendence",
+                                "boys",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.final_attendence.girls}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "final_attendence",
+                                "girls",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>বার্ষিক পরীক্ষায় প্রমোশন</td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.final_promotion.boys}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "final_promotion",
+                                "boys",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            value={serverData.final_promotion.girls}
+                            onChange={(e) =>
+                              handleInputChange(
+                                "final_promotion",
+                                "girls",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </Box>
               </Box>
-            </Box>
+            )}
           </CardContent>
           <CardActions>
             <Button

@@ -86,20 +86,45 @@ StudentsRouter.post("/info", CheckVerification, async (req, res) => {
 });
 
 //Class 6
-StudentsRouter.post("/class6", CheckVerification, (req, res) => {
-  //console.log(req.body);
-  return res.json({ message: JSON.stringify(req.body[0]) });
+StudentsRouter.post("/edit", CheckVerification, async (req, res) => {
+  console.log(req.body);
+  if (!req.body.serverData && !req.body.classInfo) {
+    return res.json({
+      message: "Missing Data! please try again",
+      severity: "warning",
+    });
+  }
+  const st = req.body.serverData;
+  const cl = req.body.classInfo;
+  const sql =
+    "UPDATE `zbnhs_students` LEFT JOIN `zbnhs_classes` ON `zbnhs_classes`.id=`zbnhs_students`.classID SET `zbnhs_students`.boys=(CASE `category` WHEN 'total' THEN ? WHEN 'muslim' THEN ? WHEN 'hindu' THEN ? WHEN 'stipend' THEN ? WHEN 'merit_stipend' THEN ? WHEN 'repeater' THEN ? WHEN 'transfer_in' THEN ? WHEN 'transfer_out' THEN ? WHEN 'final_attendence' THEN ? WHEN 'final_promotion' THEN ? end),`zbnhs_students`.girls=(CASE `category` WHEN 'total' THEN ? WHEN 'muslim' THEN ? WHEN 'hindu' THEN ? WHEN 'stipend' THEN ? WHEN 'merit_stipend' THEN ? WHEN 'repeater' THEN ? WHEN 'transfer_in' THEN ? WHEN 'transfer_out' THEN ? WHEN 'final_attendence' THEN ? WHEN 'final_promotion' THEN ? end) WHERE `zbnhs_classes`.class=? AND `zbnhs_classes`.section=? AND `zbnhs_classes`.group=?";
+  const [rows, fields] = await promisePool.query(sql, [
+    st.total.boys,
+    st.muslim.boys,
+    st.hindu.boys,
+    st.stipend.boys,
+    st.merit_stipend.boys,
+    st.repeater.boys,
+    st.transfer_in.boys,
+    st.transfer_out.boys,
+    st.final_attendence.boys,
+    st.final_promotion.boys,
+    st.total.girls,
+    st.muslim.girls,
+    st.hindu.girls,
+    st.stipend.girls,
+    st.merit_stipend.girls,
+    st.repeater.girls,
+    st.transfer_in.girls,
+    st.transfer_out.girls,
+    st.final_attendence.girls,
+    st.final_promotion.girls,
+    cl.class,
+    cl.section,
+    cl.group,
+  ]);
+  if (rows.affectedRows > 0) {
+    return res.json({ message: "Updated successfully!", severity: "success" });
+  }
 });
-
-//Class 7
-StudentsRouter.post("/class7", CheckVerification, (req, res) => {
-  //console.log(req.body);
-  return res.json({ message: JSON.stringify(req.body[0]) });
-});
-//Class
-StudentsRouter.post("/class8", CheckVerification, (req, res) => {
-  //console.log(req.body);
-  return res.json({ message: JSON.stringify(req.body[0]) });
-});
-
 module.exports = StudentsRouter;
