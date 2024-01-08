@@ -2171,18 +2171,59 @@ const tenSc = {};
 const tenCom = {};
 const tenArts = {};
 
+/*
 data.map((e) => {
   if (e.class == 6) {
-    six.class = e.class;
-    six.group = e.group;
-    if (e.section == "A") {
-      six.A = {};
-      six["A"][e.category] = {};
-      six["A"][e.category].boys = e.boys;
-      six["A"][e.category].girls = e.girls;
+    if (!six[e.section]) {
+      six[e.section] = {};
+    }
+    if (!six[e.section][e.category]) {
+      six[e.section][e.category] = {};
+    }
+    if (!six[e.section][e.category].boys) {
+      six[e.section][e.category].boys = e.boys;
+      six[e.section][e.category].girls = e.girls;
     }
   }
 });
+*/
+data.map((e) => {
+  if (e.class == 6) {
+    generateSectionData(e, six, 6, "");
+  } else if (e.class == 7) {
+    generateSectionData(e, seven, 7, "");
+  } else if (e.class == 8) {
+    generateSectionData(e, eight, 8, "");
+  } else if (e.class == 9 && e.group == "science") {
+    generateSectionData(e, nineSc, 9, "science");
+  } else if (e.class == 9 && e.group == "commerce") {
+    generateSectionData(e, nineCom, 9, "commerce");
+  } else if (e.class == 9 && e.group == "arts") {
+    generateSectionData(e, nineArts, 9, "arts");
+  } else if (e.class == 10 && e.group == "science") {
+    generateSectionData(e, tenSc, 10, "science");
+  } else if (e.class == 10 && e.group == "commerce") {
+    generateSectionData(e, tenCom, 10, "commerce");
+  } else if (e.class == 10 && e.group == "arts") {
+    generateSectionData(e, tenArts, 10, "arts");
+  }
+});
 
-console.log(JSON.stringify(six));
+function generateSectionData(data, objName, cls, grp) {
+  if (data.class == cls && data.group == grp) {
+    if (!objName[data.section]) {
+      objName.class = cls;
+      objName.group = grp;
+      objName[data.section] = {};
+    }
+    if (!objName[data.section][data.category]) {
+      objName[data.section][data.category] = {};
+    }
+    if (!objName[data.section][data.category].boys) {
+      objName[data.section][data.category].boys = data.boys;
+      objName[data.section][data.category].girls = data.girls;
+    }
+  }
+}
 
+console.log(JSON.stringify(eight));

@@ -145,7 +145,65 @@ StudentsRouter.get("/studentsData", async (req, res) => {
     " SELECT `class`,`group`,`section`,`category`,`boys`,`girls` FROM `zbnhs_students` LEFT JOIN `zbnhs_classes` ON `zbnhs_classes`.id=`zbnhs_students`.classID "
   );
   if (rows.length > 0) {
-    return res.json(rows);
+    //Arrange data for report
+    const generateSectionData = (data, objName, cls, grp) => {
+      if (data.class == cls && data.group == grp) {
+        if (!objName[data.section]) {
+          objName.class = cls;
+          objName.group = grp;
+          objName[data.section] = {};
+        }
+        if (!objName[data.section][data.category]) {
+          objName[data.section][data.category] = {};
+        }
+        if (!objName[data.section][data.category].boys) {
+          objName[data.section][data.category].boys = data.boys;
+          objName[data.section][data.category].girls = data.girls;
+        }
+      }
+    };
+    const six = {};
+    const seven = {};
+    const eight = {};
+    const nineSc = {};
+    const nineCom = {};
+    const nineArts = {};
+    const tenSc = {};
+    const tenCom = {};
+    const tenArts = {};
+    rows.map((e) => {
+      if (e.class == 6) {
+        generateSectionData(e, six, 6, "");
+      } else if (e.class == 7) {
+        generateSectionData(e, seven, 7, "");
+      } else if (e.class == 8) {
+        generateSectionData(e, eight, 8, "");
+      } else if (e.class == 9 && e.group == "science") {
+        generateSectionData(e, nineSc, 9, "science");
+      } else if (e.class == 9 && e.group == "commerce") {
+        generateSectionData(e, nineCom, 9, "commerce");
+      } else if (e.class == 9 && e.group == "arts") {
+        generateSectionData(e, nineArts, 9, "arts");
+      } else if (e.class == 10 && e.group == "science") {
+        generateSectionData(e, tenSc, 10, "science");
+      } else if (e.class == 10 && e.group == "commerce") {
+        generateSectionData(e, tenCom, 10, "commerce");
+      } else if (e.class == 10 && e.group == "arts") {
+        generateSectionData(e, tenArts, 10, "arts");
+      }
+    });
+
+    return res.json([
+      six,
+      seven,
+      eight,
+      nineSc,
+      nineCom,
+      nineArts,
+      tenSc,
+      tenCom,
+      tenArts,
+    ]);
   } else {
     return res.json({ message: "Something went wrong!", severity: "warning" });
   }
