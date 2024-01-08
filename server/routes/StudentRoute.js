@@ -127,4 +127,28 @@ StudentsRouter.post("/edit", CheckVerification, async (req, res) => {
     return res.json({ message: "Updated successfully!", severity: "success" });
   }
 });
+
+StudentsRouter.post("/studentsData", CheckVerification, async (req, res) => {
+  const [rows, fields] = await promisePool.query(
+    " SELECT `class`,`group`,`section`,`category`,`boys`,`girls` FROM `zbnhs_students` LEFT JOIN `zbnhs_classes` ON `zbnhs_classes`.id=`zbnhs_students`.classID "
+  );
+  if (rows.length > 0) {
+    return res.json(rows);
+  } else {
+    return res.json({ message: "Something went wrong!", severity: "warning" });
+  }
+});
+
+//Delete this in production mode:testing purpose only
+StudentsRouter.get("/studentsData", async (req, res) => {
+  const [rows, fields] = await promisePool.query(
+    " SELECT `class`,`group`,`section`,`category`,`boys`,`girls` FROM `zbnhs_students` LEFT JOIN `zbnhs_classes` ON `zbnhs_classes`.id=`zbnhs_students`.classID "
+  );
+  if (rows.length > 0) {
+    return res.json(rows);
+  } else {
+    return res.json({ message: "Something went wrong!", severity: "warning" });
+  }
+});
+
 module.exports = StudentsRouter;

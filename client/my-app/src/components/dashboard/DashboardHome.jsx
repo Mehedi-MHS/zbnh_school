@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/material";
+import ReportGeneratorComponent from "./ReportGeneratorComponent";
 import SettingsComponent from "./SettingsComponent";
 import ChangePasswordComponent from "./ChangePasswordComponent";
 import Logout from "./Logout";
@@ -140,6 +141,7 @@ export default function DashboardHome() {
             </Card>
           ))}
         </Stack>
+        <ReportGeneratorComponent />
         <SettingsComponent />
         <ChangePasswordComponent />
         <Logout />
