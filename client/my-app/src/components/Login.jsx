@@ -95,10 +95,10 @@ export default function Login() {
 
             <TextField
               type="text"
-              label="Your name"
+              label="User name"
               autoComplete="off"
               fullWidth
-              sx={{ marginBottom: "0.5rem" }}
+              sx={{ marginBottom: "0.5rem", textAlign: "left" }}
               onChange={(e) =>
                 setInfo((prev) => ({ ...prev, name: e.target.value }))
               }

@@ -2,35 +2,37 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { autoTable } from "jspdf-autotable";
 import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+import React from "react";
 import { useState, useRef } from "react";
+
 export default function ReportGeneratorComponent() {
   const [loading, setLoading] = useState(false);
   const [studentsData, setStudentsData] = useState([]);
   const tableRef = useRef(null);
   const bn_text = {
-    cls: "শ্রেণী ",
-    dept: "বিভাগ ",
-    section: "শাখা ",
-    boys: "ছাত্র ",
-    girls: "ছাত্রী ",
-    six: "৬ষ্ঠ ",
-    seven: "৭ম ",
-    eight: "৮ম ",
-    nine: "৯ম ",
-    ten: "১০ম ",
-    6: "৬ষ্ঠ ",
-    7: "৭ম ",
-    8: "৮ম ",
-    9: "৯ম ",
-    10: "১০ম ",
-    A: "ক ",
-    B: "খ ",
-    C: "গ ",
-    science: " বিজ্ঞান",
-    commerce: "ব্যবসায় শিক্ষা ",
-    arts: "মানবিক ",
+    cls: "†kÖYx",
+    dept: "wefvM",
+    section: "kvLv",
+    boys: "QvÎ",
+    girls: "QvÎx",
+    six: "6ô",
+    seven: "7g",
+    eight: "8g",
+    nine: "9g",
+    ten: "10g",
+    6: "6ô",
+    7: "7g",
+    8: "8g",
+    9: "9g",
+    10: "10g",
+    A: "K",
+    B: "L",
+    C: "M",
+    science: "weÁvb",
+    commerce: "e¨emvq wkÿv",
+    arts: "gvbweK",
     total: "মোট ",
     muslim: "মুসলিম ",
     hindu: "হিন্দু ",
@@ -43,9 +45,9 @@ export default function ReportGeneratorComponent() {
     final_promotion: "বার্ষিক পরীক্ষায় প্রমোশন ",
   };
 
-  const GenerateCells = (data) => {
+  const GenerateCells = (data, key) => {
     return (
-      <>
+      <React.Fragment key={key}>
         <tr>
           <td rowSpan="3">{bn_text[data.class]}</td>
           <td rowSpan="3">{bn_text[data.group]}</td>
@@ -117,9 +119,51 @@ export default function ReportGeneratorComponent() {
           <td>{data.C.final_promotion.boys}</td>
           <td>{data.C.final_promotion.girls}</td>
         </tr>
-      </>
+      </React.Fragment>
     );
   };
+
+  const handleClick = async () => {
+    try {
+      setLoading(true);
+      const req = await fetch("http://localhost:3000/students/studentsData", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-type": "application/json" },
+      });
+      const res = await req.json();
+      if (res.message) {
+        alert(res.message);
+      }
+      if (res.length > 0) {
+        setStudentsData(res);
+
+        const doc = new jsPDF({ orientation: "landscape" });
+
+        doc.addFont("/fonts/SUTOM___.TTF", "SUTOM___", "normal");
+        doc.setFont("SUTOM___");
+        doc.text("Rwg`vinvU †eMg byiæbœvnvi D”P we`¨vjq", 25, 25);
+        const tableId = tableRef.current;
+        autoTable(doc, {
+          html: tableId,
+          startY: 40,
+          theme: "grid",
+          styles: {
+            halign: "center",
+            font: "SUTOM___",
+            fontSize: 12,
+          },
+        });
+        doc.save("StudentsReport.pdf");
+      }
+    } catch (err) {
+      alert(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /*
 
   //handle button click
   const handleClick = async () => {
@@ -152,7 +196,7 @@ export default function ReportGeneratorComponent() {
       doc.save("table.pdf");
     }
   };
-
+*/
   return (
     <>
       <Container
@@ -169,53 +213,55 @@ export default function ReportGeneratorComponent() {
           Students Report Generator
         </Typography>
         <table ref={tableRef}>
-          <tr>
-            <th colSpan="3"></th>
-            <th colSpan="2">{bn_text.total}</th>
-            <th colSpan="2">{bn_text.muslim}</th>
-            <th colSpan="2">{bn_text.hindu}</th>
-            <th colSpan="2">{bn_text.stipend}</th>
-            <th colSpan="2">{bn_text.merit_stipend}</th>
-            <th colSpan="2">{bn_text.repeater}</th>
-            <th colSpan="2">{bn_text.transfer_in}</th>
-            <th colSpan="2">{bn_text.transfer_out}</th>
-            <th colSpan="2">{bn_text.final_attendence}</th>
-            <th colSpan="2">{bn_text.final_promotion}</th>
-          </tr>
-          <tr>
-            <th>{bn_text.cls}</th>
-            <th>{bn_text.dept}</th>
-            <th>{bn_text.section}</th>
-            <th>{bn_text.boys}</th>
-            <th>{bn_text.girls}</th>
-            <th>{bn_text.boys}</th>
-            <th>{bn_text.girls}</th>
-            <th>{bn_text.boys}</th>
-            <th>{bn_text.girls}</th>
-            <th>{bn_text.boys}</th>
-            <th>{bn_text.girls}</th>
-            <th>{bn_text.boys}</th>
-            <th>{bn_text.girls}</th>
-            <th>{bn_text.boys}</th>
-            <th>{bn_text.girls}</th>
-            <th>{bn_text.boys}</th>
-            <th>{bn_text.girls}</th>
-            <th>{bn_text.boys}</th>
-            <th>{bn_text.girls}</th>
-            <th>{bn_text.boys}</th>
-            <th>{bn_text.girls}</th>
-            <th>{bn_text.boys}</th>
-            <th>{bn_text.girls}</th>
-          </tr>
-          {studentsData &&
-            studentsData.map((clsData) => {
-              try {
-                // alert(JSON.stringify(clsData.class + "-" + clsData.group));
-                return GenerateCells(clsData);
-              } catch (err) {
-                alert(err);
-              }
-            })}
+          <tbody>
+            <tr>
+              <th colSpan="3"></th>
+              <th colSpan="2">{bn_text.total}</th>
+              <th colSpan="2">{bn_text.muslim}</th>
+              <th colSpan="2">{bn_text.hindu}</th>
+              <th colSpan="2">{bn_text.stipend}</th>
+              <th colSpan="2">{bn_text.merit_stipend}</th>
+              <th colSpan="2">{bn_text.repeater}</th>
+              <th colSpan="2">{bn_text.transfer_in}</th>
+              <th colSpan="2">{bn_text.transfer_out}</th>
+              <th colSpan="2">{bn_text.final_attendence}</th>
+              <th colSpan="2">{bn_text.final_promotion}</th>
+            </tr>
+            <tr>
+              <th>{bn_text.cls}</th>
+              <th>{bn_text.dept}</th>
+              <th>{bn_text.section}</th>
+              <th>{bn_text.boys}</th>
+              <th>{bn_text.girls}</th>
+              <th>{bn_text.boys}</th>
+              <th>{bn_text.girls}</th>
+              <th>{bn_text.boys}</th>
+              <th>{bn_text.girls}</th>
+              <th>{bn_text.boys}</th>
+              <th>{bn_text.girls}</th>
+              <th>{bn_text.boys}</th>
+              <th>{bn_text.girls}</th>
+              <th>{bn_text.boys}</th>
+              <th>{bn_text.girls}</th>
+              <th>{bn_text.boys}</th>
+              <th>{bn_text.girls}</th>
+              <th>{bn_text.boys}</th>
+              <th>{bn_text.girls}</th>
+              <th>{bn_text.boys}</th>
+              <th>{bn_text.girls}</th>
+              <th>{bn_text.boys}</th>
+              <th>{bn_text.girls}</th>
+            </tr>
+            {studentsData &&
+              studentsData.map((clsData, index) => {
+                try {
+                  // alert(JSON.stringify(clsData.class + "-" + clsData.group));
+                  return GenerateCells(clsData, index);
+                } catch (err) {
+                  alert(err);
+                }
+              })}
+          </tbody>
         </table>
         <Box
           sx={{
