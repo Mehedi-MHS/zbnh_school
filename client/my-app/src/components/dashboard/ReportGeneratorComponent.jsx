@@ -33,16 +33,16 @@ export default function ReportGeneratorComponent() {
     science: "weÁvb",
     commerce: "e¨emvq wkÿv",
     arts: "gvbweK",
-    total: "মোট ",
-    muslim: "মুসলিম ",
-    hindu: "হিন্দু ",
-    stipend: "উপবৃত্তি প্রাপ্ত ",
-    merit_stipend: "মেধাবৃত্তি প্রাপ্ত ",
-    repeater: "রিপিটার শিক্ষার্থী ",
-    transfer_in: " ট্রান্সফার ইন",
-    transfer_out: "ট্রান্সফার আউট ",
-    final_attendence: "বার্ষিক পরীক্ষায় অংশগ্রহণ ",
-    final_promotion: "বার্ষিক পরীক্ষায় প্রমোশন ",
+    total: "†gvU",
+    muslim: "gymwjg",
+    hindu: "wn›`y",
+    stipend: "Dce„wË cÖvß",
+    merit_stipend: "†gave„wË cÖvß",
+    repeater: "wiwcUvi wkÿv_©x",
+    transfer_in: "UªvÝdvi Bb",
+    transfer_out: "UªvÝdvi AvDU",
+    final_attendence: "evwl©K cixÿvq AskMÖnY",
+    final_promotion: "evwl©K cixÿvq cÖ‡gvkb",
   };
 
   const GenerateCells = (data, key) => {
@@ -139,14 +139,24 @@ export default function ReportGeneratorComponent() {
         setStudentsData(res);
 
         const doc = new jsPDF({ orientation: "landscape" });
-
+        const img = new Image();
+        img.src = "/images/logo.png";
+        doc.addImage(img, "png", 86, 7, 10, 10);
         doc.addFont("/fonts/SUTOM___.TTF", "SUTOM___", "normal");
         doc.setFont("SUTOM___");
-        doc.text("Rwg`vinvU †eMg byiæbœvnvi D”P we`¨vjq", 25, 25);
+        doc.setFontSize(25);
+        doc.text("Rwg`vinvU †eMg byiæbœvnvi D”P we`¨vjq", 100, 15);
+        doc.setFontSize(18);
+        doc.text(
+          "wkÿv_©x‡`i ZvwjKv " + new Date().getFullYear() + " Bs",
+          115,
+          25
+        );
+        doc.setFontSize(12);
         const tableId = tableRef.current;
         autoTable(doc, {
           html: tableId,
-          startY: 40,
+          startY: 30,
           theme: "grid",
           styles: {
             halign: "center",
@@ -154,7 +164,7 @@ export default function ReportGeneratorComponent() {
             fontSize: 12,
           },
         });
-        doc.save("StudentsReport.pdf");
+        doc.save("StudentsReport-JamiderHat Begum Nurunnahar High School.pdf");
       }
     } catch (err) {
       alert(err);
