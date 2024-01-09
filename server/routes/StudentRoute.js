@@ -128,19 +128,8 @@ StudentsRouter.post("/edit", CheckVerification, async (req, res) => {
   }
 });
 
+//Students Data for generating Report
 StudentsRouter.post("/studentsData", CheckVerification, async (req, res) => {
-  const [rows, fields] = await promisePool.query(
-    " SELECT `class`,`group`,`section`,`category`,`boys`,`girls` FROM `zbnhs_students` LEFT JOIN `zbnhs_classes` ON `zbnhs_classes`.id=`zbnhs_students`.classID "
-  );
-  if (rows.length > 0) {
-    return res.json(rows);
-  } else {
-    return res.json({ message: "Something went wrong!", severity: "warning" });
-  }
-});
-
-//Delete this in production mode:testing purpose only
-StudentsRouter.get("/studentsData", async (req, res) => {
   const [rows, fields] = await promisePool.query(
     " SELECT `class`,`group`,`section`,`category`,`boys`,`girls` FROM `zbnhs_students` LEFT JOIN `zbnhs_classes` ON `zbnhs_classes`.id=`zbnhs_students`.classID "
   );
@@ -148,17 +137,17 @@ StudentsRouter.get("/studentsData", async (req, res) => {
     //Arrange data for report
     const generateSectionData = (data, objName, cls, grp) => {
       if (data.class == cls && data.group == grp) {
-        if (!objName[data.section]) {
+        if (!objName[data.section.toUpperCase()]) {
           objName.class = cls;
           objName.group = grp;
-          objName[data.section] = {};
+          objName[data.section.toUpperCase()] = {};
         }
-        if (!objName[data.section][data.category]) {
-          objName[data.section][data.category] = {};
+        if (!objName[data.section.toUpperCase()][data.category]) {
+          objName[data.section.toUpperCase()][data.category] = {};
         }
-        if (!objName[data.section][data.category].boys) {
-          objName[data.section][data.category].boys = data.boys;
-          objName[data.section][data.category].girls = data.girls;
+        if (!objName[data.section.toUpperCase()][data.category].boys) {
+          objName[data.section.toUpperCase()][data.category].boys = data.boys;
+          objName[data.section.toUpperCase()][data.category].girls = data.girls;
         }
       }
     };
