@@ -50,7 +50,9 @@ export default function NavigationBox() {
               <Card sx={{ width: "150px", height: "100px" }}>
                 <CardContent>
                   <Stack>
-                    <IconButton>{item.icon}</IconButton>
+                    <IconButton sx={{ color: "#1272cc" }}>
+                      {item.icon}
+                    </IconButton>
                     <Typography variant="p" textAlign="center">
                       {item.name}
                     </Typography>

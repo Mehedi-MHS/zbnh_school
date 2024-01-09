@@ -3,6 +3,7 @@ require("dotenv").config();
 const dashboardRouter = express.Router();
 const fs = require("fs/promises");
 const path = require("path");
+const bcrypt = require("bcryptjs");
 const promisePool = require("../lib/dbConfig");
 dashboardRouter.all("/*", (req, res, next) => {
   //check user is logged in or not . applicable for all dashboard route
@@ -52,15 +53,51 @@ dashboardRouter.post("/editTeacher", async (req, res) => {
     designation,
     fathersName,
     mothersName,
+    indexNo,
     gender,
-    education,
-    religion,
     dateOfBirth,
+    permanentAddress,
+    presentAddress,
+    firstMPOdate,
+    currentSchoolMPOdate,
+    firstJoined,
+    joinedHere,
+    BEDscaleDate,
+    firstScaleDate,
+    secondScaleDate,
+    education,
+    bank,
+    NID,
     contact,
-    email,
-    bloodGroup,
-    joined,
+    information,
+    religion,
   } = req.body;
+
+  console.log(
+    picData,
+    fullName,
+    designation,
+    fathersName,
+    mothersName,
+    indexNo,
+    gender,
+    dateOfBirth,
+    permanentAddress,
+    presentAddress,
+    firstMPOdate,
+    currentSchoolMPOdate,
+    firstJoined,
+    joinedHere,
+    BEDscaleDate,
+    firstScaleDate,
+    secondScaleDate,
+    education,
+    bank,
+    NID,
+    contact,
+    information,
+    religion
+  );
 
   let file_name = "",
     uploadDirectory = "",
@@ -79,21 +116,31 @@ dashboardRouter.post("/editTeacher", async (req, res) => {
       imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
     }
     const [rows, fields] = await promisePool.query(
-      "INSERT INTO `zbnhs_teachers` (`fullName`,`imageURL`,`designation`,`fathersName`,`mothersName`,`gender`,`education`,`religion`,`dateOfBirth`,`contact`,`email`,`bloodGroup`,`joined`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO `zbnhs_teachers` (`fullName`,`imageURL`,`designation`,`fathersName`,`mothersName`,`indexNo`,`gender`,`dateOfBirth`,`permanentAddress`,`presentAddress`,`firstMPOdate`,`currentSchoolMPOdate`,`firstJoined`,`joinedHere`,`BEDscaleDate`,`firstScaleDate`,`secondScaleDate`,`education`,`bank`,`NID`,`contact`,`information`,`religion`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         fullName,
         imageURL,
         designation,
         fathersName,
         mothersName,
+        indexNo,
         gender,
-        education,
-        religion,
         dateOfBirth,
+        permanentAddress,
+        presentAddress,
+        firstMPOdate,
+        currentSchoolMPOdate,
+        firstJoined,
+        joinedHere,
+        BEDscaleDate,
+        firstScaleDate,
+        secondScaleDate,
+        education,
+        bank,
+        NID,
         contact,
-        email,
-        bloodGroup,
-        joined,
+        information,
+        religion,
       ]
     );
     if (rows.affectedRows > 0) {
@@ -457,6 +504,86 @@ dashboardRouter.post("/settings/logo", async (req, res) => {
   }
 });
 
+///**** Handle headmaster and assistant headmaster message */
+dashboardRouter.post("/headmasterMessage", async (req, res) => {
+  const { title, description, picData, oldPicURL, person } = req.body;
+
+  const verifyPerson = () => {
+    if (person === "headmaster") {
+      return "hm";
+    } else if (person === "assistantHeadmaster") {
+      return "ahm";
+    }
+  };
+  /*
+  console.log(
+    "title:",
+    title,
+    "description:",
+    description,
+    "-picdata:",
+    picData.length,
+    "-oldPicURL:",
+    oldPicURL,
+    "Person:",
+    person
+  );
+*/
+  if (title.length === 0 || description.length === 0 || person.length === 0) {
+    return res.json({
+      success: false,
+      severity: "warning",
+      message: "Message or Picture is empty. Please try again",
+    });
+  }
+  let file_name = "",
+    uploadDirectory = "",
+    imageURL = "",
+    imageName = req.body?.fileName;
+
+  //handle Picture
+  if (picData && picData.length > 0 && imageName.length > 0) {
+    if (oldPicURL?.length > 0) {
+      try {
+        const fileDir = req.body.oldPicURL.split("/").slice(3, 6).join("/");
+
+        await fs.unlink(fileDir);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    file_name =
+      "ZBNHS_HeadMaster_" + Date.now() + path.extname(req.body.fileName);
+    uploadDirectory = `${process.cwd()}/uploads/images/${file_name}`;
+    const imageData = picData.replace(/^data:image\/\w+;base64,/, "");
+    const imageBuffer = Buffer.from(imageData, "base64");
+    await fs.writeFile(uploadDirectory, imageBuffer);
+    imageURL = process.env.DOMAIN + "/uploads/images/" + file_name;
+  }
+  const [rows, fields] = await promisePool.query(
+    "UPDATE `zbnhs_headMessage` SET `picURL`=?, `title`=?, `description`=? WHERE `name`=?",
+    [
+      imageURL.length > 0 ? imageURL : oldPicURL,
+      title,
+      description,
+      verifyPerson(),
+    ]
+  );
+  if (rows.affectedRows > 0) {
+    return res.json({
+      success: true,
+      severity: "success",
+      message: `Successfully updated ${person} message`,
+    });
+  } else {
+    return res.json({
+      success: false,
+      severity: "warning",
+      message: "Error! Failed to save data!",
+    });
+  }
+});
+
 //Handle footer information
 dashboardRouter.post("/settings/footer", async (req, res) => {
   const { schoolName, phone, email, location } = req.body;
@@ -487,6 +614,67 @@ dashboardRouter.post("/settings/footer", async (req, res) => {
     return res.json({
       message: "Please fill all the fields and try again!",
       severity: "warning",
+    });
+  }
+});
+
+//Handle ChangeUsername & password
+dashboardRouter.post("/settings/changePassword", async (req, res) => {
+  const { oldUser, oldPassword, newUser, newPassword } = req.body;
+
+  if (
+    oldUser.length == 0 ||
+    oldPassword.length == 0 ||
+    newUser.length == 0 ||
+    newPassword.length == 0
+  ) {
+    return res.json({
+      severity: "warning",
+      message: "Please fill all the fields and try again",
+    });
+  }
+
+  // Collect info from db
+  const [rows, fields] = await promisePool.query(
+    "SELECT `name`,`password` FROM zbnhs_admin WHERE `id`=?",
+    [1]
+  );
+  const db_userName = rows[0].name;
+  const db_userPassword = rows[0].password;
+  //console.log("db:", db_userName, "-", db_userPassword);
+  // Validate credentials
+  const isSamePassword = await bcrypt.compare(oldPassword, db_userPassword);
+  if (db_userName === oldUser && isSamePassword) {
+    // Set session username before calling verifySession
+    req.session.userName = newUser;
+
+    //create new password hash.
+    const salt = await bcrypt.genSalt(10);
+    const passwordHash = await bcrypt.hash(newPassword, salt);
+    //console.log("newPassword:", newPassword, " - hash:", passwordHash);
+    //update new password in database
+    const [rows, fields] = await promisePool.query(
+      "UPDATE `zbnhs_admin` SET `name`=?,`password`=? WHERE `id`=?",
+      [newUser, passwordHash, 1]
+    );
+    if (rows.affectedRows > 0) {
+      return res.json({
+        success: true,
+        severity: "success",
+        message: "Successfully updated Username and Password",
+      });
+    } else {
+      return res.json({
+        success: false,
+        severity: "warning",
+        message: "Error! Failed to Update data!",
+      });
+    }
+  } else {
+    return res.json({
+      message: "Incorrect username or password!",
+      severity: "warning",
+      success: false,
     });
   }
 });

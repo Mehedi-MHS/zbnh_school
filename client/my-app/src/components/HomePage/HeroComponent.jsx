@@ -29,7 +29,7 @@ export default function HeroSection() {
     left: "50%",
     transform: "translate(-50%, -50%)",
     color: "yellow", // Adjust text color as needed
-    textShadow: "0px 1px 2px black",
+    textShadow: "0px 1px 2px darkBlue ",
   };
 
   return (
@@ -43,7 +43,14 @@ export default function HeroSection() {
           }
           alt="Hero Image"
         />
-        <Typography variant="h3" style={textStyle}>
+        <Typography
+          variant="h3"
+          style={textStyle}
+          sx={{
+            fontSize: { sm: "5rem" },
+            textAlign: "center",
+          }}
+        >
           {info.schoolName
             ? info.schoolName
             : "JamiderHat Begum Nurunnahar High School"}

@@ -75,10 +75,13 @@ export default function Login() {
     <>
       <Box
         sx={{
-          width: "100vw",
+          width: "100%",
           minHeight: "100vh",
           padding: "2rem auto",
           background: "linear-gradient(to top right, darkBlue,magenta)",
+          backgroundImage: "url('/images/security.jpg')",
+          backgroundPosition: "center",
+          overflow: "hidden",
           display: "flex",
           justifyContent: "Center",
           alignItems: "center",
@@ -92,10 +95,10 @@ export default function Login() {
 
             <TextField
               type="text"
-              label="Your name"
+              label="User name"
               autoComplete="off"
               fullWidth
-              sx={{ marginBottom: "0.5rem" }}
+              sx={{ marginBottom: "0.5rem", textAlign: "left" }}
               onChange={(e) =>
                 setInfo((prev) => ({ ...prev, name: e.target.value }))
               }

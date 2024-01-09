@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 
 LoginRouter.post("/", async (req, res) => {
   const { name, password } = req.body;
-  console.log("from client:", name, "-", password);
+  //console.log("from client:", name, "-", password);
   if (name.length === 0 || password.length === 0) {
     return res.json({
       message: "Please fill all the fields and try again!",
@@ -21,7 +21,7 @@ LoginRouter.post("/", async (req, res) => {
   );
   const db_userName = rows[0].name;
   const db_userPassword = rows[0].password;
-  console.log("db:", db_userName, "-", db_userPassword);
+  //console.log("db:", db_userName, "-", db_userPassword);
   // Validate credentials
   const isSamePassword = await bcrypt.compare(password, db_userPassword);
   if (db_userName === name && isSamePassword) {

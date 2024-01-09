@@ -2,7 +2,6 @@ import NavBar from "./components/NavBar";
 import Home from "./components/HomePage/Home";
 import Students from "./components/students/StudentsHome";
 import DashboardHome from "./components/dashboard/DashboardHome";
-import DynamicPost from "./components/DynamicPosts";
 import Teachers from "./components/teachers/TeachersHome";
 import TeachersProfileHome from "./components/teachers/profile/TeachersProfileHome";
 import AddTeacher from "./components/dashboard/AddTeacher";
@@ -19,10 +18,13 @@ import DeleteSchoolInfo from "./components/dashboard/DeleteSchoolInfo";
 import DeleteTeacher from "./components/dashboard/DeleteTeacher";
 import DeleteNotice from "./components/dashboard/DeleteNotice";
 import DeleteGalleryPost from "./components/dashboard/DeleteGalleryPost";
+import HeadmasterMessage from "./components/dashboard/HeadmasterMessage";
+import AssistantHeadmasterMessage from "./components/dashboard/AssistantHeadmasterMessage";
 import PrivateRoute from "./components/PrivateRoute";
 import { Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Footer from "./components/Footer";
+import ClassHomeRoute from "./components/students/ClassHomeRoute";
 export default function App() {
   return (
     <>
@@ -38,6 +40,7 @@ export default function App() {
             element={<TeachersProfileHome />}
           />
           <Route path="/students" element={<Students />} />
+          <Route path="/students/class/:cls" element={<ClassHomeRoute />} />
           <Route path="/login" element={<Login />} />
 
           <Route
@@ -89,6 +92,22 @@ export default function App() {
             }
           />
           <Route
+            path="/dashboard/headmasterMessage"
+            element={
+              <PrivateRoute>
+                <HeadmasterMessage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard/assistantHeadmasterMessage"
+            element={
+              <PrivateRoute>
+                <AssistantHeadmasterMessage />
+              </PrivateRoute>
+            }
+          />
+          <Route
             path="/dashboard/deleteSchoolInfo"
             element={
               <PrivateRoute>
@@ -122,7 +141,6 @@ export default function App() {
           />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/about" element={<About />} />
-          <Route path="/posts/:id" element={<DynamicPost />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

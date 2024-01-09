@@ -10,6 +10,7 @@ export default function NotFound() {
       <Container
         sx={{
           marginTop: "15vh",
+          marginBottom: "2rem",
         }}
       >
         <Typography

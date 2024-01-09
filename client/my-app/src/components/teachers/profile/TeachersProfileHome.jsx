@@ -19,14 +19,24 @@ export default function TeachersProfileHome() {
     designation: "",
     fathersName: "",
     mothersName: "",
+    indexNo: "",
     gender: "",
-    education: "",
-    religion: "",
     dateOfBirth: "",
+    permanentAddress: "",
+    presentAddress: "",
+    firstMPOdate: "",
+    currentSchoolMPOdate: "",
+    firstJoined: "",
+    joinedHere: "",
+    BEDscaleDate: "",
+    firstScaleDate: "",
+    secondScaleDate: "",
+    education: "",
+    bank: "",
+    NID: "",
     contact: "",
-    email: "",
-    bloodGroup: "",
-    joined: "",
+    information: "",
+    religion: "",
   });
   const { id } = useParams();
 
@@ -54,18 +64,49 @@ export default function TeachersProfileHome() {
 
   //Donot modify tableCellOptions
   const tableCellOptions = [
-    { title: "Full Name", value: info.fullName || "Unknown" },
-    { title: "Designation", value: info.designation || "Unknown" },
-    { title: "Father's name", value: info.fathersName || "Unknown" },
-    { title: "Mother's name", value: info.mothersName || "Unknown" },
+    { title: "শিক্ষকের নাম", value: info.fullName || "Unknown" },
+    { title: "পদবী", value: info.designation || "Unknown" },
+    { title: "পিতার নাম", value: info.fathersName || "Unknown" },
+    { title: "মাতার নাম", value: info.mothersName || "Unknown" },
+    { title: "ইনডেক্স নং", value: info.indexNo || "Unknown" },
     { title: "Gender", value: info.gender || "Unknown" },
-    { title: "Education", value: info.education || "Unknown" },
+    { title: "জন্মতারিখ", value: info.dateOfBirth || "Unknown" },
+    { title: "স্থায়ী ঠিকানা", value: info.permanentAddress || "Unknown" },
+    { title: "বর্তমান ঠিকানা", value: info.presentAddress || "Unknown" },
+    {
+      title: "প্রথম এম.পি.ও ভুক্তির তারিখ",
+      value: info.firstMPOdate || "Unknown",
+    },
+    {
+      title: "অত্র বিদ্যালয়ে এম.পি.ও ভুক্তির তারিখ",
+      value: info.currentSchoolMPOdate || "Unknown",
+    },
+    {
+      title: "চাকুরীতে প্রথম যোগদানের তারিখ",
+      value: info.firstJoined || "Unknown",
+    },
+    {
+      title: "অত্র বিদ্যালয়ে যোগদানের তারিখ",
+      value: info.joinedHere || "Unknown",
+    },
+    {
+      title: "বি.এড স্কেল প্রাপ্তির তারিখ",
+      value: info.BEDscaleDate || "Unknown",
+    },
+    {
+      title: "প্রথম উচ্চতর স্কেল প্রাপ্তির তারিখ",
+      value: info.firstScaleDate || "Unknown",
+    },
+    {
+      title: "দ্বিতীয় উচ্চতর স্কেল প্রাপ্তির তারিখ",
+      value: info.secondScaleDate || "Unknown",
+    },
+    { title: "শিক্ষাগত যোগ্যতা", value: info.education || "Unknown" },
+    { title: "ব্যাংক হিসাব নং", value: info.bank || "Unknown" },
+    { title: "এন.আইডি নং", value: info.NID || "Unknown" },
+    { title: "মোবাইল নং", value: info.contact || "Unknown" },
+    { title: "প্রশিক্ষণ সংক্রান্ত তথ্য", value: info.information || "Unknown" },
     { title: "Religion", value: info.religion || "Unknown" },
-    { title: "Date of Birth", value: info.dateOfBirth || "Unknown" },
-    { title: "Phone", value: info.contact || "Unknown" },
-    { title: "E-mail", value: info.email || "Unknown" },
-    { title: "Blood Group", value: info.bloodGroup || "Unknown" },
-    { title: "Joined", value: info.joined || "Unknown" },
   ];
 
   const handleProfileFilter = (url, gender) => {
