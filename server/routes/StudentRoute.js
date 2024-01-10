@@ -69,7 +69,7 @@ StudentsRouter.get("/class/10", async (req, res) => {
 StudentsRouter.post("/info", CheckVerification, async (req, res) => {
   try {
     const { cls, group, section } = req.body;
-    console.log(cls, group, section);
+    //console.log(cls, group, section);
 
     const [rows, fields] = await promisePool.query(
       "SELECT `category`,`boys`,`girls` FROM `zbnhs_students` LEFT JOIN `zbnhs_classes` ON `zbnhs_classes`.id=`zbnhs_students`.classID WHERE `zbnhs_classes`.class=? AND `zbnhs_classes`.group=? AND `zbnhs_classes`.section=?",
@@ -87,7 +87,7 @@ StudentsRouter.post("/info", CheckVerification, async (req, res) => {
 
 //Class 6
 StudentsRouter.post("/edit", CheckVerification, async (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   if (!req.body.serverData && !req.body.classInfo) {
     return res.json({
       message: "Missing Data! please try again",
