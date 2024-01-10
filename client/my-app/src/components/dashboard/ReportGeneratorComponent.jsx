@@ -1,5 +1,5 @@
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import jsPDF from "jspdf";
@@ -173,40 +173,6 @@ export default function ReportGeneratorComponent() {
     }
   };
 
-  /*
-
-  //handle button click
-  const handleClick = async () => {
-    try {
-      setLoading(true);
-      const req = await fetch("http://localhost:3000/students/studentsData", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-type": "application/json" },
-      });
-      const res = await req.json();
-      if (res.message) {
-        alert(res.message);
-      }
-      if (res.length > 0) {
-        setStudentsData(res);
-      }
-    } catch (err) {
-      alert(err);
-    } finally {
-      setLoading(false);
-      const doc = new jsPDF({ orientation: "landscape" });
-      const tableId = tableRef.current;
-      doc.text("Report : JamiderHat Begum Nurunnahar High School", 25, 25);
-      autoTable(doc, {
-        html: tableId,
-        startY: 40,
-        theme: "grid",
-      });
-      doc.save("table.pdf");
-    }
-  };
-*/
   return (
     <>
       <Container
@@ -219,10 +185,9 @@ export default function ReportGeneratorComponent() {
         }}
       >
         <Typography variant="h5" gutterBottom>
-          {" "}
-          Students Report Generator
+          Students report Generator
         </Typography>
-        <table ref={tableRef}>
+        <table ref={tableRef} style={{ display: "none" }}>
           <tbody>
             <tr>
               <th colSpan="3"></th>

@@ -341,7 +341,7 @@ export default function EditStudents() {
                   }}
                 >
                   <Box>
-                    <table>
+                    <table style={{ textAlign: "center" }}>
                       <thead>
                         <tr>
                           <td>বিবরণ</td>
@@ -357,6 +357,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.total.boys}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "total",
@@ -370,6 +371,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.total.girls}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "total",
@@ -386,6 +388,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.muslim.boys}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "muslim",
@@ -399,6 +402,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.muslim.girls}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "muslim",
@@ -415,6 +419,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.hindu.boys}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "hindu",
@@ -428,6 +433,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.hindu.girls}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "hindu",
@@ -444,6 +450,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.stipend.boys}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "stipend",
@@ -457,6 +464,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.stipend.girls}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "stipend",
@@ -473,6 +481,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.merit_stipend.boys}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "merit_stipend",
@@ -486,6 +495,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.merit_stipend.girls}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "merit_stipend",
@@ -502,6 +512,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.repeater.boys}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "repeater",
@@ -515,6 +526,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.repeater.girls}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "repeater",
@@ -531,6 +543,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.transfer_in.boys}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "transfer_in",
@@ -544,6 +557,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.transfer_in.girls}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "transfer_in",
@@ -560,6 +574,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.transfer_out.boys}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "transfer_out",
@@ -573,6 +588,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.transfer_out.girls}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "transfer_out",
@@ -589,6 +605,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.final_attendence.boys}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "final_attendence",
@@ -602,6 +619,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.final_attendence.girls}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "final_attendence",
@@ -618,6 +636,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.final_promotion.boys}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "final_promotion",
@@ -631,6 +650,7 @@ export default function EditStudents() {
                             <input
                               type="text"
                               value={serverData.final_promotion.girls}
+                              style={{ textAlign: "center" }}
                               onChange={(e) =>
                                 handleInputChange(
                                   "final_promotion",
