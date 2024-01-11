@@ -73,6 +73,7 @@ dashboardRouter.post("/editTeacher", async (req, res) => {
     religion,
   } = req.body;
 
+  /*
   console.log(
     picData,
     fullName,
@@ -98,11 +99,11 @@ dashboardRouter.post("/editTeacher", async (req, res) => {
     information,
     religion
   );
-
+*/
   let file_name = "",
     uploadDirectory = "",
     imageURL = "";
-  console.log(req.body.dateOfBirth, " joined :", req.body.joined);
+  //console.log(req.body.dateOfBirth, " joined :", req.body.joined);
   if (fullName && designation && gender) {
     //handle Picture
     if (picData && picData.length > 0 && req.body.fileName) {
@@ -176,7 +177,7 @@ dashboardRouter.delete("/teachers", async (req, res) => {
       console.log(err);
     }
   }
-  console.log(JSON.stringify(req.body));
+  //console.log(JSON.stringify(req.body));
   const [rows, fields] = await promisePool.query(
     "DELETE FROM `zbnhs_teachers` WHERE `id`=?",
     [id]

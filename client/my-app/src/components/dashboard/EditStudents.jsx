@@ -14,9 +14,9 @@ import SnackbarComponent from "../SnackbarComponent";
 import "../../styles/TableStyle.css";
 export default function EditStudents() {
   const [classInfo, setClassInfo] = useState({
-    class: null,
-    section: null,
-    group: null,
+    class: "",
+    section: "",
+    group: "",
   });
   const [selected, setSelected] = useState(false);
   const [serverData, setServerData] = useState({
