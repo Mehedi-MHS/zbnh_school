@@ -11,6 +11,7 @@ import TableCell from "@mui/material/TableCell";
 import { Skeleton } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import settings from "../../../helpers/Settings";
 export default function TeachersProfileHome() {
   const [info, setInfo] = useState({
     id: "",
@@ -46,7 +47,7 @@ export default function TeachersProfileHome() {
 
   const getProfile = async () => {
     try {
-      const req = await fetch(`http://localhost:3000/teachers/profile/${id}`, {
+      const req = await fetch(settings.backendURL + `/teachers/profile/${id}`, {
         method: "GET",
         headers: { "Content-type": "application/json" },
       });
@@ -58,9 +59,6 @@ export default function TeachersProfileHome() {
       console.error("error in teachersProfile:", error);
     }
   };
-
-  //In production mode keep the 'info' varible for storing user info as it is used to make dynamic array for generating dynamic table
-  //info will be fetched from db
 
   //Donot modify tableCellOptions
   const tableCellOptions = [

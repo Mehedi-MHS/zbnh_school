@@ -7,6 +7,8 @@ import autoTable from "jspdf-autotable";
 import React from "react";
 import { useState, useRef } from "react";
 
+import settings from "../../helpers/Settings";
+
 export default function ReportGeneratorComponent() {
   const [loading, setLoading] = useState(false);
   const [studentsData, setStudentsData] = useState([]);
@@ -126,7 +128,7 @@ export default function ReportGeneratorComponent() {
   const handleClick = async () => {
     try {
       setLoading(true);
-      const req = await fetch("http://localhost:3000/students/studentsData", {
+      const req = await fetch(settings.backendURL + "/students/studentsData", {
         method: "POST",
         credentials: "include",
         headers: { "Content-type": "application/json" },

@@ -16,6 +16,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Link from "./custom/CustomLink";
 import Tooltip from "@mui/material/Tooltip";
 import { useState, useEffect } from "react";
+import settings from "../helpers/Settings";
 export default function Footer() {
   const [info, setInfo] = useState({
     phone: "",
@@ -28,7 +29,7 @@ export default function Footer() {
   }, []);
 
   const getFooterInfo = async () => {
-    const req = await fetch("http://localhost:3000/settings", {
+    const req = await fetch(settings.backendURL + "/settings", {
       method: "GET",
     });
     const res = await req.json();

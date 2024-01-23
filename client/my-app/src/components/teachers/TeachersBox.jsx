@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import { Skeleton } from "@mui/material";
 import Link from "../custom/CustomLink";
 import { useState, useEffect } from "react";
-
+import settings from "../../helpers/Settings";
 export default function TeachersBox() {
   const [teacherList, setTeacherList] = useState([]);
 
@@ -17,7 +17,7 @@ export default function TeachersBox() {
   }, []);
 
   const getTeachers = async () => {
-    const req = await fetch("http://localhost:3000/teachers", {
+    const req = await fetch(settings.backendURL + "/teachers", {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });

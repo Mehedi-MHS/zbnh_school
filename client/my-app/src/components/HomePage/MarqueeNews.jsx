@@ -4,6 +4,7 @@ import { keyframes } from "@emotion/react";
 import Stack from "@mui/material/Stack";
 import Link from "../custom/CustomLink";
 import { useState, useEffect } from "react";
+import settings from "../../helpers/Settings";
 // Define a keyframe animation
 const slide = keyframes`
   from {
@@ -21,7 +22,7 @@ export default function MarqueeNews() {
   }, []);
 
   const getNotices = async () => {
-    const req = await fetch("http://localhost:3000/notice", {
+    const req = await fetch(settings.backendURL + "/notice", {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });

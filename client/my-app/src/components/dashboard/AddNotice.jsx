@@ -10,6 +10,7 @@ import Box from "@mui/material/Box";
 import { useState } from "react";
 import { CircularProgress } from "@mui/material";
 import SnackbarComponent from "../SnackbarComponent";
+import settings from "../../helpers/Settings";
 export default function AddNotice() {
   const [info, setInfo] = useState({
     title: "",
@@ -59,7 +60,7 @@ export default function AddNotice() {
         let formData = new FormData();
         formData.append("pdf", pdf);
         formData.append("title", info.title);
-        const req = await fetch("http://localhost:3000/dashboard/addNotice", {
+        const req = await fetch(settings.backendURL + "/dashboard/addNotice", {
           method: "POST",
           credentials: "include",
           body: formData,

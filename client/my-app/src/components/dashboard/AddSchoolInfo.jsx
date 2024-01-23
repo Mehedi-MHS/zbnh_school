@@ -11,6 +11,7 @@ import { useState } from "react";
 import { imageResizer } from "../../helpers/ImageResizer";
 import { CircularProgress } from "@mui/material";
 import SnackbarComponent from "../SnackbarComponent";
+import settings from "../../helpers/Settings";
 export default function AddSchoolInfo() {
   const [info, setInfo] = useState({
     title: "",
@@ -48,7 +49,7 @@ export default function AddSchoolInfo() {
     try {
       if (info.title && info.description) {
         const req = await fetch(
-          "http://localhost:3000/dashboard/addSchoolInfo",
+          settings.backendURL + "/dashboard/addSchoolInfo",
           {
             method: "POST",
             credentials: "include",

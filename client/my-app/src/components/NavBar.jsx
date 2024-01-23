@@ -22,6 +22,7 @@ import Link from "./custom/CustomLink"; //created custom link to work mui with r
 import Divider from "@mui/material/Divider";
 import { Stack } from "@mui/material";
 import { useState, useEffect } from "react";
+import settings from "../helpers/Settings";
 const drawerWidth = 240;
 const navItems = [
   {
@@ -67,7 +68,7 @@ export default function NavBar(props) {
     getLogo();
   }, []);
   const getLogo = async () => {
-    const req = await fetch("http://localhost:3000/settings", {
+    const req = await fetch(settings.backendURL + "/settings", {
       method: "GET",
     });
     const res = await req.json();

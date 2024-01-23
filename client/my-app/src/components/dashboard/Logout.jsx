@@ -2,10 +2,12 @@ import { Button } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
+
+import settings from "../../helpers/Settings";
 export default function Logout() {
   const navigate = useNavigate();
   const handleLogout = async () => {
-    const req = await fetch("http://localhost:3000/login/logout/", {
+    const req = await fetch(settings.backendURL + "/login/logout/", {
       method: "POST",
       credentials: "include",
       headers: { "Content-type": "application/json" },

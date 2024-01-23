@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 import SEO from "./custom/SEO";
 import { useState, useEffect } from "react";
+import settings from "../helpers/Settings";
 export default function Gallery() {
   const [galleryData, setGalleryData] = useState([]);
 
@@ -15,7 +16,7 @@ export default function Gallery() {
   }, []);
 
   const getGalleryData = async () => {
-    const req = await fetch("http://localhost:3000/gallery", {
+    const req = await fetch(settings.backendURL + "/gallery", {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });

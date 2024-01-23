@@ -9,6 +9,7 @@ import { CircularProgress } from "@mui/material";
 import SnackbarComponent from "./SnackbarComponent";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import settings from "../helpers/Settings";
 export default function Login() {
   const [info, setInfo] = useState({
     name: "",
@@ -24,7 +25,7 @@ export default function Login() {
   }, []);
 
   const checkAuth = async () => {
-    const req = await fetch("http://localhost:3000/login/verify", {
+    const req = await fetch(settings.backendURL + "/login/verify", {
       method: "POST",
       credentials: "include",
     });
@@ -44,7 +45,7 @@ export default function Login() {
     setLoading(true);
     try {
       if (info.name.length > 3 && info.password.length > 7) {
-        const req = await fetch("http://localhost:3000/login", {
+        const req = await fetch(settings.backendURL + "/login", {
           method: "POST",
           credentials: "include",
           headers: { "Content-type": "application/json" },

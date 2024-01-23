@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useState, useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
+import settings from "../../helpers/Settings";
 export default function CarouselComponent() {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
@@ -10,7 +11,7 @@ export default function CarouselComponent() {
   }, []);
 
   const getPosts = async () => {
-    const req = await fetch("http://localhost:3000/gallery", {
+    const req = await fetch(settings.backendURL + "gallery", {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });

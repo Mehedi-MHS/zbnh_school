@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import "@fontsource/roboto/400.css";
 import { useState, useEffect } from "react";
+import settings from "../../helpers/Settings";
 export default function HeroSection() {
   const [info, setInfo] = useState({
     schoolName: "",
@@ -14,7 +15,7 @@ export default function HeroSection() {
     getCoverImage();
   }, []);
   const getCoverImage = async () => {
-    const req = await fetch("http://localhost:3000/settings", {
+    const req = await fetch(settings.backendURL + "/settings", {
       method: "GET",
     });
     const res = await req.json();

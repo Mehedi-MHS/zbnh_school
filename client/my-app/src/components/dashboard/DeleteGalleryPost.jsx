@@ -4,9 +4,9 @@ import Typography from "@mui/material/Typography";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-
 import { FormControlLabel } from "@mui/material";
 import { useState, useEffect } from "react";
+import settings from "../../helpers/Settings";
 export default function DeleteSchoolInfo() {
   const [galleryPosts, setGalleryPosts] = useState([]);
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function DeleteSchoolInfo() {
   }, []);
 
   const getGalleryPosts = async () => {
-    const req = await fetch("http://localhost:3000/gallery", {
+    const req = await fetch(settings.backendURL + "/gallery", {
       method: "GET",
 
       headers: { "Content-type": "application/json" },
@@ -26,7 +26,7 @@ export default function DeleteSchoolInfo() {
   //Handle Delete Requests
   const handleDelete = async (id, imageURL) => {
     const deleteRequest = await fetch(
-      "http://localhost:3000/dashboard/galleryPost",
+      settings.backendURL + "/dashboard/galleryPost",
       {
         method: "DELETE",
         credentials: "include",

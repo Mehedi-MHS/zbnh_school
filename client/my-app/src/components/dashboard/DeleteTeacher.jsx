@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 
 import { FormControlLabel } from "@mui/material";
 import { useState, useEffect } from "react";
+import settings from "../../helpers/Settings";
 export default function DeleteTeacher() {
   const [teachers, setTeachers] = useState([]);
   useEffect(() => {
@@ -14,7 +15,7 @@ export default function DeleteTeacher() {
   }, []);
 
   const getTeachers = async () => {
-    const req = await fetch("http://localhost:3000/teachers", {
+    const req = await fetch(settings.backendURL + "/teachers", {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });
@@ -25,7 +26,7 @@ export default function DeleteTeacher() {
   //Handle Delete Requests
   const handleDelete = async (id, imageURL) => {
     const deleteRequest = await fetch(
-      "http://localhost:3000/dashboard/teachers",
+      settings.backendURL + "/dashboard/teachers",
       {
         method: "DELETE",
         credentials: "include",

@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 import SEO from "./custom/SEO";
 import { useState, useEffect } from "react";
+import settings from "../helpers/Settings";
 export default function About() {
   const [post, setPost] = useState([]);
 
@@ -16,7 +17,7 @@ export default function About() {
   }, []);
 
   const getPost = async () => {
-    const req = await fetch("http://localhost:3000/about", {
+    const req = await fetch(settings.backendURL + "/about", {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });

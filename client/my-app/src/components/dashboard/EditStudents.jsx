@@ -12,6 +12,7 @@ import { useState } from "react";
 import { CircularProgress } from "@mui/material";
 import SnackbarComponent from "../SnackbarComponent";
 import "../../styles/TableStyle.css";
+import settings from "../../helpers/Settings";
 export default function EditStudents() {
   const [classInfo, setClassInfo] = useState({
     class: "",
@@ -201,7 +202,7 @@ export default function EditStudents() {
   };
   const handleSubmit = async () => {
     setLoading(true);
-    const req = await fetch("http://localhost:3000/students/edit", {
+    const req = await fetch(settings.backendURL + "/students/edit", {
       method: "POST",
       credentials: "include",
       headers: { "Content-type": "application/json" },
@@ -224,7 +225,7 @@ export default function EditStudents() {
       group: e.target.value.group,
     });
 
-    const req = await fetch("http://localhost:3000/students/info", {
+    const req = await fetch(settings.backendURL + "/students/info", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       credentials: "include",
