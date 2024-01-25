@@ -3,6 +3,7 @@ Sql code for responsible features
 //Set db encoding for any language support
 ALTER DATABASE your_database_name CHARACTER SET utf8;
 
+
 //Alter table column
 ALTER TABLE your_table_name
 MODIFY your_column_name VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -14,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `zbnh_one` (
   `imageURL` VARCHAR(255) NOT NULL,
   `description` VARCHAR(1000) NOT NULL
 ) default charset=utf8mb4;
-
+------------------------------------------------------------
 
 //Students table: zbnhs_students
 create table zbnhs_students ( class int, total int);
