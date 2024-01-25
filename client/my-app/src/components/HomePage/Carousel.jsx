@@ -11,7 +11,7 @@ export default function CarouselComponent() {
   }, []);
 
   const getPosts = async () => {
-    const req = await fetch(settings.backendURL + "gallery", {
+    const req = await fetch(settings.backendURL + "/gallery", {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });

@@ -200,3 +200,176 @@ insert into zbnhs_students (`category`,`boys`,`girls`,`classID`) values
 ('total','0','0',26),('muslim','0','0',26),('hindu','0','0',26),('stipend','0','0',26),('merit_stipend','0','0',26),('repeater','0','0',26),('transfer_in','0','0',26),('transfer_out','0','0',26),('final_attendence','0','0',26),('final_promotion','0','0',26),
 ('total','0','0',27),('muslim','0','0',27),('hindu','0','0',27),('stipend','0','0',27),('merit_stipend','0','0',27),('repeater','0','0',27),('transfer_in','0','0',27),('transfer_out','0','0',27),('final_attendence','0','0',27),('final_promotion','0','0',27);
 
+### All the table at once
+------------------------------------------------------------
+
+
+create table if not exists zbnhs_teachers (
+id int NOT NULL auto_increment,
+fullName varchar(100) NOT NULL,
+imageURL varchar(200),
+designation varchar(50),
+fathersName varchar(100),
+mothersName varchar(100),
+indexNo varchar(100),
+gender varchar(10),
+dateOfBirth varchar(20),
+permanentAddress varchar(300),
+presentAddress varchar(300),
+firstMPOdate varchar(20),
+currentSchoolMPOdate varchar(20),
+firstJoined varchar(20),
+joinedHere varchar(20),
+BEDscaleDate varchar(20),
+firstScaleDate varchar(20),
+secondScaleDate varchar(20),
+education varchar(500),
+bank varchar(50),
+NID varchar(30),
+contact varchar(20),
+information varchar(1000),
+religion varchar(20),
+PRIMARY KEY (id)
+        ) default charset=utf8mb4;
+
+
+
+
+
+insert into zbnhs_teachers (fullName,imageURL,designation,fathersName,mothersName,indexNo,gender,dateOfBirth,permanentAddress,presentAddress,firstMPOdate,currentSchoolMPOdate,firstJoined,joinedHere,BEDscaleDate,firstScaleDate,secondScaleDate,education,bank,NID,contact,information,religion) VALUES("MR Teacher 1","","Headmaster","MR Father", "Mrs Mother",10,"Male","10/11/2023","permanentAddress","presentAddress","10/11/2023","10/11/2023","10/11/2023","10/11/2023","10/11/2023","10/11/2023","10/11/2023","MSC is CSE","021557450154478","7510785421578","01569158171","information","islam");
+
+
+
+create table if not exists zbnhs_about (
+id int not null auto_increment,
+title varchar(250)  ,
+description varchar(2000),
+imageURL varchar(250),
+PRIMARY KEY (id)
+        ) default charset=utf8mb4;
+
+
+create table if not exists zbnhs_gallery (
+id int not null auto_increment,
+description varchar(2000),
+imageURL varchar(250),
+PRIMARY KEY (id)
+        ) default charset=utf8mb4;
+
+
+create table if not exists zbnhs_notice (
+id int not null auto_increment,
+title varchar(300),
+fileURL varchar(250),
+date varchar(20),
+PRIMARY KEY (id)
+        ) default charset=utf8mb4;
+
+
+
+create table if not exists zbnhs_settings (
+id int not null default 1,
+schoolName varchar(200) default "Jamidarhat Begum Nurunnahar High School",
+coverURL varchar(250) default '/images/school.jpg',
+logoURL varchar(250) default '/images/logo.png',
+phone varchar(20),
+email varchar(50),
+location varchar(100),
+PRIMARY KEY (id)
+        ) default charset=utf8mb4;
+
+insert into zbnhs_settings (phone, email, location) VALUES ("01853-552668","tarekhasan1992bd@gmail.com","School Road. Jamidarhat. Begumgonj. Noakhali. Bangladesh, 3825, Begumganj, Bangladesh");
+
+
+create table if not exists zbnhs_admin (
+id int not null default 1,
+name varchar(100) not null,
+password varchar(500) not null,
+PRIMARY KEY (id)
+        ) default charset=utf8mb4;
+
+
+insert into zbnhs_admin (name, password) VALUES ("admin#1","$2a$10$RLxPCMR9MzGSZFPbdPCBQu7oBTfJUub5TKEAFaiSlrKUQZ61gTXcW");
+
+
+
+CREATE TABLE IF NOT EXISTS `sessions` (
+ `session_id` varchar(128) COLLATE utf8mb4_bin NOT NULL,
+ `expires` int(11) unsigned NOT NULL,
+ `data` mediumtext COLLATE utf8mb4_bin,
+ PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB
+
+
+create table if not exists zbnhs_headMessage (
+id int not null,
+name varchar(10) not null,
+title varchar(300) not null,
+description varchar(700) not null,
+picURL varchar(200) ,
+PRIMARY KEY (id)
+        ) default charset=utf8mb4;
+
+   
+insert into zbnhs_headMessage (id,name,title,description,picURL) values(1,'hm','Message of Headmaster','Lorem ipsum headmaster','/images/avatar0.webp');
+insert into zbnhs_headMessage (id,name,title,description,picURL) values(2,'ahm','Message of assistant Headmaster','Lorem ipsum assistant headmaster','/images/avatar0.webp');
+
+
+
+
+
+create table if not exists zbnhs_classes (
+id int not null auto_increment primary key,
+`class` int not null,
+`group` varchar(20),
+`section` varchar(30) not null
+        ) default charset=utf8mb4;
+
+insert into `zbnhs_classes` (`class`,`group`,`section`) 
+values (6,'','A'),(6,"",'B'),(6,"","C"),(7,"","A"),
+(7,"","B"),(7,"","C"),(8,'','A'),(8,'','B'),
+(8,'','C'),(9,'science','A'),(9,'science','B'),
+(9,'science','c'),(9,'commerce','A'),(9,'commerce','B'),
+(9,'commerce','C'),(9,'arts','A'),(9,'arts','B'),(9,'arts','C'),
+(10,'science','A'),(10,'science','B'),(10,'science','C'),
+(10,'commerce','A'),(10,'commerce','B'),(10,'commerce','C'),
+(10,'arts','A'),(10,'arts','B'),(10,'arts','C');
+
+
+create table if not exists zbnhs_students (
+id int not null auto_increment primary key,
+`category` varchar(30),
+`boys` varchar(500),
+`girls` varchar(500),
+`classID` int
+        ) default charset=utf8mb4;
+
+insert into zbnhs_students (`category`,`boys`,`girls`,`classID`) values 
+('total','0','0',1),('muslim','0','0',1),('hindu','0','0',1),('stipend','0','0',1),('merit_stipend','0','0',1),('repeater','0','0',1),('transfer_in','0','0',1),('transfer_out','0','0',1),('final_attendence','0','0',1),('final_promotion','0','0',1),
+('total','0','0',2),('muslim','0','0',2),('hindu','0','0',2),('stipend','0','0',2),('merit_stipend','0','0',2),('repeater','0','0',2),('transfer_in','0','0',2),('transfer_out','0','0',2),('final_attendence','0','0',2),('final_promotion','0','0',2),
+('total','0','0',3),('muslim','0','0',3),('hindu','0','0',3),('stipend','0','0',3),('merit_stipend','0','0',3),('repeater','0','0',3),('transfer_in','0','0',3),('transfer_out','0','0',3),('final_attendence','0','0',3),('final_promotion','0','0',3),
+('total','0','0',4),('muslim','0','0',4),('hindu','0','0',4),('stipend','0','0',4),('merit_stipend','0','0',4),('repeater','0','0',4),('transfer_in','0','0',4),('transfer_out','0','0',4),('final_attendence','0','0',4),('final_promotion','0','0',4),
+('total','0','0',5),('muslim','0','0',5),('hindu','0','0',5),('stipend','0','0',5),('merit_stipend','0','0',5),('repeater','0','0',5),('transfer_in','0','0',5),('transfer_out','0','0',5),('final_attendence','0','0',5),('final_promotion','0','0',5),
+('total','0','0',6),('muslim','0','0',6),('hindu','0','0',6),('stipend','0','0',6),('merit_stipend','0','0',6),('repeater','0','0',6),('transfer_in','0','0',6),('transfer_out','0','0',6),('final_attendence','0','0',6),('final_promotion','0','0',6),
+('total','0','0',7),('muslim','0','0',7),('hindu','0','0',7),('stipend','0','0',7),('merit_stipend','0','0',7),('repeater','0','0',7),('transfer_in','0','0',7),('transfer_out','0','0',7),('final_attendence','0','0',7),('final_promotion','0','0',7),
+('total','0','0',8),('muslim','0','0',8),('hindu','0','0',8),('stipend','0','0',8),('merit_stipend','0','0',8),('repeater','0','0',8),('transfer_in','0','0',8),('transfer_out','0','0',8),('final_attendence','0','0',8),('final_promotion','0','0',8),
+('total','0','0',9),('muslim','0','0',9),('hindu','0','0',9),('stipend','0','0',9),('merit_stipend','0','0',9),('repeater','0','0',9),('transfer_in','0','0',9),('transfer_out','0','0',9),('final_attendence','0','0',9),('final_promotion','0','0',9),
+('total','0','0',10),('muslim','0','0',10),('hindu','0','0',10),('stipend','0','0',10),('merit_stipend','0','0',10),('repeater','0','0',10),('transfer_in','0','0',10),('transfer_out','0','0',10),('final_attendence','0','0',10),('final_promotion','0','0',10),
+('total','0','0',11),('muslim','0','0',11),('hindu','0','0',11),('stipend','0','0',11),('merit_stipend','0','0',11),('repeater','0','0',11),('transfer_in','0','0',11),('transfer_out','0','0',11),('final_attendence','0','0',11),('final_promotion','0','0',11),
+('total','0','0',12),('muslim','0','0',12),('hindu','0','0',12),('stipend','0','0',12),('merit_stipend','0','0',12),('repeater','0','0',12),('transfer_in','0','0',12),('transfer_out','0','0',12),('final_attendence','0','0',12),('final_promotion','0','0',12),
+('total','0','0',13),('muslim','0','0',13),('hindu','0','0',13),('stipend','0','0',13),('merit_stipend','0','0',13),('repeater','0','0',13),('transfer_in','0','0',13),('transfer_out','0','0',13),('final_attendence','0','0',13),('final_promotion','0','0',13),
+('total','0','0',14),('muslim','0','0',14),('hindu','0','0',14),('stipend','0','0',14),('merit_stipend','0','0',14),('repeater','0','0',14),('transfer_in','0','0',14),('transfer_out','0','0',14),('final_attendence','0','0',14),('final_promotion','0','0',14),
+('total','0','0',15),('muslim','0','0',15),('hindu','0','0',15),('stipend','0','0',15),('merit_stipend','0','0',15),('repeater','0','0',15),('transfer_in','0','0',15),('transfer_out','0','0',15),('final_attendence','0','0',15),('final_promotion','0','0',15),
+('total','0','0',16),('muslim','0','0',16),('hindu','0','0',16),('stipend','0','0',16),('merit_stipend','0','0',16),('repeater','0','0',16),('transfer_in','0','0',16),('transfer_out','0','0',16),('final_attendence','0','0',16),('final_promotion','0','0',16),
+('total','0','0',17),('muslim','0','0',17),('hindu','0','0',17),('stipend','0','0',17),('merit_stipend','0','0',17),('repeater','0','0',17),('transfer_in','0','0',17),('transfer_out','0','0',17),('final_attendence','0','0',17),('final_promotion','0','0',17),
+('total','0','0',18),('muslim','0','0',18),('hindu','0','0',18),('stipend','0','0',18),('merit_stipend','0','0',18),('repeater','0','0',18),('transfer_in','0','0',18),('transfer_out','0','0',18),('final_attendence','0','0',18),('final_promotion','0','0',18),
+('total','0','0',19),('muslim','0','0',19),('hindu','0','0',19),('stipend','0','0',19),('merit_stipend','0','0',19),('repeater','0','0',19),('transfer_in','0','0',19),('transfer_out','0','0',19),('final_attendence','0','0',19),('final_promotion','0','0',19),
+('total','0','0',20),('muslim','0','0',20),('hindu','0','0',20),('stipend','0','0',20),('merit_stipend','0','0',20),('repeater','0','0',20),('transfer_in','0','0',20),('transfer_out','0','0',20),('final_attendence','0','0',20),('final_promotion','0','0',20),
+('total','0','0',21),('muslim','0','0',21),('hindu','0','0',21),('stipend','0','0',21),('merit_stipend','0','0',21),('repeater','0','0',21),('transfer_in','0','0',21),('transfer_out','0','0',21),('final_attendence','0','0',21),('final_promotion','0','0',21),
+('total','0','0',22),('muslim','0','0',22),('hindu','0','0',22),('stipend','0','0',22),('merit_stipend','0','0',22),('repeater','0','0',22),('transfer_in','0','0',22),('transfer_out','0','0',22),('final_attendence','0','0',22),('final_promotion','0','0',22),
+('total','0','0',23),('muslim','0','0',23),('hindu','0','0',23),('stipend','0','0',23),('merit_stipend','0','0',23),('repeater','0','0',23),('transfer_in','0','0',23),('transfer_out','0','0',23),('final_attendence','0','0',23),('final_promotion','0','0',23),
+('total','0','0',24),('muslim','0','0',24),('hindu','0','0',24),('stipend','0','0',24),('merit_stipend','0','0',24),('repeater','0','0',24),('transfer_in','0','0',24),('transfer_out','0','0',24),('final_attendence','0','0',24),('final_promotion','0','0',24),
+('total','0','0',25),('muslim','0','0',25),('hindu','0','0',25),('stipend','0','0',25),('merit_stipend','0','0',25),('repeater','0','0',25),('transfer_in','0','0',25),('transfer_out','0','0',25),('final_attendence','0','0',25),('final_promotion','0','0',25),
+('total','0','0',26),('muslim','0','0',26),('hindu','0','0',26),('stipend','0','0',26),('merit_stipend','0','0',26),('repeater','0','0',26),('transfer_in','0','0',26),('transfer_out','0','0',26),('final_attendence','0','0',26),('final_promotion','0','0',26),
+('total','0','0',27),('muslim','0','0',27),('hindu','0','0',27),('stipend','0','0',27),('merit_stipend','0','0',27),('repeater','0','0',27),('transfer_in','0','0',27),('transfer_out','0','0',27),('final_attendence','0','0',27),('final_promotion','0','0',27);
+
