@@ -4,7 +4,7 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import "../../../styles/TableStyle.css";
 import { useState, useEffect } from "react";
-
+import settings from "../../../helpers/Settings";
 export default function Class9() {
   const [scienceData, setScienceData] = useState([
     {
@@ -406,7 +406,7 @@ export default function Class9() {
   }, []);
 
   const getClassData = async () => {
-    await fetch("http://localhost:3000/students/class/9", {
+    await fetch(settings.backendURL + "/students/class/9", {
       method: "GET",
     })
       .then((res) => res.json())

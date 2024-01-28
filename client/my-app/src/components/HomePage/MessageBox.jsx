@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import { Divider } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState, useEffect } from "react";
+import settings from "../../helpers/Settings";
 export default function MessageBox() {
   const [messages, setMessages] = useState([]);
 
@@ -11,7 +12,7 @@ export default function MessageBox() {
     getMessages();
   }, []);
   const getMessages = async () => {
-    const req = await fetch("http://localhost:3000/getHeadmasterMessage", {
+    const req = await fetch(settings.backendURL + "/getHeadmasterMessage", {
       method: "get",
       headers: { "Content-type": "application/json" },
       credentials: "include",
@@ -20,22 +21,6 @@ export default function MessageBox() {
     setMessages(res);
   };
 
-  /*
-  const demoInfo = [
-    {
-      title: "Message of the Headmaster",
-      picURL: "",
-      message:
-        "I welcome you all the faculty members and lorem ipsum Dolor sit amet. Toe build a digital bangladesh",
-    },
-    {
-      title: "Message of Assistant Headmaster",
-      picURL: "",
-      message:
-        "I welcome you all the faculty members and lorem ipsum Dolor sit amet. Toe build a digital bangladesh",
-    },
-  ];
-*/
   return (
     <>
       <Container sx={{ width: "100%", margin: "2rem auto" }}>

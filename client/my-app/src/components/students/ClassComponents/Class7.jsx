@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import "../../../styles/TableStyle.css";
 import { useState, useEffect } from "react";
+import settings from "../../../helpers/Settings";
 export default function Class7() {
   const [serverData, setServerData] = useState([
     {
@@ -141,7 +142,7 @@ export default function Class7() {
   }, []);
 
   const getClassData = async () => {
-    await fetch("http://localhost:3000/students/class/7", {
+    await fetch(settings.backendURL + "/students/class/7", {
       method: "GET",
     })
       .then((res) => res.json())

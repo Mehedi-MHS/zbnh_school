@@ -1,5 +1,6 @@
+import settings from "../helpers/Settings";
 export default async function useAuth() {
-  const req = await fetch("http://localhost:3000/login/verify", {
+  const req = await fetch(settings.backendURL + "/login/verify", {
     method: "POST",
     headers: { "Content-type": "application/json" },
     body: JSON.stringify({ code: "zbnhs#secret" }),

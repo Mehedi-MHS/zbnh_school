@@ -4,3 +4,10 @@
   font-weight: 400;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "SutonnyMJ";
+  src: url("../fonts/SUTOM___.TTF") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}

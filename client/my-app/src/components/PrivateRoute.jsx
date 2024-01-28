@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import settings from "../helpers/Settings";
 export default function PrivateRoute(props) {
   const [auth, setAuth] = useState(false);
   const { children } = props;
@@ -9,7 +10,7 @@ export default function PrivateRoute(props) {
   }, []);
 
   const checkAuth = async () => {
-    const req = await fetch("http://localhost:3000/login/verify", {
+    const req = await fetch(settings.backendURL + "/login/verify", {
       method: "POST",
       credentials: "include",
     });

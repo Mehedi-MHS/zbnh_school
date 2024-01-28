@@ -73,36 +73,10 @@ dashboardRouter.post("/editTeacher", async (req, res) => {
     religion,
   } = req.body;
 
-  console.log(
-    picData,
-    fullName,
-    designation,
-    fathersName,
-    mothersName,
-    indexNo,
-    gender,
-    dateOfBirth,
-    permanentAddress,
-    presentAddress,
-    firstMPOdate,
-    currentSchoolMPOdate,
-    firstJoined,
-    joinedHere,
-    BEDscaleDate,
-    firstScaleDate,
-    secondScaleDate,
-    education,
-    bank,
-    NID,
-    contact,
-    information,
-    religion
-  );
-
   let file_name = "",
     uploadDirectory = "",
     imageURL = "";
-  console.log(req.body.dateOfBirth, " joined :", req.body.joined);
+  //console.log(req.body.dateOfBirth, " joined :", req.body.joined);
   if (fullName && designation && gender) {
     //handle Picture
     if (picData && picData.length > 0 && req.body.fileName) {
@@ -176,7 +150,7 @@ dashboardRouter.delete("/teachers", async (req, res) => {
       console.log(err);
     }
   }
-  console.log(JSON.stringify(req.body));
+  //console.log(JSON.stringify(req.body));
   const [rows, fields] = await promisePool.query(
     "DELETE FROM `zbnhs_teachers` WHERE `id`=?",
     [id]
@@ -402,12 +376,7 @@ dashboardRouter.delete("/notice", async (req, res) => {
 //Manage Cover photo update
 dashboardRouter.post("/settings/coverPhoto", async (req, res) => {
   const { coverData, oldCoverPhotoURL, coverPhotoName } = req.body;
-  /*
- coverData: info.coverData,
-        oldCoverPhotoURL: info.coverURL,
-        coverPhotoName: info.coverPhotoName,
 
- */
   let file_name = "",
     uploadDirectory = "",
     imageURL = "";
@@ -515,20 +484,6 @@ dashboardRouter.post("/headmasterMessage", async (req, res) => {
       return "ahm";
     }
   };
-  /*
-  console.log(
-    "title:",
-    title,
-    "description:",
-    description,
-    "-picdata:",
-    picData.length,
-    "-oldPicURL:",
-    oldPicURL,
-    "Person:",
-    person
-  );
-*/
   if (title.length === 0 || description.length === 0 || person.length === 0) {
     return res.json({
       success: false,

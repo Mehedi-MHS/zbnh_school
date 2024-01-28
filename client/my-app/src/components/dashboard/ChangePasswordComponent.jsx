@@ -8,6 +8,7 @@ import SnackbarComponent from "../SnackbarComponent";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
+import settings from "../../helpers/Settings";
 export default function ChangePasswordComponent() {
   const [info, setInfo] = useState({
     oldUser: "",
@@ -28,7 +29,7 @@ export default function ChangePasswordComponent() {
     setLoading(true);
     try {
       const req = await fetch(
-        "http://localhost:3000/dashboard/settings/changePassword",
+        settings.backendURL + "dashboard/settings/changePassword",
         {
           method: "POST",
           credentials: "include",

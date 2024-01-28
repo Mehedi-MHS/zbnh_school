@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 
 import { FormControlLabel } from "@mui/material";
 import { useState, useEffect } from "react";
+import settings from "../../helpers/Settings";
 export default function DeleteNotice() {
   const [notices, setNotices] = useState([]);
   useEffect(() => {
@@ -14,7 +15,7 @@ export default function DeleteNotice() {
   }, []);
 
   const getNotices = async () => {
-    const req = await fetch("http://localhost:3000/notice", {
+    const req = await fetch(settings.backendURL + "/notice", {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });
@@ -25,7 +26,7 @@ export default function DeleteNotice() {
   //Handle Delete Requests
   const handleDelete = async (id, fileURL) => {
     const deleteRequest = await fetch(
-      "http://localhost:3000/dashboard/notice",
+      settings.backendURL + "/dashboard/notice",
       {
         method: "DELETE",
         credentials: "include",

@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import SEO from "./custom/SEO";
 import { FormControlLabel } from "@mui/material";
 import { useState, useEffect } from "react";
+import settings from "../helpers/Settings";
 export default function Notice() {
   const [notice, setNotice] = useState([]);
   useEffect(() => {
@@ -15,7 +16,7 @@ export default function Notice() {
   }, []);
 
   const getNotices = async () => {
-    const req = await fetch("http://localhost:3000/notice", {
+    const req = await fetch(settings.backendURL + "/notice", {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });

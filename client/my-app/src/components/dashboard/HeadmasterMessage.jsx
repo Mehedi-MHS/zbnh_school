@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import { imageResizer } from "../../helpers/ImageResizer";
 import { CircularProgress } from "@mui/material";
 import SnackbarComponent from "../SnackbarComponent";
+import settings from "../../helpers/Settings";
 export default function HeadmasterMessage() {
   const [info, setInfo] = useState({
     title: "",
@@ -29,7 +30,7 @@ export default function HeadmasterMessage() {
     getHeadmasterInfo();
   }, []);
   const getHeadmasterInfo = async () => {
-    const req = await fetch("http://localhost:3000/getHeadmasterMessage", {
+    const req = await fetch(settings.backendURL + "/getHeadmasterMessage", {
       method: "get",
       headers: { "Content-type": "application/json" },
       credentials: "include",
@@ -72,7 +73,7 @@ export default function HeadmasterMessage() {
         (info.picData.length > 0 || info.oldPicURL.length > 0)
       ) {
         const req = await fetch(
-          "http://localhost:3000/dashboard/headmasterMessage",
+          settings.backendURL + "/dashboard/headmasterMessage",
           {
             method: "POST",
             credentials: "include",

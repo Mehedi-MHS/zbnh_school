@@ -16,6 +16,7 @@ import Select from "@mui/material/Select";
 import { imageResizer } from "../../helpers/ImageResizer";
 import { CircularProgress } from "@mui/material";
 import SnackbarComponent from "../SnackbarComponent";
+import settings from "../../helpers/Settings";
 export default function AddTeacher() {
   /*
 শিক্ষকের নাম
@@ -104,12 +105,15 @@ export default function AddTeacher() {
         teacherInfo.designation &&
         teacherInfo.gender
       ) {
-        const req = await fetch("http://localhost:3000/dashboard/editTeacher", {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify(teacherInfo),
-        });
+        const req = await fetch(
+          settings.backendURL + "/dashboard/editTeacher",
+          {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(teacherInfo),
+          }
+        );
         const res = await req.json();
         if (res) {
           setSnackbarMessage(res.message);

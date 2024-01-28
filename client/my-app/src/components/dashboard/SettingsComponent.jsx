@@ -12,6 +12,8 @@ import SnackbarComponent from "../SnackbarComponent";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
+
+import settings from "../../helpers/Settings";
 export default function SettingsComponent() {
   const [info, setInfo] = useState({
     schoolName: "",
@@ -32,7 +34,7 @@ export default function SettingsComponent() {
     getSettingsInfo();
   }, []);
   const getSettingsInfo = async () => {
-    const req = await fetch("http://localhost:3000/settings", {
+    const req = await fetch(settings.backendURL + "/settings", {
       method: "GET",
     });
     const res = await req.json();
@@ -93,7 +95,7 @@ export default function SettingsComponent() {
         coverPhotoName: info.coverPhotoName,
       };
       const req = await fetch(
-        "http://localhost:3000/dashboard/settings/coverPhoto",
+        settings.backendURL + "/dashboard/settings/coverPhoto",
         {
           method: "POST",
           credentials: "include",
@@ -125,12 +127,15 @@ export default function SettingsComponent() {
         oldLogoURL: info.logoURL,
         logoName: info.logoName,
       };
-      const req = await fetch("http://localhost:3000/dashboard/settings/logo", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      const req = await fetch(
+        settings.backendURL + "/dashboard/settings/logo",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
       const res = await req.json();
       if (res) {
         setLoading(false);
@@ -157,7 +162,7 @@ export default function SettingsComponent() {
         location: info.location,
       };
       const req = await fetch(
-        "http://localhost:3000/dashboard/settings/footer",
+        settings.backendURL + "/dashboard/settings/footer",
         {
           method: "POST",
           credentials: "include",
