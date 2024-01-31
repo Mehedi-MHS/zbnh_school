@@ -14,7 +14,7 @@ var loginRoute = require("./routes/LoginRoute");
 require("dotenv").config();
 const promisePool = require("./lib/dbConfig");
 
-var port = process.env.PORT || 3000;
+//var port = process.env.PORT || 3000;
 
 var app = express();
 
@@ -33,7 +33,7 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:5173"],
+    origin: ["https://api.jbnhschool.com", "https://jbnhschool.com"],
     credentials: true,
   })
 );
@@ -65,6 +65,4 @@ app.use("/students", StudentsRoute);
 app.use("/login", loginRoute);
 app.use("/dashboard", DashboardRoute);
 
-app.listen(port, () => {
-  console.log("Server running on port>", port);
-});
+app.listen();

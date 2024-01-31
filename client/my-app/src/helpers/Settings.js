@@ -1,7 +1,7 @@
 
   const settings = {
-    frontendURL: "http://localhost:5173",
-    backendURL: "http://localhost:3000",
+    frontendURL: "https://school.onlineferiwala.com.bd",
+    backendURL: "https://testapi.onlineferiwala.com.bd",
   }
 
   export default settings;
