@@ -1,7 +1,7 @@
 
   const settings = {
-    frontendURL: "https://school.onlineferiwala.com.bd",
-    backendURL: "https://testapi.onlineferiwala.com.bd",
+    frontendURL: "https://jbnhschool.com",
+    backendURL: "https://api.jbnhschool.com",
   }
 
   export default settings;
