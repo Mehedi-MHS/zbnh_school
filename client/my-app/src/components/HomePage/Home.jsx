@@ -1,4 +1,4 @@
-import HeroSection from "./HeroComponent";
+
 import MarqueeNews from "./MarqueeNews";
 import SEO from "../custom/SEO";
 import CarouselComponent from "./Carousel";
@@ -16,12 +16,12 @@ export default function Home() {
           name="ZamiderHat Begum Nurunnahar High School"
           type="Article"
         />
-        <HeroSection />
+        <CarouselComponent />
         <MarqueeNews />
         <NavigationBox />
         <MessageBox />
         <Divider />
-        <CarouselComponent />
+
       </Box>
     </>
   );
