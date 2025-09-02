@@ -1,196 +1,137 @@
 import React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import HomeIcon from "@mui/icons-material/Home";
-import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
-import CoPresentIcon from "@mui/icons-material/CoPresent";
-import GroupsIcon from "@mui/icons-material/Groups";
-import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
-import InfoIcon from "@mui/icons-material/Info";
-import DashboardIcon from "@mui/icons-material/Dashboard";
+
 import Link from "./custom/CustomLink"; //created custom link to work mui with react-router-dom
-import Divider from "@mui/material/Divider";
-import { Stack } from "@mui/material";
+
 import { useState, useEffect } from "react";
 import settings from "../helpers/Settings";
-const drawerWidth = 240;
+
 const navItems = [
   {
     name: "Home",
-    url: "/",
-    icon: <HomeIcon />,
+    url: "/"
   },
   {
     name: "Notice",
-    url: "notice",
-    icon: <CircleNotificationsIcon />,
+    url: "notice"
   },
   {
     name: "Teachers",
-    url: "teachers",
-    icon: <CoPresentIcon />,
+    url: "teachers"
   },
   {
     name: "Students",
-    url: "students",
-    icon: <GroupsIcon />,
+    url: "students"
   },
   {
     name: "Gallery",
-    url: "gallery",
-    icon: <InsertPhotoIcon />,
+    url: "gallery"
   },
   {
     name: "About School",
-    url: "about",
-    icon: <InfoIcon />,
+    url: "about"
   },
   {
     name: "Dashboard",
-    url: "dashboard",
-    icon: <DashboardIcon />,
+    url: "dashboard"
   },
 ];
 
-export default function NavBar(props) {
-  const [logoURL, setLogoURL] = useState("/images/logo.png");
-  useEffect(() => {
-    getLogo();
-  }, []);
-  const getLogo = async () => {
-    const req = await fetch(settings.backendURL + "/settings", {
-      method: "GET",
-    });
-    const res = await req.json();
-    if (res.length > 0) {
-      setLogoURL(res[0]?.logoURL);
-    }
+
+
+export default function NavBar() {
+ 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
-
-  const drawer = (
-    <Box onClick={handleDrawerToggle}>
-      {/*<Typography variant="h6" sx={{ my: 2 }}>
-        MUI
-      </Typography>
-      <Divider />
-      */}
-      <List>
-        {navItems.map((item, index) => (
+      {/*  {navItems.map((item, index) => (
           <Link key={index} to={item.url}>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{item.icon}</ListItemIcon>
+      */}
+  
+      return (
+    <header className="w-full sticky top-0 z-50 bg-gray-100 shadow-md">
+      {/* First Row: Logo and Mobile Menu Button */}
+      <div className="flex items-center justify-between p-4 md:px-8">
+        {/* Logo and Name */}
+        <div className="flex items-center space-x-2">
+          {/* Logo SVG - Replace with your own */}
+          <img src="/images/logo.png" alt="" className='w-[40px] md:w-[50px]' />
+          <div className="flex flex-col">
+          <span className="text-2xl font-bold text-blue-800">Jamidar Hat Begum Nurunnahar High School</span>
+          <p className="font-light text-gray-500">ESTD: 1969 | School road, Jamidar Hat, Begumgonj, Noakhali.</p>
+          </div>
+        </div>
 
-                <ListItemText primary={item.name} />
-              </ListItemButton>
-            </ListItem>
+        {/* Hamburger Menu for Mobile */}
+        <div className="md:hidden">
+          <button onClick={toggleMobileMenu} className="text-gray-600 focus:outline-none">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
 
-            <Divider />
-          </Link>
-        ))}
-      </List>
-    </Box>
-  );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
-  return (
-    <Box sx={{ display: "flex" }}>
-      <AppBar component="nav">
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+      {/* Second Row: Navigation Links (hidden on mobile by default) */}
+      <nav className={`md:flex md:items-center md:justify-center md:space-x-8 md:p-2 md:sticky md:top-0 md:z-50 bg-blue-500 ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
+        <a href="#" className="block px-4 py-2 text-white md:inline-block hover:text-yellow-500 hover:bg-blue-700 md:hover:bg-transparent">Home</a>
+        <a href="#" className="block px-4 py-2 text-white md:inline-block hover:text-yellow-500 hover:bg-green-500 md:hover:bg-transparent">About</a>
+        <a href="#" className="block px-4 py-2 text-white md:inline-block hover:text-yellow-500 hover:bg-green-500 md:hover:bg-transparent">Services</a>
+        
+        {/* Dropdown Menu */}
+        <div className="relative group">
+          <button
+            onClick={toggleDropdown}
+            className="w-full px-4 py-2 text-left text-white md:inline-flex md:w-auto md:text-center md:items-center hover:text-yellow-500 hover:bg-blue-700"
           >
-            <MenuIcon />
-          </IconButton>
-          <Box
-            component="img"
-            src={logoURL ? logoURL : "/images/logo.png"}
-            sx={{
-              width: { xs: "60px", sm: "80px" },
-              height: "auto",
-              ml: { xs: "30%", sm: 0 },
-            }}
-          />
-          {/* <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "block", sm: "block" } }}
+            Dropdown
+            <svg
+              className={`ml-1 w-4 h-4 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+          
+          {/* Dropdown content */}
+          <div
+            className={`absolute z-10 w-48 py-2 mt-2 bg-white rounded-md shadow-lg transition-all duration-300 transform md:group-hover:block md:w-auto md:min-w-[150px] ${isDropdownOpen ? 'block scale-y-100 opacity-100' : 'hidden scale-y-0 opacity-0'}`}
           >
-            MUI
-          </Typography>
-          */}
-          <Stack
-            direction="row"
-            spacing={{ sm: 3 }}
-            sx={{
-              display: { xs: "none", sm: "block" },
-              ml: { sm: 7 },
-            }}
-          >
-            {navItems.map((item, index) => (
-              <Link
-                key={index}
-                to={item.url}
-                sx={{ color: "#fff", textDecoration: "none" }}
-              >
-                <Button sx={{ color: "#fff" }} startIcon={item.icon}>
-                  {" "}
-                  {item.name}
-                </Button>
-              </Link>
-            ))}
-          </Stack>
-        </Toolbar>
-      </AppBar>
-      <nav>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
+            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Option 1</a>
+            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Option 2</a>
+            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Option 3</a>
+          </div>
+        </div>
+        
+        <a href="#" className="block px-4 py-2 text-white md:inline-block hover:text-yellow-500 hover:bg-blue-700 md:hover:bg-transparent">Contact</a>
       </nav>
-      <Toolbar />
-      {/*
-        <Box component="main" sx={{ p: 3 }}>
-        <Toolbar />
-      </Box>
-        */}
-    </Box>
+    </header>
   );
+           
+
 }
