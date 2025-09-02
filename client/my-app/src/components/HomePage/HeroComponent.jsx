@@ -27,23 +27,29 @@ export default function HeroSection() {
   const textStyle = {
     position: "absolute",
     top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
+    left: "10%",
+    transform: "translate(-10%, -50%)",
     color: "yellow", // Adjust text color as needed
-    textShadow: "0px 1px 2px darkBlue ",
+    lineHeight:"130%",
+    textShadow: "0px 1px 2px black ",
   };
 
   return (
     <Card sx={{ borderRadius: 0, background: "lightGray" }}>
-      <Box style={{ position: "relative", maxWidth: "100%" }}>
+      <Box sx={{ position: "relative", maxWidth: "100%" }}>
+        <Box sx={{position:"absolute",width:"100%",height:"100%",background:"rgba(40,130,143,0.5)"}}>
+
+        </Box>
         <CardMedia
           component="img"
           height="400"
+          sx={{zIndex:"10"}}
           image={
             info.coverURL.length > 0 ? info.coverURL : "/images/school.jpg"
           }
           alt="Hero Image"
         />
+        <Box sx={{width:"100%",height:"100%",position:"absolute"}}>
         <Typography
           variant="h3"
           style={textStyle}
@@ -56,6 +62,8 @@ export default function HeroSection() {
             ? info.schoolName
             : "JamiderHat Begum Nurunnahar High School"}
         </Typography>
+        </Box>
+        
       </Box>
     </Card>
   );
