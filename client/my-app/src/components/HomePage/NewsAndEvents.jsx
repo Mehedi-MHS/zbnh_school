@@ -17,8 +17,8 @@ const NewsAndEvents = () => {
     },
     {
       id: 3,
-      image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=250&fit=crop",
-      title: "Football Team Advances to Regional Finals",
+      image: "https://plus.unsplash.com/premium_photo-1681140560681-2342c9e8ff8b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "School Tree Plantation Program",
       date: "March 8, 2024"
     }
   ];
