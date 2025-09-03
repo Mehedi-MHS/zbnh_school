@@ -162,7 +162,7 @@ export default function Footer() {
         &copy;Copyright {new Date().getFullYear()}. All rights reserved -
         <Tooltip
           title="Mehedi Hasan Shuvo (Batch: 2019) 
-           Email: mehedishuvo685638@gmail.com"
+           Email: mehedimhs.dev@gmail.com"
           arrow
         >
           <Typography

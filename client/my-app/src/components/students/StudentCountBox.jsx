@@ -28,7 +28,6 @@ export default function StudentCountBox() {
             color: "#000",
             "&:hover": {
               color: "green",
-              textTransform: "uppercase",
               transition: "0.5s",
             },
           }}
@@ -57,39 +56,28 @@ export default function StudentCountBox() {
               sx={{
                 padding: "2.5rem 1rem",
                 border: "1px solid gray",
-                background: "linear-gradient(to top right,magenta,Blue)",
+                backgroundImage: "url('/images/student-bg1.png')",
+                backgroundSize:"cover",
                 width: { xs: "250px", sm: "300px" },
                 position: "relative",
                 borderRadius: "0.5rem",
-                "&:hover": {
-                  boxShadow: "0px 2px 5px cyan",
-                  background: "linear-gradient(to top right,Blue,magenta)",
-                  transition: "5s ease",
-                  cursor: "pointer",
-                },
+                "&:hover":{
+                  border:"1px solid cyan",
+                  boxShadow:"0px 1px 2px #ebedeb"
+                }
+                
               }}
             >
-              <Box
-                sx={{
-                  position: "absolute",
-                  marginBottom: "10px",
-                  background: "black",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  textAlign: "center",
-                  padding: "4px 0.5rem",
-                  borderTopLeftRadius: "0.5rem",
-                }}
-              ></Box>
+
               <Typography variant="h4" textAlign="center" color="silver">
                 Class :
               </Typography>
               <Typography
                 variant="h2"
                 textAlign="center"
+                fontWeight="bold"
                 component="p"
-                sx={{ color: "#fff", marginBottom: "1rem" }}
+                sx={{ color: "#41125e", marginBottom: "1rem" }}
               >
                 {cls.title}
               </Typography>
@@ -100,7 +88,7 @@ export default function StudentCountBox() {
                     position: "absolute",
                     bottom: "7px",
                     right: "7px",
-                    background: "#000",
+                    background: "#12731c",
                     border: "1px solid white",
                   }}
                 >
