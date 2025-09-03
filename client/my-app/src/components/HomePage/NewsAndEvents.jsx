@@ -96,8 +96,8 @@ const NewsAndEvents = () => {
       </div>
     </section>
     {/*School page iframe */}
-<section className="md:col-span-4 w-full h-full">
-   <div className="text-center mb-12">
+<section className="md:col-span-4 w-full h-full mx-auto">
+   <div className="text-center mb-12 ">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3 ">
            Our Facebook Page
           </h2>
@@ -110,11 +110,12 @@ const NewsAndEvents = () => {
         </div>
 <iframe 
   src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FJamidarhat.bn.school&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
-  width="400" 
+  width="100%" 
   height="400" 
   style={{
     border: "none",
-    overflow: "hidden"
+    overflow: "hidden",
+    margin:"0px auto"
   }} 
   allowFullScreen={true} 
   allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"

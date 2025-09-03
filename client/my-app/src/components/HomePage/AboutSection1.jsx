@@ -1,7 +1,21 @@
 
-
+import { useState, useEffect } from "react";
+import settings from "../../helpers/Settings";
 const AboutSection1 = ()=>{
+const [messages, setMessages] = useState([]);
 
+  useEffect(() => {
+    getMessages();
+  }, []);
+  const getMessages = async () => {
+    const req = await fetch(settings.backendURL + "/getHeadmasterMessage", {
+      method: "get",
+      headers: { "Content-type": "application/json" },
+      credentials: "include",
+    });
+    const res = await req.json();
+    setMessages(res);
+  };
     
 return(
     <div className="container w-full mx-auto mt-3  px-1 pb-10 grid grid-cols-1 md:grid-cols-12 gap-2">

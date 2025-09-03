@@ -162,11 +162,13 @@ export default function Footer() {
         &copy;Copyright {new Date().getFullYear()}. All rights reserved -
         <Tooltip
           title="Mehedi Hasan Shuvo (Batch: 2019) 
-           Email: mehedimhs.dev@gmail.com"
+           Email: mehedimhs.dev@gmail.com | 01569-158171"
+          
           arrow
         >
           <Typography
             variant="inherit"
+            onClick={()=>{alert('Mehedi hasan Shuvo (SSC Batch: 2019) | 01569-158171 | mehedimhs.dev@gmail.com')}}
             sx={{
               cursor: "pointer",
               textDecoration: "underline",

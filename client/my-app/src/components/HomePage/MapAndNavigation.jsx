@@ -75,7 +75,7 @@ const MapAndNavigation = () => {
         ))}
       </div>
         </section>
-        <section className='w-full md:col-span-6'>
+        <section className='w-full md:col-span-6 mx-auto'>
             <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-2">School Location</h2>
       </div>
