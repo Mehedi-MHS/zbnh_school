@@ -53,6 +53,7 @@ export default function StudentCountBox() {
           {classes.map((cls, index) => (
             <Box
               key={index}
+              data-aos='fade-up'
               sx={{
                 padding: "2.5rem 1rem",
                 border: "1px solid gray",
@@ -77,7 +78,7 @@ export default function StudentCountBox() {
                 textAlign="center"
                 fontWeight="bold"
                 component="p"
-                sx={{ color: "#41125e", marginBottom: "1rem" }}
+                sx={{ color: "#41125e", marginBottom: "2rem" }}
               >
                 {cls.title}
               </Typography>
