@@ -29,7 +29,9 @@ Jamidarhat Begum Nurunnahar High School is committed to providing quality educat
            <img src="/images/headmaster.jpg" alt="" className="w-50 rounded-lg shadow-sm mx-auto" data-aos="fade-up" />
 <div className="title text-blue-700 text-xl text-center">Mohammad Ismail Chowdhury</div>
 <p className="text-blue-500 text-sm text-center">Head Teacher</p>
-<div className="description text-justify text-slate-500">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda nobis hic dolor, sequi odit, laboriosam illo consectetur atque minima ullam nesciunt illum voluptates quas perferendis excepturi quo odio nemo recusandae.</div>
+<div className="description text-justify text-slate-500">Welcome to the official website of Jamidar Hat Begum Nurunnahar High School.
+
+We are dedicated to providing a holistic education that fosters academic excellence and strong character. Our committed educators work to create an environment where every student can thrive and become a confident, compassionate leader. We deeply value the partnership with our community and look forward to a successful academic year ahead.</div>
         </div>
     
     
@@ -38,7 +40,7 @@ Jamidarhat Begum Nurunnahar High School is committed to providing quality educat
            <img src="/images/assistant.jpg" alt="" className="w-50 rounded-lg shadow-sm mx-auto" data-aos="fade-up"/>
 <div className="title text-blue-700 text-xl text-center">Rahmat Ullah Sujon</div>
 <p className="text-blue-500 text-sm text-center"> Assistant Head Teacher</p>
-<div className="description text-justify text-slate-500">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda nobis hic dolor, sequi odit, laboriosam illo consectetur atque minima ullam nesciunt illum voluptates quas perferendis excepturi quo odio nemo recusandae.</div>
+<div className="description text-justify text-slate-500">It is an honor to serve as the Assistant Headmaster of Jamidar Hat Begum Nurunnahar High School. I am committed to supporting our students and staff, and to maintaining the high standards of our academic programs. My role is to foster a culture of respect and collaboration, ensuring every student feels valued and is inspired to succeed. Together, we will continue to build a strong and nurturing school community.</div>
         </div>
     
     <img src="/images/helpline.png" alt="National helpline number bd" className="w-full mx-auto my-2" data-aos="fade-up" />

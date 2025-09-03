@@ -5,9 +5,9 @@ const NewsAndEvents = () => {
   const newsItems = [
     {
       id: 1,
-      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=250&fit=crop",
-      title: "Annual Science Fair Winners Announced",
-      date: "March 15, 2024"
+      image: "/images/computer-lab.png",
+      title: "Our Modern Computer Lab",
+      date: "March 15, 2025"
     },
     {
       id: 2,
@@ -18,7 +18,7 @@ const NewsAndEvents = () => {
     {
       id: 3,
       image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=250&fit=crop",
-      title: "Basketball Team Advances to Regional Finals",
+      title: "Football Team Advances to Regional Finals",
       date: "March 8, 2024"
     }
   ];
