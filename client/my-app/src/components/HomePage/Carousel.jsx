@@ -100,10 +100,10 @@ export default function CarouselComponent() {
               <img src={slide.url} alt={slide.alt} className="absolute inset-0 w-full h-full object-cover" />
               
               {/* Semi-transparent dark overlay */}
-              <div className="absolute inset-0 bg-slate-800/60"></div>
+              <div className="absolute inset-0 bg-slate-800/30"></div>
               
               {/* Animated Text Content */}
-              <div className="absolute inset-0 flex flex-col items-end justify-center text-white text-center p-8">
+              <div className="absolute inset-0 flex flex-col items-end justify-center text-white text-center p-8 text-shadow-sm">
                 <h3 className="animated-text text-3xl md:text-5xl font-bold mb-2">
                   {slide.title}
                 </h3>
