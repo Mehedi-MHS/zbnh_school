@@ -40,7 +40,7 @@ export default function MarqueeNews() {
         maxWidth: "100%",
         overflow: "hidden",
         padding: "3px 0",
-        background: "silver",
+        background: "skyblue",
         display: "flex",
         justifyContent: "center",
         marginBottom: "1rem",

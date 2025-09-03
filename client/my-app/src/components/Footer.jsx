@@ -48,6 +48,7 @@ export default function Footer() {
     { title: "Students", url: "/students" },
     { title: "Gallery", url: "/gallery" },
     { title: "About School", url: "/about" },
+    { title: "News and Events", url: "/news" },
   ];
   const relatedLinks = [
     {
@@ -82,7 +83,7 @@ export default function Footer() {
           maxWidth: "100vw",
           overflow: "hidden",
           padding: { xs: "1rem 0.5rem", sm: "2rem 1rem" },
-          background: "darkBlue",
+          background: "#096b68",
           borderTop: "4px solid #04cca1",
         }}
       >
@@ -161,11 +162,13 @@ export default function Footer() {
         &copy;Copyright {new Date().getFullYear()}. All rights reserved -
         <Tooltip
           title="Mehedi Hasan Shuvo (Batch: 2019) 
-           Email: mehedishuvo685638@gmail.com"
+           Email: mehedimhs.dev@gmail.com | 01569-158171"
+          
           arrow
         >
           <Typography
             variant="inherit"
+            onClick={()=>{alert('Mehedi hasan Shuvo (SSC Batch: 2019) | 01569-158171 | mehedimhs.dev@gmail.com')}}
             sx={{
               cursor: "pointer",
               textDecoration: "underline",

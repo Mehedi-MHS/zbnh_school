@@ -1,4 +1,4 @@
-import NavBar from "./components/NavBar";
+import NavBar from "./components/Nav/NavBar";
 import Home from "./components/HomePage/Home";
 import Students from "./components/students/StudentsHome";
 import DashboardHome from "./components/dashboard/DashboardHome";
@@ -25,7 +25,19 @@ import { Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Footer from "./components/Footer";
 import ClassHomeRoute from "./components/students/ClassHomeRoute";
+//AOS library
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
 export default function App() {
+   useEffect(() => {
+    AOS.init({
+      // Make sure this is present and correct
+      once: true,
+      duration:"1500"
+    });
+  }, []);
+
   return (
     <>
       <HelmetProvider>
