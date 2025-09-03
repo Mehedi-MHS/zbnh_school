@@ -64,7 +64,7 @@ export default function TeachersBox() {
               <Card
                 sx={{
                   width: { xs: "100%", sm: "300px" },
-                  background: "rgba(15,13,55,0.05)",
+                  background: "#f0f5f5",
                 }}
                 key={index}
                 variant="outlined"
