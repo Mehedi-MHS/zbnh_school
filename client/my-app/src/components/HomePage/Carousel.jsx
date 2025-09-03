@@ -18,15 +18,15 @@ const slides = [
     id: 1,
     url: '/images/jbnhschool.jpg',
     alt: 'Slide 1',
-    title: 'School Playground',
-    subtitle: 'Explore the world like never before.'
+    title: 'School Campus',
+    subtitle: 'Explore the campus like never before.'
   },
   {
     id: 2,
-    url: '/images/school.jpg',
+    url: '/images/thumb2.png',
     alt: 'Slide 2',
-    title: 'Create Something Beautiful',
-    subtitle: 'Let your creativity soar.'
+    title: 'Inspire To Innovative',
+    subtitle: 'Let students creativity soar.'
   }
 
 ];
@@ -100,7 +100,7 @@ export default function CarouselComponent() {
               <img src={slide.url} alt={slide.alt} className="absolute inset-0 w-full h-full object-cover" />
               
               {/* Semi-transparent dark overlay */}
-              <div className="absolute inset-0 bg-slate-700/70"></div>
+              <div className="absolute inset-0 bg-slate-500/70"></div>
               
               {/* Animated Text Content */}
               <div className="absolute inset-0 flex flex-col items-end justify-center text-white text-center p-8">
