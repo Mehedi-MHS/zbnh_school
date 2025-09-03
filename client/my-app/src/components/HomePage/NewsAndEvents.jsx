@@ -46,6 +46,7 @@ const NewsAndEvents = () => {
             <article 
               key={news.id} 
               className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
+              data-aos="fade-up"
             >
               {/* News Image */}
               <div className="relative overflow-hidden">
@@ -118,6 +119,7 @@ const NewsAndEvents = () => {
   allowFullScreen={true} 
   allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
   title="Facebook Page"
+  data-aos="fade-up"
 />
 </section>
     </div>

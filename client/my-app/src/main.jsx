@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import { CssBaseline } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
 import './main.css';
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <CssBaseline>
