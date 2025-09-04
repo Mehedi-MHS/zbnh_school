@@ -9,10 +9,10 @@ export default function NotFound() {
     <>
       <Container
         sx={{
-          marginTop: "15vh",
           marginBottom: "2rem",
         }}
       >
+        <img src="/images/404.png" alt="page not found - jbnhschool" className="mx-auto my-3 w-[80%] md:w-[50%]" />
         <Typography
           variant="h3"
           component="h1"
@@ -29,7 +29,7 @@ export default function NotFound() {
             <Button
               variant="contained"
               endIcon={<ArrowForwardIosIcon />}
-              sx={{ marginTop: "20vh" }}
+              sx={{ marginTop: "5vh" }}
             >
               Go to home
             </Button>

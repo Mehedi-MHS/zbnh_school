@@ -40,21 +40,25 @@ Jamidarhat Begum Nurunnahar High School is committed to providing quality educat
         
         <div className="headmaster w-full rounded-xl bg-white shadow-sm p-3 " data-aos="fade-up">
            <div className="w-full bg-green-100 text-slate-500 text-center font-bold text-2xl p-3 mb-3"> Message of the Headmaster</div>
-           <img src="/images/headmaster.jpg" alt="" className="w-50 rounded-lg shadow-sm mx-auto" data-aos="fade-up" />
-<div className="title text-blue-700 text-xl text-center">Mohammad Ismail Chowdhury</div>
+           <img src={messages.length > 0 && messages[0].picURL && messages[0].title.length > 0? messages[0].picURL: "/images/headmaster.jpg"} alt="Headmaster - jbnhschool" className="w-50 rounded-lg shadow-sm mx-auto" data-aos="fade-up" />
+<div className=" text-blue-700 text-xl text-center"> {messages.length > 0 && messages[0].title && messages[0].title.length > 0? messages[0].title: "Mohammad Ismail Chowdhury"}</div>
 <p className="text-blue-500 text-sm text-center">Head Teacher</p>
-<div className="description text-justify text-slate-500">Welcome to the official website of Jamidar Hat Begum Nurunnahar High School.
-
-We are dedicated to providing a holistic education that fosters academic excellence and strong character. Our committed educators work to create an environment where every student can thrive and become a confident, compassionate leader. We deeply value the partnership with our community and look forward to a successful academic year ahead.</div>
+<div className="description text-justify text-slate-500">
+   {messages.length > 0 && messages[0].description && messages[0].description.length > 0
+    ? messages[0].description
+    : "  Welcome to the official website of Jamidar Hat Begum Nurunnahar High School. We are dedicated to providing a holistic education that fosters academic excellence and strong character. Our committed educators work to create an environment where every student can thrive and become a confident, compassionate leader. We deeply value the partnership with our community and look forward to a successful academic year ahead."}
+</div>
         </div>
     
     
-    <div className="headmaster w-full rounded-xl bg-white shadow-sm p-3 mt-1 " data-aos="fade-up">
+    <div className="assistant-headmaster w-full rounded-xl bg-white shadow-sm p-3 mt-1 " data-aos="fade-up">
            <div className="w-full bg-blue-100 text-slate-500 text-center font-bold text-2xl p-3 mb-3"> Message of Assistant Headmaster</div>
-           <img src="/images/assistant.jpg" alt="" className="w-50 rounded-lg shadow-sm mx-auto" data-aos="fade-up"/>
-<div className="title text-blue-700 text-xl text-center">Rahmat Ullah Sujon</div>
+           <img src={messages.length > 0 && messages[1].picURL && messages[1].title.length > 0? messages[1].picURL: "/images/assistant.jpg"} alt="Assistant Headmaster - jbnhschool" className="w-50 rounded-lg shadow-sm mx-auto" data-aos="fade-up"/>
+<div className="title text-blue-700 text-xl text-center">{messages.length > 0 && messages[1].title && messages[1].title.length > 0? messages[1].title: "Rahmat Ullah Sujon"}</div>
 <p className="text-blue-500 text-sm text-center"> Assistant Head Teacher</p>
-<div className="description text-justify text-slate-500">It is an honor to serve as the Assistant Headmaster of Jamidar Hat Begum Nurunnahar High School. I am committed to supporting our students and staff, and to maintaining the high standards of our academic programs. My role is to foster a culture of respect and collaboration, ensuring every student feels valued and is inspired to succeed. Together, we will continue to build a strong and nurturing school community.</div>
+<div className="description text-justify text-slate-500">{messages.length > 0 && messages[0].description && messages[0].description.length > 0
+    ? messages[0].description
+    : "It is an honor to serve as the Assistant Headmaster of Jamidar Hat Begum Nurunnahar High School. I am committed to supporting our students and staff, and to maintaining the high standards of our academic programs. My role is to foster a culture of respect and collaboration, ensuring every student feels valued and is inspired to succeed. Together, we will continue to build a strong and nurturing school community."}</div>
         </div>
     
     <img src="/images/helpline.png" alt="National helpline number bd" className="w-full mx-auto my-2" data-aos="fade-up" />

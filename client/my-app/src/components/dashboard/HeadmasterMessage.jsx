@@ -139,7 +139,7 @@ export default function HeadmasterMessage() {
               />
               <TextField
                 type="text"
-                label="Title"
+                label="Name"
                 fullWidth
                 value={info.title}
                 sx={{ marginBottom: 2 }}
