@@ -1,7 +1,7 @@
 
   const settings = {
-    frontendURL: "http://localhost:5173",
-    backendURL: "http://localhost:3000",
+    frontendURL: "https://jbhnschool.edu.bd",
+    backendURL: "https://api.jbhnschool.edu.bd/v1",
   }
 
   export default settings;
